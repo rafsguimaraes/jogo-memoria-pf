@@ -1,0 +1,70 @@
+[20:59, 6/29/2025] 😎: const pairs=[["Emissor","Função Expressiva"],["Receptor","Função Apelativa"],["Mensagem","Função Poética"],["Canal","Função Fática"],["Código","Função Metalinguística"],["Contexto","Função Referencial"],["Compreensão","Identifica informações explícitas"],["Interpretação","Depende de inferências"],["Texto verbal","Forma oral ou escrita"],["Texto não verbal","Imagens, sons, símbolos"]];
+const elems=[...pairs,...pairs].sort(()=>0.5-Math.random());
+const grid=document.getElementById("grid");
+elems.forEach(text=>{
+  const d=document.createElement("div");
+  d.textContent="?";
+  d.style.cssText="background:#3498db;color:#fff;padding:20px;text-align:center;cursor:pointer;border-radius:8px;";
+  d.dataset.text=text;
+  d.addEventListener("click",()=>{
+    if(d.textCont…
+[20:59, 6/29/2025] 😎: <h1>Jogo da Memória - PF 2025</h1>
+<div id="grid" style="display:grid;grid-template-columns:repeat(4,auto);gap:10px;"></div>
+[13:45, 7/2/2025] 😎: <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Jogo da Memória – Etapa 2</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#f4f6f8;padding:20px;text-align:center}
+    h1{color:#2c3e50} .subtitle{color:#34495e;margin-bottom:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;max-width:800px;margin:auto}
+    .card{background:#3498db;color:#fff;border-radius:10px;padding:20px;font-size:14px;cursor:pointer;height:100px;display:flex;justify-content:center;align-items:center;transition:background .3s}
+    .card.flipped{background:#2ecc71!important} .card.matched{background:#95a5a6!important;cursor:default}
+  </style>
+</head>
+<body>
+  <h1>Jogo da Memória – PF 2025</h1>
+  <div class="subtitle">Etapa 2: Pressupostos, Subentendidos e Funções da Linguagem</div>
+  <div class="grid" id="grid"></div>
+  <script>
+    const pairs = [
+      ["Compreensão","Identifica informações explícitas no texto"],
+      ["Interpretação","Depende de inferências e análise contextual"],
+      ["Texto verbal","Forma oral ou escrita"],
+      ["Texto não verbal","Imagens, sons, símbolos visuais"],
+      ["Texto misto","Combina texto verbal e não verbal"],
+      ["Pressuposto","Marca linguística que supõe algo"],
+      ["Subentendido","Mensagem não explícita, deduzida pelo contexto"],
+      ["Pontuação","Pode funcionar como marcador de subentendido"],
+      ["Emissor","Função Expressiva"],
+      ["Receptor","Função Apelativa"],
+      ["Mensagem","Função Poética"],
+      ["Código","Função Metalinguística"],
+      ["Canal","Função Fática"],
+      ["Contexto","Função Referencial"]
+    ];
+    const grid = document.getElementById("grid");
+    const cards = [...pairs,...pairs].sort(()=>0.5-Math.random()).map(text=>{
+      const c=document.createElement("div");c.className="card";c.textContent="?";c.dataset.text=text;grid.appendChild(c);return c;
+    });
+    let first=null,lock=false;
+    cards.forEach(card=>card.addEventListener("click",()=>{
+      if(lock||card===first||card.classList.contains("matched"))return;
+      card.textContent=card.dataset.text;card.classList.add("flipped");
+      if(!first){first=card}else{
+        const isMatch = pairs.some(p=>(
+          (p[0]===first.dataset.text&&p[1]===card.dataset.text)||
+          (p[1]===first.dataset.text&&p[0]===card.dataset.text)
+        ));
+        if(isMatch){first.classList.add("matched");card.classList.add("matched");first=null}
+        else{lock=true;setTimeout(()=>{
+          first.textContent="?";card.textContent="?";first.classList.remove("flipped");card.classList.remove("flipped");
+          first=null;lock=false;
+        },1000);}
+      }
+    }));
+  </script>
+</body>
+</html>
