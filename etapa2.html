@@ -26,10 +26,27 @@
       font-size: 38px;
       padding: 10px;
       cursor: pointer;
-      transition: font-size 0.2s;
+      transition: font-size 0.2s, background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.4s cubic-bezier(.4,2,.6,1);
       text-align: center;
       overflow: hidden;
       word-break: break-word;
+      box-shadow: 0 2px 8px #0001;
+      will-change: transform, font-size, background, color;
+    }
+    .card.flipped, .card.matched {
+      font-size: 13px;
+      line-height: 1.1;
+      padding: 4px;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      transition: font-size 0.2s, background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.4s cubic-bezier(.4,2,.6,1);
+      transform: scale(1.08) rotateY(180deg);
+      box-shadow: 0 4px 16px #0002;
     }
     .card.flipped, .card.matched {
       font-size: 13px;
