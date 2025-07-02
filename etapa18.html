@@ -11,24 +11,27 @@
   <div class="menu-voltar">
     <button onclick="location.href='index.html'">⬅️ Voltar ao Menu</button>
   </div>
-  <div class="grid-memoria">
-    <!-- Pares conceito ↔ explicação/exemplo -->
-    <div class="carta">📄<div class="texto-carta">Redação Oficial</div></div>
-    <div class="carta">Conjunto de normas para comunicação formal na administração pública.</div>
-    <div class="carta">📝<div class="texto-carta">Princípios</div></div>
-    <div class="carta">Clareza, concisão, formalidade, impessoalidade, uniformidade.</div>
-    <div class="carta">📬<div class="texto-carta">Tipos de Documentos</div></div>
-    <div class="carta">Ofício, memorando, aviso, edital, ata, requerimento, despacho, etc.</div>
-    <div class="carta">🔤<div class="texto-carta">Linguagem</div></div>
-    <div class="carta">Formal, objetiva, padrão culto, sem gírias ou regionalismos.</div>
-    <div class="carta">❗<div class="texto-carta">Estrutura</div></div>
-    <div class="carta">Cabeçalho, vocativo, corpo do texto, fecho, assinatura.</div>
-    <div class="carta">⚠️<div class="texto-carta">Erros comuns</div></div>
-    <div class="carta">Uso de linguagem pessoal, prolixidade, informalidade, falta de clareza.</div>
-    <div class="carta">📝<div class="texto-carta">Dica</div></div>
-    <div class="carta">Leia exemplos de documentos oficiais e pratique a redação formal!</div>
+  <div class="scoreboard">
+    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
   </div>
-  <footer>Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <div class="game-area">
+    <div class="grid-memoria" id="memoryGrid"></div>
+    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
+    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
+  </div>
+  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <script>
+    // Pares didáticos de Redação Oficial com emojis
+    const pares = [
+      { emoji: '📄', frente: 'Redação Oficial', verso: 'Conjunto de normas para comunicação formal na administração pública.' },
+      { emoji: '📝', frente: 'Princípios', verso: 'Clareza, concisão, formalidade, impessoalidade, uniformidade.' },
+      { emoji: '📬', frente: 'Tipos de Documentos', verso: 'Ofício, memorando, aviso, edital, ata, requerimento, despacho, etc.' },
+      { emoji: '🔤', frente: 'Linguagem', verso: 'Formal, objetiva, padrão culto, sem gírias ou regionalismos.' },
+      { emoji: '❗', frente: 'Estrutura', verso: 'Cabeçalho, vocativo, corpo do texto, fecho, assinatura.' },
+      { emoji: '⚠️', frente: 'Erros comuns', verso: 'Uso de linguagem pessoal, prolixidade, informalidade, falta de clareza.' },
+      { emoji: '📝', frente: 'Dica', verso: 'Leia exemplos de documentos oficiais e pratique a redação formal!' }
+    ];
+  </script>
   <script src="memoria.js"></script>
 </body>
 </html>

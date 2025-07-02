@@ -11,20 +11,25 @@
   <div class="menu-voltar">
     <button onclick="location.href='index.html'">⬅️ Voltar ao Menu</button>
   </div>
-  <div class="grid-memoria">
-    <!-- Pares conceito ↔ explicação/exemplo -->
-    <div class="carta">➰<div class="texto-carta">O que é Crase?</div></div>
-    <div class="carta">Fusão da preposição "a" com o artigo "a(s)" ou pronomes.<br><em>Ex: "Vou à escola."</em></div>
-    <div class="carta">❗<div class="texto-carta">Quando usar crase</div></div>
-    <div class="carta">Antes de palavras femininas, locuções prepositivas, adverbiais e conjuntivas femininas.<br><em>Ex: "à tarde", "à medida que"</em></div>
-    <div class="carta">🚫<div class="texto-carta">Quando não usar crase</div></div>
-    <div class="carta">Antes de palavras masculinas, verbos, pronomes pessoais, nomes de cidades sem artigo.<br><em>Ex: "Vou a pé."</em></div>
-    <div class="carta">🔄<div class="texto-carta">Casos facultativos</div></div>
-    <div class="carta">Antes de nomes de mulher, pronome possessivo feminino.<br><em>Ex: "Entreguei a carta à minha mãe / a minha mãe."</em></div>
-    <div class="carta">📝<div class="texto-carta">Dica</div></div>
-    <div class="carta">Substitua por "ao" (masculino): se fizer sentido, use crase!<br><em>Ex: "Vou à escola" → "Vou ao colégio"</em></div>
+  <div class="scoreboard">
+    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
   </div>
-  <footer>Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <div class="game-area">
+    <div class="grid-memoria" id="memoryGrid"></div>
+    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
+    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
+  </div>
+  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <script>
+    // Pares didáticos de Crase com emojis
+    const pares = [
+      { emoji: '➰', frente: 'O que é Crase?', verso: 'Fusão da preposição "a" com o artigo "a(s)" ou pronomes.<br><em>Ex: "Vou à escola."</em>' },
+      { emoji: '❗', frente: 'Quando usar crase', verso: 'Antes de palavras femininas, locuções prepositivas, adverbiais e conjuntivas femininas.<br><em>Ex: "à tarde", "à medida que"</em>' },
+      { emoji: '🚫', frente: 'Quando não usar crase', verso: 'Antes de palavras masculinas, verbos, pronomes pessoais, nomes de cidades sem artigo.<br><em>Ex: "Vou a pé."</em>' },
+      { emoji: '🔄', frente: 'Casos facultativos', verso: 'Antes de nomes de mulher, pronome possessivo feminino.<br><em>Ex: "Entreguei a carta à minha mãe / a minha mãe."</em>' },
+      { emoji: '📝', frente: 'Dica', verso: 'Substitua por "ao" (masculino): se fizer sentido, use crase!<br><em>Ex: "Vou à escola" → "Vou ao colégio"</em>' }
+    ];
+  </script>
   <script src="memoria.js"></script>
 </body>
 </html>

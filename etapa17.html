@@ -11,22 +11,26 @@
   <div class="menu-voltar">
     <button onclick="location.href='index.html'">⬅️ Voltar ao Menu</button>
   </div>
-  <div class="grid-memoria">
-    <!-- Pares conceito ↔ explicação/exemplo -->
-    <div class="carta">📍<div class="texto-carta">Colocação Pronominal</div></div>
-    <div class="carta">Posição dos pronomes oblíquos átonos em relação ao verbo: próclise, ênclise, mesóclise.</div>
-    <div class="carta">⬅️<div class="texto-carta">Próclise</div></div>
-    <div class="carta">Pronome antes do verbo.<br><em>Ex: "Me disseram a verdade."</em></div>
-    <div class="carta">➡️<div class="texto-carta">Ênclise</div></div>
-    <div class="carta">Pronome depois do verbo.<br><em>Ex: "Disseram-me a verdade."</em></div>
-    <div class="carta">🔀<div class="texto-carta">Mesóclise</div></div>
-    <div class="carta">Pronome no meio do verbo (futuro do presente/pretérito).<br><em>Ex: "Dir-se-ia a verdade."</em></div>
-    <div class="carta">❗<div class="texto-carta">Regras de colocação</div></div>
-    <div class="carta">Próclise: palavras negativas, pronomes relativos, advérbios, conjunções subordinativas.<br>Ênclise: início de frase, verbo no gerúndio, imperativo afirmativo.<br>Mesóclise: verbo no futuro sem atrativo.</div>
-    <div class="carta">📝<div class="texto-carta">Dica</div></div>
-    <div class="carta">Identifique o "atrativo" para saber a posição correta do pronome!</div>
+  <div class="scoreboard">
+    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
   </div>
-  <footer>Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <div class="game-area">
+    <div class="grid-memoria" id="memoryGrid"></div>
+    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
+    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
+  </div>
+  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <script>
+    // Pares didáticos de Colocação Pronominal com emojis
+    const pares = [
+      { emoji: '📍', frente: 'Colocação Pronominal', verso: 'Posição dos pronomes oblíquos átonos em relação ao verbo: próclise, ênclise, mesóclise.' },
+      { emoji: '⬅️', frente: 'Próclise', verso: 'Pronome antes do verbo.<br><em>Ex: "Me disseram a verdade."</em>' },
+      { emoji: '➡️', frente: 'Ênclise', verso: 'Pronome depois do verbo.<br><em>Ex: "Disseram-me a verdade."</em>' },
+      { emoji: '🔀', frente: 'Mesóclise', verso: 'Pronome no meio do verbo (futuro do presente/pretérito).<br><em>Ex: "Dir-se-ia a verdade."</em>' },
+      { emoji: '❗', frente: 'Regras de colocação', verso: 'Próclise: palavras negativas, pronomes relativos, advérbios, conjunções subordinativas.<br>Ênclise: início de frase, verbo no gerúndio, imperativo afirmativo.<br>Mesóclise: verbo no futuro sem atrativo.' },
+      { emoji: '📝', frente: 'Dica', verso: 'Identifique o "atrativo" para saber a posição correta do pronome!' }
+    ];
+  </script>
   <script src="memoria.js"></script>
 </body>
 </html>
