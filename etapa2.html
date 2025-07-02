@@ -53,11 +53,15 @@
       ["🌍 Contexto", "Função Referencial"]
     ];
     const grid = document.getElementById("grid");
+    // Mostra o emoji na frente da carta, texto aparece ao virar
     const cards = [...pairs, ...pairs].sort(() => 0.5 - Math.random()).map(text => {
       const card = document.createElement("div");
       card.className = "card";
-      card.textContent = "?";
+      // Extrai o emoji do texto, se houver
+      const emoji = /^([\uD800-\uDBFF][\uDC00-\uDFFF]|[^\s\w])/.exec(text)[0];
+      card.textContent = emoji;
       card.dataset.text = text;
+      card.dataset.emoji = emoji;
       grid.appendChild(card);
       return card;
     });
@@ -82,8 +86,9 @@
           } else {
             lock = true;
             setTimeout(() => {
-              first.textContent = "?";
-              card.textContent = "?";
+              // Volta a mostrar só o emoji
+              first.textContent = first.dataset.emoji;
+              card.textContent = card.dataset.emoji;
               first.classList.remove("flipped");
               card.classList.remove("flipped");
               first = null;
