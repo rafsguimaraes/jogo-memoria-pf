@@ -9,10 +9,11 @@
     h1 { color: #2c3e50; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      max-width: 800px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      max-width: 700px;
       margin: 20px auto;
+      justify-items: center;
     }
     .card {
       background: #3498db;
@@ -22,8 +23,8 @@
       justify-content: center;
       align-items: center;
       border-radius: 8px;
-      font-size: 38px;
-      padding: 10px;
+      font-size: 2.2em;
+      padding: 4px;
       cursor: pointer;
       transition: font-size 0.2s, background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.4s cubic-bezier(.4,2,.6,1);
       text-align: center;
@@ -31,6 +32,21 @@
       word-break: break-word;
       box-shadow: 0 2px 8px #0001;
       will-change: transform, font-size, background, color;
+    }
+    .card.flipped, .card.matched {
+      font-size: 1.1em;
+      line-height: 1.1;
+      padding: 4px;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      transition: none;
+      transform: none;
+      box-shadow: 0 4px 16px #0002;
     }
     .card.flipped, .card.matched {
       font-size: 13px;

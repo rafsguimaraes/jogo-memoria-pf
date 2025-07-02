@@ -22,8 +22,27 @@
     .card {
       background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001;
       width: 140px; height: 90px; display: flex; align-items: center; justify-content: center;
-      font-size: 1.1em; cursor: pointer; transition: background 0.2s;
+      font-size: 2.2em; /* Tamanho do emoji igual etapa 2 */
+      cursor: pointer; transition: background 0.2s;
       user-select: none; position: relative;
+      padding: 4px;
+      text-align: center;
+      word-break: break-word;
+    }
+    .card.flipped, .card.matched {
+      font-size: 1.1em;
+      line-height: 1.1;
+      padding: 4px;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      transition: none;
+      transform: none;
+      box-shadow: 0 4px 16px #0002;
     }
     .card.matched { background: #b2f2bb; color: #222; cursor: default; }
     .card.flipped { background: #d0ebff; color: #222; }
