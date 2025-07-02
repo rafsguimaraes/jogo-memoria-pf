@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo da Memória – Etapa 4: Coesão e Coerência</title>
+  <title>Jogo da Memória – Etapa 5: Semântica</title>
   <style>
     body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center; }
     h1 { color: #2c3e50; margin-bottom: 5px; }
@@ -38,8 +38,8 @@
   </style>
 </head>
 <body>
-  <h1>🔗 Etapa 4 – Coesão e Coerência</h1>
-  <h2>Fixe os conceitos essenciais para interpretação textual!</h2>
+  <h1>🧩 Etapa 5 – Semântica</h1>
+  <h2>Memorize os conceitos essenciais de sentido das palavras!</h2>
   <div class="regras">
     <h3>📌 Como jogar</h3>
     <ul>
@@ -58,17 +58,19 @@
   </div>
   <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
   <script>
-    // Pares didáticos de Coesão e Coerência
-    // Pares didáticos de Coesão e Coerência com emojis
+    // Pares didáticos de Semântica com emojis
     const pares = [
-      { emoji: '🔗', frente: 'Coesão', verso: 'Ligação formal entre partes do texto (ex: pronomes, conjunções).' },
-      { emoji: '🧠', frente: 'Coerência', verso: 'Harmonia e sentido global do texto.' },
-      { emoji: '➡️', frente: 'Coesão sequencial', verso: 'Conexão lógica entre frases, uso de conjunções e preposições.' },
-      { emoji: '🔄', frente: 'Coesão referencial', verso: 'Retomada ou antecipação de termos (ex: pronomes, elipse).' },
-      { emoji: '🔁', frente: 'Anáfora', verso: 'Retomada de termo já citado anteriormente.' },
-      { emoji: '⏩', frente: 'Catáfora', verso: 'Antecipação de termo que será citado depois.' },
-      { emoji: '✂️', frente: 'Elipse', verso: 'Omissão de termo facilmente identificado pelo contexto.' },
-      { emoji: '📝', frente: 'Exemplo de coesão', verso: '"Maria saiu. Ela foi ao mercado." (Ela = Maria)' }
+      { emoji: '🟢', frente: 'Sinonímia', verso: 'Relação de palavras com sentido igual ou semelhante. Ex: feliz/contente.' },
+      { emoji: '🔴', frente: 'Antônimia', verso: 'Relação de palavras com sentido oposto. Ex: claro/escuro.' },
+      { emoji: '🔄', frente: 'Polissemia', verso: 'Palavra com vários sentidos. Ex: "banco" (instituição ou assento).' },
+      { emoji: '⚠️', frente: 'Ambiguidade', verso: 'Duplo sentido, pode gerar interpretações diferentes.' },
+      { emoji: '📦', frente: 'Campo semântico', verso: 'Conjunto de palavras relacionadas por sentido. Ex: mesa, cadeira, sofá (móveis).' },
+      { emoji: '📜', frente: 'Denotação', verso: 'Sentido literal, objetivo. Ex: "Ele tem coração saudável" (órgão).' },
+      { emoji: '🎭', frente: 'Conotação', verso: 'Sentido figurado, subjetivo. Ex: "Ele tem um grande coração" (bondoso).' },
+      { emoji: '🔗', frente: 'Homônimos', verso: 'Palavras iguais na escrita/pronúncia, mas com sentidos diferentes. Ex: "manga" (fruta/roupa).' },
+      { emoji: '🧩', frente: 'Parônimos', verso: 'Palavras parecidas na escrita/pronúncia, mas com sentidos diferentes. Ex: descrição/discrição.' },
+      { emoji: '📝', frente: 'Sentido próprio', verso: 'Palavra usada em seu significado original.' },
+      { emoji: '🖌️', frente: 'Sentido figurado', verso: 'Palavra usada em sentido diferente do original.' }
     ];
 
     let cartas = [];
@@ -94,6 +96,7 @@
       primeiraCarta = null;
       segundaCarta = null;
       bloqueado = false;
+      // Monta as cartas (cada par vira 2 cartas: frente e verso)
       cartas = [];
       pares.forEach((par, idx) => {
         cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
@@ -153,6 +156,7 @@
       }
     }
 
+    // Inicia o jogo ao carregar a página
     window.onload = iniciarJogo;
   </script>
 </body>

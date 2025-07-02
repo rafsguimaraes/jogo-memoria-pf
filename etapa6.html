@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo da Memória – Etapa 4: Coesão e Coerência</title>
+  <title>Jogo da Memória – Etapa 6: Figuras e Vícios de Linguagem</title>
   <style>
     body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center; }
     h1 { color: #2c3e50; margin-bottom: 5px; }
@@ -38,12 +38,12 @@
   </style>
 </head>
 <body>
-  <h1>🔗 Etapa 4 – Coesão e Coerência</h1>
-  <h2>Fixe os conceitos essenciais para interpretação textual!</h2>
+  <h1>🧩 Etapa 6 – Figuras e Vícios de Linguagem</h1>
+  <h2>Memorize as principais figuras e vícios de linguagem!</h2>
   <div class="regras">
     <h3>📌 Como jogar</h3>
     <ul>
-      <li>Encontre os pares: <b>conceito</b> ↔ <b>definição ou exemplo</b></li>
+      <li>Encontre os pares: <b>figura/vício</b> ↔ <b>definição ou exemplo</b></li>
       <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
       <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
     </ul>
@@ -58,17 +58,22 @@
   </div>
   <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
   <script>
-    // Pares didáticos de Coesão e Coerência
-    // Pares didáticos de Coesão e Coerência com emojis
+    // Pares didáticos de Figuras e Vícios de Linguagem com emojis
     const pares = [
-      { emoji: '🔗', frente: 'Coesão', verso: 'Ligação formal entre partes do texto (ex: pronomes, conjunções).' },
-      { emoji: '🧠', frente: 'Coerência', verso: 'Harmonia e sentido global do texto.' },
-      { emoji: '➡️', frente: 'Coesão sequencial', verso: 'Conexão lógica entre frases, uso de conjunções e preposições.' },
-      { emoji: '🔄', frente: 'Coesão referencial', verso: 'Retomada ou antecipação de termos (ex: pronomes, elipse).' },
-      { emoji: '🔁', frente: 'Anáfora', verso: 'Retomada de termo já citado anteriormente.' },
-      { emoji: '⏩', frente: 'Catáfora', verso: 'Antecipação de termo que será citado depois.' },
-      { emoji: '✂️', frente: 'Elipse', verso: 'Omissão de termo facilmente identificado pelo contexto.' },
-      { emoji: '📝', frente: 'Exemplo de coesão', verso: '"Maria saiu. Ela foi ao mercado." (Ela = Maria)' }
+      { emoji: '🔄', frente: 'Metáfora', verso: 'Comparação implícita. Ex: "Ele é uma fera no futebol."' },
+      { emoji: '🟰', frente: 'Comparação', verso: 'Relação explícita, uso de "como". Ex: "Forte como um touro."' },
+      { emoji: '🔊', frente: 'Onomatopeia', verso: 'Imitação de sons. Ex: "O relógio fazia tic-tac."' },
+      { emoji: '🔁', frente: 'Anáfora', verso: 'Repetição de palavras no início de versos/frases.' },
+      { emoji: '🔝', frente: 'Hipérbole', verso: 'Exagero intencional. Ex: "Estou morrendo de sede."' },
+      { emoji: '🔽', frente: 'Eufemismo', verso: 'Suavizar uma ideia. Ex: "Ele partiu desta para melhor."' },
+      { emoji: '❌', frente: 'Pleonasmo', verso: 'Repetição desnecessária. Ex: "Subir para cima".' },
+      { emoji: '🔄', frente: 'Ambiguidade', verso: 'Duplo sentido, falta de clareza.' },
+      { emoji: '🚫', frente: 'Barbarismo', verso: 'Erro de pronúncia, grafia ou flexão. Ex: "menas".' },
+      { emoji: '⚠️', frente: 'Cacofonia', verso: 'Som desagradável na junção de palavras. Ex: "De tanto amor te vi".' },
+      { emoji: '🔇', frente: 'Hiato', verso: 'Encontro de vogais em sílabas diferentes. Ex: "saída".' },
+      { emoji: '🔃', frente: 'Silepse', verso: 'Concordância com a ideia, não com a gramática. Ex: "O povo gritava e batia palmas."' },
+      { emoji: '🧩', frente: 'Zeugma', verso: 'Omissão de termo já mencionado. Ex: "Eu gosto de praia, ela de campo."' },
+      { emoji: '🗣️', frente: 'Prosopopeia', verso: 'Atribuição de características humanas a seres inanimados. Ex: "O vento sussurrava."' }
     ];
 
     let cartas = [];
@@ -94,6 +99,7 @@
       primeiraCarta = null;
       segundaCarta = null;
       bloqueado = false;
+      // Monta as cartas (cada par vira 2 cartas: frente e verso)
       cartas = [];
       pares.forEach((par, idx) => {
         cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
@@ -153,6 +159,7 @@
       }
     }
 
+    // Inicia o jogo ao carregar a página
     window.onload = iniciarJogo;
   </script>
 </body>

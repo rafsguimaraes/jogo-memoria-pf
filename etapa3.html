@@ -59,17 +59,18 @@
   <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
   <script>
     // Pares didáticos de Tipologias e Gêneros
+    // Pares didáticos de Tipologias e Gêneros com emojis
     const pares = [
-      { frente: 'Narração', verso: 'Relato de eventos com personagens, tempo e espaço.' },
-      { frente: 'Descrição', verso: 'Apresentação de características de seres, objetos ou ambientes.' },
-      { frente: 'Dissertação Expositiva', verso: 'Exposição de ideias ou fatos, sem convencer.' },
-      { frente: 'Dissertação Argumentativa', verso: 'Defesa de ponto de vista, busca convencer.' },
-      { frente: 'Injunção', verso: 'Texto que orienta, instrui ou ensina (ex: manual, receita).' },
-      { frente: 'Editorial', verso: 'Tese e proposta de intervenção do veículo de comunicação.' },
-      { frente: 'Artigo de opinião', verso: 'Defesa de ideia do autor, uso da 1ª pessoa.' },
-      { frente: 'Notícia', verso: 'Relato objetivo de fatos, responde: o quê, quem, quando, onde, como, por quê.' },
-      { frente: 'Crônica', verso: 'Texto breve, cotidiano, narrativa curta.' },
-      { frente: 'Conto', verso: 'Narrativa breve, um só conflito, poucos personagens.' }
+      { emoji: '📖', frente: 'Narração', verso: 'Relato de eventos com personagens, tempo e espaço.' },
+      { emoji: '🖼️', frente: 'Descrição', verso: 'Apresentação de características de seres, objetos ou ambientes.' },
+      { emoji: '📚', frente: 'Dissertação Expositiva', verso: 'Exposição de ideias ou fatos, sem convencer.' },
+      { emoji: '🗣️', frente: 'Dissertação Argumentativa', verso: 'Defesa de ponto de vista, busca convencer.' },
+      { emoji: '📝', frente: 'Injunção', verso: 'Texto que orienta, instrui ou ensina (ex: manual, receita).' },
+      { emoji: '📰', frente: 'Editorial', verso: 'Tese e proposta de intervenção do veículo de comunicação.' },
+      { emoji: '✍️', frente: 'Artigo de opinião', verso: 'Defesa de ideia do autor, uso da 1ª pessoa.' },
+      { emoji: '🗞️', frente: 'Notícia', verso: 'Relato objetivo de fatos, responde: o quê, quem, quando, onde, como, por quê.' },
+      { emoji: '🕒', frente: 'Crônica', verso: 'Texto breve, cotidiano, narrativa curta.' },
+      { emoji: '📘', frente: 'Conto', verso: 'Narrativa breve, um só conflito, poucos personagens.' }
     ];
 
     let cartas = [];
@@ -98,8 +99,8 @@
       // Monta as cartas (cada par vira 2 cartas: frente e verso)
       cartas = [];
       pares.forEach((par, idx) => {
-        cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false });
-        cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false });
+        cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
+        cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false, emoji: par.emoji });
       });
       embaralhar(cartas);
       renderizarCartas();
@@ -112,7 +113,7 @@
         const div = document.createElement('div');
         div.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
         if (carta.acertou) div.classList.add('matched');
-        div.textContent = (carta.virada || carta.acertou) ? carta.texto : '❓';
+        div.textContent = (carta.virada || carta.acertou) ? carta.texto : carta.emoji;
         div.onclick = () => virarCarta(i);
         grid.appendChild(div);
       });
