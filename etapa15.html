@@ -4,10 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Etapa 15 – Regência</title>
-  <link rel="stylesheet" href="estilo-etapa.css">
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center; }
+    h1 { color: #2c3e50; margin-bottom: 5px; }
+    h2 { color: #34495e; margin-top: 0; font-size: 18px; }
+    .regras {
+      background: #ecf0f1; border-radius: 10px; padding: 15px; max-width: 600px;
+      margin: 20px auto; text-align: left; font-size: 14px;
+    }
+    .game-area { margin: 30px auto; max-width: 700px; }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      justify-items: center;
+    }
+    .card {
+      background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001;
+      width: 140px; height: 90px; display: flex; align-items: center; justify-content: center;
+      font-size: 2.2em;
+      cursor: pointer; transition: background 0.2s;
+      user-select: none; position: relative;
+      padding: 4px;
+      text-align: center;
+      word-break: break-word;
+    }
+    .card.flipped, .card.matched {
+      font-size: 1.1em;
+      line-height: 1.1;
+      padding: 4px;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      transition: none;
+      transform: none;
+      box-shadow: 0 4px 16px #0002;
+    }
+    .card.matched { background: #b2f2bb; color: #222; cursor: default; }
+    .card.flipped { background: #d0ebff; color: #222; }
+    .scoreboard { margin: 20px 0 10px 0; font-size: 15px; }
+    .btn-restart { background: #3498db; color: #fff; border: none; border-radius: 6px; padding: 8px 18px; font-size: 15px; cursor: pointer; margin-top: 10px; }
+    .btn-restart:hover { background: #2980b9; }
+    .parabens { color: #27ae60; font-weight: bold; font-size: 18px; margin-top: 15px; }
+    @media (max-width: 600px) {
+      .memory-grid { grid-template-columns: repeat(2, 1fr); }
+      .card { width: 95px; height: 70px; font-size: 0.95em; }
+    }
+  </style>
 </head>
 <body>
   <h1>🧭 Etapa 15 – Regência</h1>
+  <h2>Memorize as principais regras de regência verbal e nominal!</h2>
+  <div class="regras">
+    <h3>📌 Como jogar</h3>
+    <ul>
+      <li>Encontre os pares: <b>regra</b> ↔ <b>exemplo ou explicação</b></li>
+      <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
+      <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
+    </ul>
+  </div>
   <div class="menu-voltar">
     <button onclick="location.href='index.html'">⬅️ Voltar ao Menu</button>
   </div>
@@ -15,7 +74,7 @@
     Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
   </div>
   <div class="game-area">
-    <div class="grid-memoria" id="memoryGrid"></div>
+    <div class="memory-grid" id="memoryGrid"></div>
     <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
     <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
   </div>
@@ -23,12 +82,12 @@
   <script>
     // Pares didáticos de Regência com emojis
     const pares = [
-      { emoji: '🧭', frente: 'O que é Regência Verbal?', verso: 'É a relação entre o verbo e seu complemento, podendo exigir ou não preposição.<br><em>Ex: Assisti <b>ao</b> filme.</em>' },
-      { emoji: '📚', frente: 'O que é Regência Nominal?', verso: 'É a relação entre um nome (substantivo, adjetivo, advérbio) e seu complemento.<br><em>Ex: Cheio <b>de</b> esperança.</em>' },
+      { emoji: '🧭', frente: 'Regência verbal', verso: 'O verbo concorda com o seu complemento, podendo exigir ou não preposição.<br><em>Ex: Assisti <b>ao</b> filme.</em>' },
+      { emoji: '📚', frente: 'Regência nominal', verso: 'O nome (substantivo, adjetivo, advérbio) se liga ao complemento, geralmente com preposição.<br><em>Ex: Cheio <b>de</b> esperança.</em>' },
       { emoji: '❗', frente: 'Verbos que exigem preposição', verso: 'Exigem preposição obrigatória.<br><em>Ex: Gostar <b>de</b>, precisar <b>de</b>, assistir <b>a</b>.</em>' },
       { emoji: '⚠️', frente: 'Verbos que não exigem preposição', verso: 'Não exigem preposição antes do complemento.<br><em>Ex: Agradecer algo a alguém, pagar algo a alguém.</em>' },
-      { emoji: '🔄', frente: 'Ambiguidade de Regência', verso: 'A preposição pode mudar o sentido do verbo.<br><em>Ex: Assisti <b>ao</b> jogo (ver) x Assisti o doente (cuidar).</em>' },
-      { emoji: '📝', frente: 'Dica de Estudo', verso: 'Consulte sempre o dicionário para saber a regência correta de cada verbo ou nome!' }
+      { emoji: '🔄', frente: 'Ambiguidade de regência', verso: 'A preposição pode mudar o sentido do verbo.<br><em>Ex: Assisti <b>ao</b> jogo (ver) x Assisti o doente (cuidar).</em>' },
+      { emoji: '📝', frente: 'Dica', verso: 'Consulte sempre o dicionário para saber a regência correta de cada verbo ou nome!' }
     ];
   </script>
   <script src="memoria.js"></script>
