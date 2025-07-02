@@ -54,14 +54,18 @@
     ];
     const grid = document.getElementById("grid");
     // Mostra o emoji na frente da carta, texto aparece ao virar
-    const cards = [...pairs, ...pairs].sort(() => 0.5 - Math.random()).map(text => {
+    // Para cada par, cria duas cartas: uma com o emoji e texto, outra só com o texto (mas ambas mostram o emoji na frente)
+    const allCards = [];
+    pairs.forEach(pair => {
+      allCards.push({ emoji: pair[0].split(' ')[0], text: pair[0] });
+      allCards.push({ emoji: pair[0].split(' ')[0], text: pair[1] });
+    });
+    const cards = allCards.sort(() => 0.5 - Math.random()).map(data => {
       const card = document.createElement("div");
       card.className = "card";
-      // Extrai o emoji do texto, se houver
-      const emoji = /^([\uD800-\uDBFF][\uDC00-\uDFFF]|[^\s\w])/.exec(text)[0];
-      card.textContent = emoji;
-      card.dataset.text = text;
-      card.dataset.emoji = emoji;
+      card.textContent = data.emoji;
+      card.dataset.text = data.text;
+      card.dataset.emoji = data.emoji;
       grid.appendChild(card);
       return card;
     });
