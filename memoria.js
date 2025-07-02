@@ -31,7 +31,12 @@ window.addEventListener('DOMContentLoaded', function () {
     bloqueado = false;
     cartas = [];
     pares.forEach((par, idx) => {
-      cartas.push({ id: idx + '-a', conteudo: par.emoji + '<div class="texto-carta">' + par.frente + '</div>', tipo: 'frente', par: idx });
+      // Se "frente" já contém emoji, não duplica
+      let frenteHtml = par.frente;
+      if (!frenteHtml.includes(par.emoji)) {
+        frenteHtml = '<span style="font-size:2em;">' + par.emoji + '</span><br>' + par.frente;
+      }
+      cartas.push({ id: idx + '-a', conteudo: frenteHtml, tipo: 'frente', par: idx });
       cartas.push({ id: idx + '-b', conteudo: par.verso, tipo: 'verso', par: idx });
     });
     embaralhar(cartas);
