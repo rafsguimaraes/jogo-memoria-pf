@@ -2,19 +2,63 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Jogo da Memória – Etapa 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Memória PF 2025</title>
   <style>
-    body{font-family:Arial,sans-serif;background:#f4f6f8;padding:20px;text-align:center}
-    h1{color:#2c3e50} .subtitle{color:#34495e;margin-bottom:20px}
+    body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center; }
+    h1 { color: #2c3e50; margin-bottom: 5px; }
+    h2 { color: #34495e; margin-top: 0; font-size: 18px; }
+    .regras {
+      background: #ecf0f1; border-radius: 10px; padding: 15px; max-width: 600px;
+      margin: 20px auto; text-align: left; font-size: 14px;
+    }
+    .menu {
+      margin-top: 30px;
+      margin-bottom: 30px; /* Added margin for spacing */
+    }
+    .menu button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .menu button:hover {
+      background-color: #2980b9;
+    }
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;max-width:800px;margin:auto}
     .card{background:#3498db;color:#fff;border-radius:10px;padding:20px;font-size:14px;cursor:pointer;height:100px;display:flex;justify-content:center;align-items:center;transition:background .3s}
     .card.flipped{background:#2ecc71!important} .card.matched{background:#95a5a6!important;cursor:default}
+    footer { margin-top: 40px; font-size: 12px; color: #888; }
   </style>
 </head>
 <body>
-  <h1>Jogo da Memória – PF 2025</h1>
-  <div class="subtitle">Etapa 2: Pressupostos, Subentendidos e Funções da Linguagem</div>
+  <h1>🎓 Jogo da Memória – PF 2025</h1>
+  <h2>Estudo Ativo com Gamificação</h2>
+
+  <div class="regras">
+    <h3>📌 Regras do Jogo</h3>
+    <ul>
+      <li>Encontre os pares corretos: conceito ↔ explicação, emoji ↔ definição</li>
+      <li>Você pode repetir as fases quantas vezes quiser</li>
+      <li>Cada etapa tem um nível diferente de desafio</li>
+      <li>Ideal para memorização ativa com foco em TDAH</li>
+    </ul>
+  </div>
+
+  <div class="menu">
+    <h3>🎮 Escolha sua Etapa</h3>
+    <button onclick="alert('🚧 Em breve: Etapa 1 – Compreensão e Interpretação')">🧠 Etapa 1 – Compreensão e Interpretação</button>
+    <button onclick="location.href='index.html'">🧩 Etapa 2 – Pressupostos e Funções da Linguagem</button>
+    <button onclick='alert("🚧 Em breve: Etapa 3 – Tipologias e Gêneros Textuais")'>📖 Etapa 3 – Tipologias e Gêneros (em breve)</button>
+  </div>
+
+  <!-- Subtitle for the game -->
+  <h2 style="margin-top: 30px; margin-bottom: 20px;">Etapa 2: Pressupostos, Subentendidos e Funções da Linguagem</h2>
   <div class="grid" id="grid"></div>
   <script>
     const pairs = [
@@ -66,5 +110,6 @@
       }
     }));
   </script>
+  <footer>Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
 </body>
 </html>
