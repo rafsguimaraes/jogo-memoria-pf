@@ -68,74 +68,118 @@
 </head>
 <body>
   <h1>Etapa 2 – Pressupostos, Subentendidos e Funções da Linguagem</h1>
+  <div id="explicacao" style="max-width:700px;margin:0 auto 20px auto;text-align:left;background:#fffbe7;border-radius:8px;padding:16px 20px 10px 20px;box-shadow:0 2px 8px #0001;font-size:15px;">
+    <b>Como jogar:</b> Encontre os pares de cartas que relacionam conceitos, exemplos e funções da linguagem. <br>
+    <b>O que você vai aprender:</b> Pressupostos, subentendidos, funções da linguagem e exemplos práticos. <br>
+    <b>Dica:</b> Clique nas cartas para revelar o conteúdo e tente memorizar as relações!
+  </div>
+  <div id="placar" style="margin-bottom:16px;font-size:16px;color:#2c3e50;"></div>
   <div class="grid" id="grid"></div>
+  <div id="mensagem-final" style="display:none;margin:24px auto 0 auto;max-width:500px;background:#eaffea;border-radius:8px;padding:18px 20px 10px 20px;box-shadow:0 2px 8px #0001;font-size:18px;text-align:center;color:#207520;font-weight:bold;"></div>
+  <div style="margin-top:18px;"><button id="reiniciar" style="display:none;padding:8px 18px;font-size:15px;border-radius:6px;border:none;background:#3498db;color:#fff;cursor:pointer;">Reiniciar Jogo</button></div>
   <script>
     const pairs = [
-      ["🧠 Compreensão", "Identifica informações explícitas no texto"],
-      ["🧩 Interpretação", "Depende de inferências e análise contextual"],
-      ["✍️ Texto verbal", "Forma oral ou escrita"],
-      ["🖼️ Texto não verbal", "Imagens, sons, símbolos visuais"],
-      ["🔀 Texto misto", "Combina texto verbal e não verbal"],
-      ["💬 Pressuposto", "Marca linguística que supõe algo"],
-      ["🤔 Subentendido", "Mensagem não explícita, deduzida pelo contexto"],
-      ["❗ Pontuação", "Pode funcionar como marcador de subentendido"],
-      ["🙋 Emissor", "Função Expressiva"],
-      ["👂 Receptor", "Função Apelativa"],
-      ["🖋️ Mensagem", "Função Poética"],
-      ["🔤 Código", "Função Metalinguística"],
-      ["📞 Canal", "Função Fática"],
-      ["🌍 Contexto", "Função Referencial"]
+      ["🧠 Compreensão", "Ler e entender informações explícitas no texto."],
+      ["🔍 Interpretação", "Analisar e deduzir informações implícitas, usando contexto."],
+      ["✍️ Texto verbal", "Exemplo: Uma frase escrita ou falada."],
+      ["🖼️ Texto não verbal", "Exemplo: Uma imagem, símbolo ou som."],
+      ["♻️ Texto misto", "Exemplo: Uma charge com texto e imagem."],
+      ["💬 Pressuposto", "Informação subentendida, mas não dita explicitamente. Ex: 'João parou de fumar' pressupõe que ele fumava."],
+      ["🤔 Subentendido", "Mensagem deduzida pelo contexto, não dita. Ex: 'Está calor aqui', pode ser um pedido para abrir a janela."],
+      ["🧾 Pontuação", "Pode indicar subentendidos. Ex: reticências sugerem continuação ou dúvida."],
+      ["🙋 Função Expressiva", "Foco no emissor. Ex: 'Estou feliz!'"],
+      ["👂 Função Apelativa", "Foco no receptor. Ex: 'Feche a porta, por favor.'"],
+      ["🖋️ Função Poética", "Foco na mensagem. Ex: poemas, músicas, slogans."],
+      ["🔤 Função Metalinguística", "Foco no código. Ex: 'O que significa a palavra 'verbo'?'."],
+      ["📞 Função Fática", "Foco no canal. Ex: 'Alô? Está me ouvindo?'"],
+      ["🌍 Função Referencial", "Foco no contexto. Ex: notícias, textos informativos."],
+      ["📚 Dica de estudo", "Leia exemplos reais e tente identificar pressupostos e subentendidos!"],
+      ["🎯 Curiosidade", "A função da linguagem pode mudar conforme a intenção do falante."],
     ];
     const grid = document.getElementById("grid");
-    // Mostra o emoji na frente da carta, texto aparece ao virar
-    // Para cada par, cria duas cartas: uma com o emoji e texto, outra só com o texto (mas ambas mostram o emoji na frente)
-    const allCards = [];
-    pairs.forEach(pair => {
-      allCards.push({ emoji: pair[0].split(' ')[0], text: pair[0] });
-      allCards.push({ emoji: pair[0].split(' ')[0], text: pair[1] });
-    });
-    const cards = allCards.sort(() => 0.5 - Math.random()).map(data => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.textContent = data.emoji;
-      card.dataset.text = data.text;
-      card.dataset.emoji = data.emoji;
-      grid.appendChild(card);
-      return card;
-    });
-    let first = null;
-    let lock = false;
-    cards.forEach(card => {
-      card.addEventListener("click", () => {
-        if (lock || card.classList.contains("matched") || card === first) return;
-        card.textContent = card.dataset.text;
-        card.classList.add("flipped");
-        if (!first) {
-          first = card;
-        } else {
-          const isMatch = pairs.some(pair =>
-            (pair[0] === first.dataset.text && pair[1] === card.dataset.text) ||
-            (pair[1] === first.dataset.text && pair[0] === card.dataset.text)
-          );
-          if (isMatch) {
-            first.classList.add("matched");
-            card.classList.add("matched");
-            first = null;
-          } else {
-            lock = true;
-            setTimeout(() => {
-              // Volta a mostrar só o emoji
-              first.textContent = first.dataset.emoji;
-              card.textContent = card.dataset.emoji;
-              first.classList.remove("flipped");
-              card.classList.remove("flipped");
-              first = null;
-              lock = false;
-            }, 1000);
-          }
-        }
+    const placar = document.getElementById("placar");
+    const mensagemFinal = document.getElementById("mensagem-final");
+    const btnReiniciar = document.getElementById("reiniciar");
+
+    function embaralhar(array) {
+      return array.map(a => [Math.random(), a]).sort((a, b) => a[0] - b[0]).map(a => a[1]);
+    }
+
+    function iniciarJogo() {
+      grid.innerHTML = "";
+      mensagemFinal.style.display = "none";
+      btnReiniciar.style.display = "none";
+      let tentativas = 0;
+      let acertos = 0;
+      let totalPares = pairs.length;
+      let first = null;
+      let lock = false;
+
+      // Gera cartas (emoji e texto)
+      const allCards = [];
+      pairs.forEach(pair => {
+        allCards.push({ emoji: pair[0].split(' ')[0], text: pair[0] });
+        allCards.push({ emoji: pair[0].split(' ')[0], text: pair[1] });
       });
-    });
+      const cards = embaralhar(allCards).map(data => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.textContent = data.emoji;
+        card.dataset.text = data.text;
+        card.dataset.emoji = data.emoji;
+        grid.appendChild(card);
+        return card;
+      });
+
+      function atualizarPlacar() {
+        placar.innerHTML = `Tentativas: <b>${tentativas}</b> &nbsp; | &nbsp; Pares encontrados: <b>${acertos}/${totalPares}</b>`;
+      }
+      atualizarPlacar();
+
+      cards.forEach(card => {
+        card.addEventListener("click", () => {
+          if (lock || card.classList.contains("matched") || card === first) return;
+          card.textContent = card.dataset.text;
+          card.classList.add("flipped");
+          if (!first) {
+            first = card;
+          } else {
+            tentativas++;
+            atualizarPlacar();
+            const isMatch = pairs.some(pair =>
+              (pair[0] === first.dataset.text && pair[1] === card.dataset.text) ||
+              (pair[1] === first.dataset.text && pair[0] === card.dataset.text)
+            );
+            if (isMatch) {
+              first.classList.add("matched");
+              card.classList.add("matched");
+              acertos++;
+              atualizarPlacar();
+              if (acertos === totalPares) {
+                setTimeout(() => {
+                  mensagemFinal.innerHTML = `🎉 Parabéns! Você encontrou todos os pares!<br> Total de tentativas: <b>${tentativas}</b> <br><br> <span style='font-size:15px;'>Clique em Reiniciar para jogar novamente.</span>`;
+                  mensagemFinal.style.display = "block";
+                  btnReiniciar.style.display = "inline-block";
+                }, 400);
+              }
+              first = null;
+            } else {
+              lock = true;
+              setTimeout(() => {
+                first.textContent = first.dataset.emoji;
+                card.textContent = card.dataset.emoji;
+                first.classList.remove("flipped");
+                card.classList.remove("flipped");
+                first = null;
+                lock = false;
+              }, 900);
+            }
+          }
+        });
+      });
+    }
+    iniciarJogo();
+    btnReiniciar.onclick = iniciarJogo;
   </script>
 </body>
 </html>
