@@ -69,9 +69,9 @@
 <body>
   <h1>Etapa 2 – Pressupostos, Subentendidos e Funções da Linguagem</h1>
   <div id="explicacao" style="max-width:700px;margin:0 auto 20px auto;text-align:left;background:#fffbe7;border-radius:8px;padding:16px 20px 10px 20px;box-shadow:0 2px 8px #0001;font-size:15px;">
-    <b>Como jogar:</b> Encontre os pares de cartas que relacionam conceitos, exemplos e funções da linguagem. <br>
-    <b>O que você vai aprender:</b> Pressupostos, subentendidos, funções da linguagem e exemplos práticos. <br>
-    <b>Dica:</b> Clique nas cartas para revelar o conteúdo e tente memorizar as relações!
+    <b>Como jogar:</b> Encontre os pares de cartas que relacionam <b>conceitos</b> e <b>explicações/exemplos</b> sobre Pressupostos, Subentendidos e Funções da Linguagem.<br>
+    <b>O que você vai aprender:</b> Identificar pressupostos, subentendidos e reconhecer as funções da linguagem em exemplos reais.<br>
+    <b>Dica:</b> Clique nas cartas para revelar o conteúdo e memorize as relações!
   </div>
   <div id="placar" style="margin-bottom:16px;font-size:16px;color:#2c3e50;"></div>
   <div class="grid" id="grid"></div>
@@ -79,22 +79,14 @@
   <div style="margin-top:18px;"><button id="reiniciar" style="display:none;padding:8px 18px;font-size:15px;border-radius:6px;border:none;background:#3498db;color:#fff;cursor:pointer;">Reiniciar Jogo</button></div>
   <script>
     const pairs = [
-      ["🧠 Compreensão", "Ler e entender informações explícitas no texto."],
-      ["🔍 Interpretação", "Analisar e deduzir informações implícitas, usando contexto."],
-      ["✍️ Texto verbal", "Exemplo: Uma frase escrita ou falada."],
-      ["🖼️ Texto não verbal", "Exemplo: Uma imagem, símbolo ou som."],
-      ["♻️ Texto misto", "Exemplo: Uma charge com texto e imagem."],
-      ["💬 Pressuposto", "Informação subentendida, mas não dita explicitamente. Ex: 'João parou de fumar' pressupõe que ele fumava."],
-      ["🤔 Subentendido", "Mensagem deduzida pelo contexto, não dita. Ex: 'Está calor aqui', pode ser um pedido para abrir a janela."],
-      ["🧾 Pontuação", "Pode indicar subentendidos. Ex: reticências sugerem continuação ou dúvida."],
-      ["🙋 Função Expressiva", "Foco no emissor. Ex: 'Estou feliz!'"],
-      ["👂 Função Apelativa", "Foco no receptor. Ex: 'Feche a porta, por favor.'"],
-      ["🖋️ Função Poética", "Foco na mensagem. Ex: poemas, músicas, slogans."],
-      ["🔤 Função Metalinguística", "Foco no código. Ex: 'O que significa a palavra 'verbo'?'."],
-      ["📞 Função Fática", "Foco no canal. Ex: 'Alô? Está me ouvindo?'"],
-      ["🌍 Função Referencial", "Foco no contexto. Ex: notícias, textos informativos."],
-      ["📚 Dica de estudo", "Leia exemplos reais e tente identificar pressupostos e subentendidos!"],
-      ["🎯 Curiosidade", "A função da linguagem pode mudar conforme a intenção do falante."],
+      ["💬 Pressuposto", "Informação implícita, pressuposta pelo falante, necessária para o sentido. Ex: 'João parou de fumar.' (pressupõe que João fumava antes)"],
+      ["🤔 Subentendido", "Sentido sugerido, depende do contexto e da interpretação. Ex: 'Está calor aqui, não?' (pode sugerir: abra a janela)"],
+      ["🌍 Função Referencial", "Foco na informação, linguagem objetiva, transmite dados. Ex: notícia, relatório."],
+      ["🙋 Função Emotiva (Expressiva)", "Expressa emoções, sentimentos ou opiniões do emissor. Ex: 'Estou muito feliz hoje!'"],
+      ["👂 Função Conativa (Apelativa)", "Busca influenciar o receptor, dar ordens, pedidos, conselhos. Ex: 'Feche a porta, por favor.'"],
+      ["� Função Fática", "Testa, inicia, mantém ou encerra o canal de comunicação. Ex: 'Alô?', 'Oi!', 'Tudo bem?'"],
+      ["🔤 Função Metalinguística", "A linguagem fala de si mesma, explica códigos. Ex: 'O que significa a palavra 'verbo'?'."],
+      ["�️ Função Poética", "Foco na forma, estética da mensagem, uso de figuras de linguagem. Ex: poesia, slogan."],
     ];
     const grid = document.getElementById("grid");
     const placar = document.getElementById("placar");

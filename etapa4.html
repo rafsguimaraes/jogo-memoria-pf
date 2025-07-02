@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Memória – Etapa 4: Coesão e Coerência</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center; }
+    h1 { color: #2c3e50; margin-bottom: 5px; }
+    h2 { color: #34495e; margin-top: 0; font-size: 18px; }
+    .regras {
+      background: #ecf0f1; border-radius: 10px; padding: 15px; max-width: 600px;
+      margin: 20px auto; text-align: left; font-size: 14px;
+    }
+    .game-area { margin: 30px auto; max-width: 700px; }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      justify-items: center;
+    }
+    .card {
+      background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001;
+      width: 140px; height: 90px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1em; cursor: pointer; transition: background 0.2s;
+      user-select: none; position: relative;
+    }
+    .card.matched { background: #b2f2bb; color: #222; cursor: default; }
+    .card.flipped { background: #d0ebff; color: #222; }
+    .scoreboard { margin: 20px 0 10px 0; font-size: 15px; }
+    .btn-restart { background: #3498db; color: #fff; border: none; border-radius: 6px; padding: 8px 18px; font-size: 15px; cursor: pointer; margin-top: 10px; }
+    .btn-restart:hover { background: #2980b9; }
+    .parabens { color: #27ae60; font-weight: bold; font-size: 18px; margin-top: 15px; }
+    @media (max-width: 600px) {
+      .memory-grid { grid-template-columns: repeat(2, 1fr); }
+      .card { width: 95px; height: 70px; font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🔗 Etapa 4 – Coesão e Coerência</h1>
+  <h2>Fixe os conceitos essenciais para interpretação textual!</h2>
+  <div class="regras">
+    <h3>📌 Como jogar</h3>
+    <ul>
+      <li>Encontre os pares: <b>conceito</b> ↔ <b>definição ou exemplo</b></li>
+      <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
+      <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
+    </ul>
+  </div>
+  <div class="scoreboard">
+    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
+  </div>
+  <div class="game-area">
+    <div class="memory-grid" id="memoryGrid"></div>
+    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
+    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
+  </div>
+  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <script>
+    // Pares didáticos de Coesão e Coerência
+    const pares = [
+      { frente: 'Coesão', verso: 'Ligação formal entre partes do texto (ex: pronomes, conjunções).' },
+      { frente: 'Coerência', verso: 'Harmonia e sentido global do texto.' },
+      { frente: 'Coesão sequencial', verso: 'Conexão lógica entre frases, uso de conjunções e preposições.' },
+      { frente: 'Coesão referencial', verso: 'Retomada ou antecipação de termos (ex: pronomes, elipse).' },
+      { frente: 'Anáfora', verso: 'Retomada de termo já citado anteriormente.' },
+      { frente: 'Catáfora', verso: 'Antecipação de termo que será citado depois.' },
+      { frente: 'Elipse', verso: 'Omissão de termo facilmente identificado pelo contexto.' },
+      { frente: 'Exemplo de coesão', verso: '"Maria saiu. Ela foi ao mercado." (Ela = Maria)' }
+    ];
+
+    let cartas = [];
+    let primeiraCarta = null;
+    let segundaCarta = null;
+    let bloqueado = false;
+    let tentativas = 0;
+    let acertos = 0;
+
+    function embaralhar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function iniciarJogo() {
+      tentativas = 0;
+      acertos = 0;
+      document.getElementById('tentativas').textContent = tentativas;
+      document.getElementById('acertos').textContent = acertos;
+      document.getElementById('parabensMsg').style.display = 'none';
+      primeiraCarta = null;
+      segundaCarta = null;
+      bloqueado = false;
+      cartas = [];
+      pares.forEach((par, idx) => {
+        cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false });
+        cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false });
+      });
+      embaralhar(cartas);
+      renderizarCartas();
+    }
+
+    function renderizarCartas() {
+      const grid = document.getElementById('memoryGrid');
+      grid.innerHTML = '';
+      cartas.forEach((carta, i) => {
+        const div = document.createElement('div');
+        div.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
+        if (carta.acertou) div.classList.add('matched');
+        div.textContent = (carta.virada || carta.acertou) ? carta.texto : '❓';
+        div.onclick = () => virarCarta(i);
+        grid.appendChild(div);
+      });
+    }
+
+    function virarCarta(idx) {
+      if (bloqueado) return;
+      const carta = cartas[idx];
+      if (carta.virada || carta.acertou) return;
+      carta.virada = true;
+      renderizarCartas();
+      if (!primeiraCarta) {
+        primeiraCarta = carta;
+      } else if (!segundaCarta) {
+        segundaCarta = carta;
+        tentativas++;
+        document.getElementById('tentativas').textContent = tentativas;
+        if (primeiraCarta.par === segundaCarta.par && primeiraCarta.id !== segundaCarta.id) {
+          primeiraCarta.acertou = true;
+          segundaCarta.acertou = true;
+          acertos++;
+          document.getElementById('acertos').textContent = acertos;
+          primeiraCarta = null;
+          segundaCarta = null;
+          renderizarCartas();
+          if (acertos === pares.length) {
+            document.getElementById('parabensMsg').style.display = 'block';
+          }
+        } else {
+          bloqueado = true;
+          setTimeout(() => {
+            primeiraCarta.virada = false;
+            segundaCarta.virada = false;
+            primeiraCarta = null;
+            segundaCarta = null;
+            bloqueado = false;
+            renderizarCartas();
+          }, 1100);
+        }
+      }
+    }
+
+    window.onload = iniciarJogo;
+  </script>
+</body>
+</html>
