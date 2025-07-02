@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,34 +13,19 @@
       background: #ecf0f1; border-radius: 10px; padding: 15px; max-width: 600px;
       margin: 20px auto; text-align: left; font-size: 14px;
     }
-    .menu {
-      margin-top: 30px;
-      margin-bottom: 30px; /* Added margin for spacing */
-    }
+    .menu { margin-top: 30px; }
     .menu button {
-      background-color: #3498db;
-      color: white;
-      padding: 12px 20px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
+      background-color: #3498db; color: white; padding: 12px 20px; margin: 10px;
+      border: none; border-radius: 8px; font-size: 16px; cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .menu button:hover {
-      background-color: #2980b9;
-    }
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;max-width:800px;margin:auto}
-    .card{background:#3498db;color:#fff;border-radius:10px;padding:20px;font-size:14px;cursor:pointer;height:100px;display:flex;justify-content:center;align-items:center;transition:background .3s}
-    .card.flipped{background:#2ecc71!important} .card.matched{background:#95a5a6!important;cursor:default}
+    .menu button:hover { background-color: #2980b9; }
     footer { margin-top: 40px; font-size: 12px; color: #888; }
   </style>
 </head>
 <body>
   <h1>🎓 Jogo da Memória – PF 2025</h1>
   <h2>Estudo Ativo com Gamificação</h2>
-
   <div class="regras">
     <h3>📌 Regras do Jogo</h3>
     <ul>
@@ -49,67 +35,11 @@
       <li>Ideal para memorização ativa com foco em TDAH</li>
     </ul>
   </div>
-
   <div class="menu">
     <h3>🎮 Escolha sua Etapa</h3>
-    <button onclick="alert('🚧 Em breve: Etapa 1 – Compreensão e Interpretação')">🧠 Etapa 1 – Compreensão e Interpretação</button>
-    <button onclick="location.href='index.html'">🧩 Etapa 2 – Pressupostos e Funções da Linguagem</button>
+    <button onclick="location.href='etapa2.html'">🧩 Etapa 2 – Pressupostos e Funções da Linguagem</button>
     <button onclick='alert("🚧 Em breve: Etapa 3 – Tipologias e Gêneros Textuais")'>📖 Etapa 3 – Tipologias e Gêneros (em breve)</button>
   </div>
-
-  <!-- Subtitle for the game -->
-  <h2 style="margin-top: 30px; margin-bottom: 20px;">Etapa 2: Pressupostos, Subentendidos e Funções da Linguagem</h2>
-  <div class="grid" id="grid"></div>
-  <script>
-    const pairs = [
-      ["Compreensão","Identifica informações explícitas no texto"],
-      ["Interpretação","Depende de inferências e análise contextual"],
-      ["Texto verbal","Forma oral ou escrita"],
-      ["Texto não verbal","Imagens, sons, símbolos visuais"],
-      ["Texto misto","Combina texto verbal e não verbal"],
-      ["Pressuposto","Marca linguística que supõe algo"],
-      ["Subentendido","Mensagem não explícita, deduzida pelo contexto"],
-      ["Pontuação","Pode funcionar como marcador de subentendido"],
-      ["Emissor","Função Expressiva"],
-      ["Receptor","Função Apelativa"],
-      ["Mensagem","Função Poética"],
-      ["Código","Função Metalinguística"],
-      ["Canal","Função Fática"],
-      ["Contexto","Função Referencial"]
-    ];
-    const grid = document.getElementById("grid");
-    const cards = [...pairs,...pairs].sort(()=>0.5-Math.random()).map(text=>{
-      const c=document.createElement("div");c.className="card";c.textContent="?";c.dataset.text=text;grid.appendChild(c);return c;
-    });
-    let first=null,lock=false;
-    cards.forEach(card=>card.addEventListener("click",()=>{
-      if(lock||card===first||card.classList.contains("matched"))return;
-      card.textContent = card.dataset.text;
-      card.classList.add("flipped");
-      if(!first){first=card}
-      else{
-        const isMatch = pairs.some(p=>(
-          (p[0]===first.dataset.text && p[1]===card.dataset.text) ||
-          (p[1]===first.dataset.text && p[0]===card.dataset.text)
-        ));
-        if(isMatch){
-          first.classList.add("matched");
-          card.classList.add("matched");
-          first=null;
-        } else {
-          lock=true;
-          setTimeout(()=>{
-            first.textContent="?";
-            card.textContent="?";
-            first.classList.remove("flipped");
-            card.classList.remove("flipped");
-            first=null;
-            lock=false;
-          },1000);
-        }
-      }
-    }));
-  </script>
   <footer>Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
 </body>
 </html>
