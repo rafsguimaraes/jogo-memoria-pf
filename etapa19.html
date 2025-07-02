@@ -11,20 +11,25 @@
   <div class="menu-voltar">
     <button onclick="location.href='index.html'">⬅️ Voltar ao Menu</button>
   </div>
-  <div class="grid-memoria">
-    <!-- Pares conceito ↔ explicação/exemplo -->
-    <div class="carta">🌀<div class="texto-carta">Ambiguidade</div></div>
-    <div class="carta">Quando uma frase permite mais de uma interpretação.<br><em>Ex: "Vi o homem com o binóculo."</em></div>
-    <div class="carta">❗<div class="texto-carta">Ambiguidade Lexical</div></div>
-    <div class="carta">Palavra com mais de um significado.<br><em>Ex: "Banco" (instituição ou assento)</em></div>
-    <div class="carta">🔄<div class="texto-carta">Ambiguidade Sintática</div></div>
-    <div class="carta">Dúvida sobre a quem ou o que se refere um termo.<br><em>Ex: "A mãe do aluno que chegou."</em></div>
-    <div class="carta">⚠️<div class="texto-carta">Como evitar</div></div>
-    <div class="carta">Reescreva a frase para deixá-la clara.<br><em>Ex: "Vi, com o binóculo, o homem."</em></div>
-    <div class="carta">📝<div class="texto-carta">Dica</div></div>
-    <div class="carta">Leia o texto em voz alta e peça para outra pessoa ler: se houver dúvida, reescreva!</div>
+  <div class="scoreboard">
+    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
   </div>
-  <footer>Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <div class="game-area">
+    <div class="grid-memoria" id="memoryGrid"></div>
+    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
+    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
+  </div>
+  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <script>
+    // Pares didáticos de Ambiguidade com emojis
+    const pares = [
+      { emoji: '🌀', frente: 'Ambiguidade', verso: 'Quando uma frase permite mais de uma interpretação.<br><em>Ex: "Vi o homem com o binóculo."</em>' },
+      { emoji: '❗', frente: 'Ambiguidade Lexical', verso: 'Palavra com mais de um significado.<br><em>Ex: "Banco" (instituição ou assento)</em>' },
+      { emoji: '🔄', frente: 'Ambiguidade Sintática', verso: 'Dúvida sobre a quem ou o que se refere um termo.<br><em>Ex: "A mãe do aluno que chegou."</em>' },
+      { emoji: '⚠️', frente: 'Como evitar', verso: 'Reescreva a frase para deixá-la clara.<br><em>Ex: "Vi, com o binóculo, o homem."</em>' },
+      { emoji: '📝', frente: 'Dica', verso: 'Leia o texto em voz alta e peça para outra pessoa ler: se houver dúvida, reescreva!' }
+    ];
+  </script>
   <script src="memoria.js"></script>
 </body>
 </html>
