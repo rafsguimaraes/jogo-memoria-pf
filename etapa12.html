@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Memória – Etapa 12: Sintaxe</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center; }
+    h1 { color: #2c3e50; margin-bottom: 5px; }
+    h2 { color: #34495e; margin-top: 0; font-size: 18px; }
+    .regras {
+      background: #ecf0f1; border-radius: 10px; padding: 15px; max-width: 600px;
+      margin: 20px auto; text-align: left; font-size: 14px;
+    }
+    .game-area { margin: 30px auto; max-width: 700px; }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      justify-items: center;
+    }
+    .card {
+      background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001;
+      width: 140px; height: 90px; display: flex; align-items: center; justify-content: center;
+      font-size: 2.2em;
+      cursor: pointer; transition: background 0.2s;
+      user-select: none; position: relative;
+      padding: 4px;
+      text-align: center;
+      word-break: break-word;
+    }
+    .card.flipped, .card.matched {
+      font-size: 1.1em;
+      line-height: 1.1;
+      padding: 4px;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      transition: none;
+      transform: none;
+      box-shadow: 0 4px 16px #0002;
+    }
+    .card.matched { background: #b2f2bb; color: #222; cursor: default; }
+    .card.flipped { background: #d0ebff; color: #222; }
+    .scoreboard { margin: 20px 0 10px 0; font-size: 15px; }
+    .btn-restart { background: #3498db; color: #fff; border: none; border-radius: 6px; padding: 8px 18px; font-size: 15px; cursor: pointer; margin-top: 10px; }
+    .btn-restart:hover { background: #2980b9; }
+    .parabens { color: #27ae60; font-weight: bold; font-size: 18px; margin-top: 15px; }
+    @media (max-width: 600px) {
+      .memory-grid { grid-template-columns: repeat(2, 1fr); }
+      .card { width: 95px; height: 70px; font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 Etapa 12 – Sintaxe</h1>
+  <h2>Memorize os termos da oração e funções sintáticas!</h2>
+  <div class="regras">
+    <h3>📌 Como jogar</h3>
+    <ul>
+      <li>Encontre os pares: <b>termo ou função</b> ↔ <b>definição ou exemplo</b></li>
+      <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
+      <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
+    </ul>
+  </div>
+  <div class="scoreboard">
+    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
+  </div>
+  <div class="game-area">
+    <div class="memory-grid" id="memoryGrid"></div>
+    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
+    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
+  </div>
+  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <script>
+    // Pares didáticos de Sintaxe com emojis
+    const pares = [
+      { emoji: '👤', frente: 'Sujeito', verso: 'Termo sobre o qual se declara algo. Ex: O aluno estuda.' },
+      { emoji: '🔎', frente: 'Predicado', verso: 'O que se declara sobre o sujeito. Ex: O aluno estuda.' },
+      { emoji: '🎯', frente: 'Objeto direto', verso: 'Recebe a ação sem preposição. Ex: Comprei um livro.' },
+      { emoji: '🔗', frente: 'Objeto indireto', verso: 'Recebe a ação com preposição. Ex: Gosto de música.' },
+      { emoji: '🧭', frente: 'Adjunto adverbial', verso: 'Indica circunstância. Ex: Ele saiu cedo.' },
+      { emoji: '📝', frente: 'Adjunto adnominal', verso: 'Acompanha o substantivo, indicando característica. Ex: Linda casa branca.' },
+      { emoji: '💬', frente: 'Aposto', verso: 'Explica, resume ou especifica outro termo. Ex: Brasília, capital do Brasil.' },
+      { emoji: '🔄', frente: 'Vocativo', verso: 'Chama ou interpela o interlocutor. Ex: João, venha cá!' },
+      { emoji: '⚡', frente: 'Predicativo', verso: 'Atribui qualidade ao sujeito ou objeto. Ex: O dia está lindo.' },
+      { emoji: '🔤', frente: 'Complemento nominal', verso: 'Completa o sentido de um nome. Ex: Amor à natureza.' }
+    ];
+
+    let cartas = [];
+    let primeiraCarta = null;
+    let segundaCarta = null;
+    let bloqueado = false;
+    let tentativas = 0;
+    let acertos = 0;
+
+    function embaralhar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function iniciarJogo() {
+      tentativas = 0;
+      acertos = 0;
+      document.getElementById('tentativas').textContent = tentativas;
+      document.getElementById('acertos').textContent = acertos;
+      document.getElementById('parabensMsg').style.display = 'none';
+      primeiraCarta = null;
+      segundaCarta = null;
+      bloqueado = false;
+      // Monta as cartas (cada par vira 2 cartas: frente e verso)
+      cartas = [];
+      pares.forEach((par, idx) => {
+        cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
+        cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false, emoji: par.emoji });
+      });
+      embaralhar(cartas);
+      renderizarCartas();
+    }
+
+    function renderizarCartas() {
+      const grid = document.getElementById('memoryGrid');
+      grid.innerHTML = '';
+      cartas.forEach((carta, i) => {
+        const div = document.createElement('div');
+        div.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
+        if (carta.acertou) div.classList.add('matched');
+        div.textContent = (carta.virada || carta.acertou) ? carta.texto : carta.emoji;
+        div.onclick = () => virarCarta(i);
+        grid.appendChild(div);
+      });
+    }
+
+    function virarCarta(idx) {
+      if (bloqueado) return;
+      const carta = cartas[idx];
+      if (carta.virada || carta.acertou) return;
+      carta.virada = true;
+      renderizarCartas();
+      if (!primeiraCarta) {
+        primeiraCarta = carta;
+      } else if (!segundaCarta) {
+        segundaCarta = carta;
+        tentativas++;
+        document.getElementById('tentativas').textContent = tentativas;
+        if (primeiraCarta.par === segundaCarta.par && primeiraCarta.id !== segundaCarta.id) {
+          primeiraCarta.acertou = true;
+          segundaCarta.acertou = true;
+          acertos++;
+          document.getElementById('acertos').textContent = acertos;
+          primeiraCarta = null;
+          segundaCarta = null;
+          renderizarCartas();
+          if (acertos === pares.length) {
+            document.getElementById('parabensMsg').style.display = 'block';
+          }
+        } else {
+          bloqueado = true;
+          setTimeout(() => {
+            primeiraCarta.virada = false;
+            segundaCarta.virada = false;
+            primeiraCarta = null;
+            segundaCarta = null;
+            bloqueado = false;
+            renderizarCartas();
+          }, 1100);
+        }
+      }
+    }
+
+    // Inicia o jogo ao carregar a página
+    window.onload = iniciarJogo;
+  </script>
+</body>
+</html>
