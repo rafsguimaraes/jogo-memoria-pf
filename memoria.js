@@ -52,7 +52,17 @@ window.addEventListener('DOMContentLoaded', function () {
       div.setAttribute('tabindex', 0);
       div.setAttribute('role', 'button');
       div.setAttribute('aria-label', 'Carta do jogo da memória');
-      div.innerHTML = '?';
+      // Mostra o emoji do par antes de virar
+      if (!div.classList.contains('flipped') && !div.classList.contains('matched')) {
+        // Descobre o emoji do par
+        let emoji = '';
+        if (carta.tipo === 'frente' && typeof pares[carta.par] !== 'undefined') {
+          emoji = pares[carta.par].emoji;
+        } else if (typeof pares[carta.par] !== 'undefined') {
+          emoji = pares[carta.par].emoji;
+        }
+        div.innerHTML = '<span style="font-size:2em;">' + emoji + '</span>';
+      }
       div.onclick = () => virarCarta(div, carta, i);
       div.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') virarCarta(div, carta, i); };
       grid.appendChild(div);
