@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireMemory - Etapa 15: Regência</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="logo">FireMemory</h1>
+      <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+
+    <h2 class="game-page-title">🧭 Etapa 15 – Regência</h2>
+    <p class="game-page-subtitle">Memorize as principais regras de regência verbal e nominal!</p>
+
+    <div class="game-container">
+      <div class="scoreboard">
+        <div>Tentativas: <span id="tentativas">0</span></div>
+        <div>Acertos: <span id="acertos">0</span></div>
+        <div>Tempo: <span id="timer">0s</span></div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="pares-restantes" id="paresRestantes">Pares restantes: 0</div>
+
+      <div class="memory-grid" id="memoryGrid">
+        <!-- As cartas serão geradas pelo JavaScript -->
+      </div>
+
+      <div class="game-controls">
+        <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar Etapa</button>
+        <a href="index.html" class="btn-back">🏠 Voltar ao Início</a>
+      </div>
+
+      <div class="parabens-msg" id="parabensMsg" style="display:none;">
+        Parabéns! Você concluiu a etapa 👏
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+  </footer>
+
+  <script>
+    // Define os dados específicos desta etapa que o script.js usará
+    // Ajustado para 8 pares para manter o padrão da grade 4x4.
+    window.dadosDaEtapaAtual = [
+      { emoji: '🧭', frente: 'Regência Verbal', verso: 'Verbo exige complemento (com ou sem preposição). Ex: Assisti AO filme.' },
+      { emoji: '📚', frente: 'Regência Nominal', verso: 'Nome (subst., adj., adv.) exige complemento (com preposição). Ex: Tenho amor À pátria.' },
+      { emoji: '➡️', frente: 'Obedecer / Desobedecer', verso: 'Exigem a preposição "a". Ex: Obedeceu AOS pais.' },
+      { emoji: '🤝', frente: 'Simpatizar / Antipatizar', verso: 'Exigem a preposição "com". Ex: Simpatizo COM ele.' },
+      { emoji: '👀', frente: 'Assistir (ver)', verso: 'Exige prep. "a". Ex: Assistimos AO jogo.' },
+      { emoji: '🆘', frente: 'Assistir (ajudar)', verso: 'Não exige preposição (VTD). Ex: O médico assiste O paciente.' },
+      { emoji: '💳', frente: 'Pagar / Perdoar (coisa)', verso: 'Não exige preposição (VTD). Ex: Paguei A CONTA.' },
+      { emoji: '👤', frente: 'Pagar / Perdoar (pessoa)', verso: 'Exige prep. "a" (VTI). Ex: Perdoei AOS devedores.' }
+    ];
+  </script>
+  <script src="script.js" defer></script>
+</body>
+</html>
