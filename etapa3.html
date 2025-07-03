@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FireMemory - Etapa 3</title>
@@ -32,129 +33,67 @@
       .card { width: 95px; height: 70px; font-size: 0.95em; }
     }
   </style>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 3: Tipologias e Gêneros Textuais - FireMemory</title>
+    <link rel="stylesheet" href="style.css">
+>>>>>>> feature/firememory-initial-structure-and-stages-1-16_20
 </head>
 <body>
-  <h1>🧩 Etapa 3 – Tipologias e Gêneros Textuais</h1>
-  <h2>Memorize os conceitos e exemplos mais cobrados em concursos!</h2>
-  <div class="regras">
-    <h3>📌 Como jogar</h3>
-    <ul>
-      <li>Encontre os pares: <b>tipologia/gênero</b> ↔ <b>característica ou exemplo</b></li>
-      <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
-      <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
-    </ul>
-  </div>
-  <div class="scoreboard">
-    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
-  </div>
-  <div class="game-area">
-    <div class="memory-grid" id="memoryGrid"></div>
-    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
-    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
-  </div>
-  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
-  <script>
-    // Pares didáticos de Tipologias e Gêneros
-    // Pares didáticos de Tipologias e Gêneros com emojis
-    const pares = [
-      { emoji: '📖', frente: 'Narração', verso: 'Relato de eventos com personagens, tempo e espaço.' },
-      { emoji: '🖼️', frente: 'Descrição', verso: 'Apresentação de características de seres, objetos ou ambientes.' },
-      { emoji: '📚', frente: 'Dissertação Expositiva', verso: 'Exposição de ideias ou fatos, sem convencer.' },
-      { emoji: '🗣️', frente: 'Dissertação Argumentativa', verso: 'Defesa de ponto de vista, busca convencer.' },
-      { emoji: '📝', frente: 'Injunção', verso: 'Texto que orienta, instrui ou ensina (ex: manual, receita).' },
-      { emoji: '📰', frente: 'Editorial', verso: 'Tese e proposta de intervenção do veículo de comunicação.' },
-      { emoji: '✍️', frente: 'Artigo de opinião', verso: 'Defesa de ideia do autor, uso da 1ª pessoa.' },
-      { emoji: '🗞️', frente: 'Notícia', verso: 'Relato objetivo de fatos, responde: o quê, quem, quando, onde, como, por quê.' },
-      { emoji: '🕒', frente: 'Crônica', verso: 'Texto breve, cotidiano, narrativa curta.' },
-      { emoji: '📘', frente: 'Conto', verso: 'Narrativa breve, um só conflito, poucos personagens.' }
-    ];
+    <header>
+        <h1>FireMemory</h1>
+        <nav>
+            <a href="index.html">Voltar para a Seleção de Etapas</a>
+        </nav>
+    </header>
+    <main>
+        <h2 class="game-page-title">Etapa 3: Tipologias e Gêneros Textuais</h2>
+        <p class="game-page-subtitle">Combine os conceitos com suas definições.</p>
 
-    let cartas = [];
-    let primeiraCarta = null;
-    let segundaCarta = null;
-    let bloqueado = false;
-    let tentativas = 0;
-    let acertos = 0;
+        <div class="game-container">
+            <div class="scoreboard">
+                <div>Tentativas: <span id="tentativas">0</span></div>
+                <div>Acertos: <span id="acertos">0</span></div>
+                <div>Tempo: <span id="timer">0s</span></div>
+            </div>
 
-    function embaralhar(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    }
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
 
-    function iniciarJogo() {
-      tentativas = 0;
-      acertos = 0;
-      document.getElementById('tentativas').textContent = tentativas;
-      document.getElementById('acertos').textContent = acertos;
-      document.getElementById('parabensMsg').style.display = 'none';
-      primeiraCarta = null;
-      segundaCarta = null;
-      bloqueado = false;
-      // Monta as cartas (cada par vira 2 cartas: frente e verso)
-      cartas = [];
-      pares.forEach((par, idx) => {
-        cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
-        cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false, emoji: par.emoji });
-      });
-      embaralhar(cartas);
-      renderizarCartas();
-    }
+            <div id="memoryGrid" class="memory-grid">
+                <!-- As cartas serão geradas pelo script.js aqui -->
+            </div>
 
-    function renderizarCartas() {
-      const grid = document.getElementById('memoryGrid');
-      grid.innerHTML = '';
-      cartas.forEach((carta, i) => {
-        const div = document.createElement('div');
-        div.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
-        if (carta.acertou) div.classList.add('matched');
-        div.textContent = (carta.virada || carta.acertou) ? carta.texto : carta.emoji;
-        div.onclick = () => virarCarta(i);
-        grid.appendChild(div);
-      });
-    }
+            <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                Parabéns! Você concluiu a etapa!
+            </div>
 
-    function virarCarta(idx) {
-      if (bloqueado) return;
-      const carta = cartas[idx];
-      if (carta.virada || carta.acertou) return;
-      carta.virada = true;
-      renderizarCartas();
-      if (!primeiraCarta) {
-        primeiraCarta = carta;
-      } else if (!segundaCarta) {
-        segundaCarta = carta;
-        tentativas++;
-        document.getElementById('tentativas').textContent = tentativas;
-        if (primeiraCarta.par === segundaCarta.par && primeiraCarta.id !== segundaCarta.id) {
-          primeiraCarta.acertou = true;
-          segundaCarta.acertou = true;
-          acertos++;
-          document.getElementById('acertos').textContent = acertos;
-          primeiraCarta = null;
-          segundaCarta = null;
-          renderizarCartas();
-          if (acertos === pares.length) {
-            document.getElementById('parabensMsg').style.display = 'block';
-          }
-        } else {
-          bloqueado = true;
-          setTimeout(() => {
-            primeiraCarta.virada = false;
-            segundaCarta.virada = false;
-            primeiraCarta = null;
-            segundaCarta = null;
-            bloqueado = false;
-            renderizarCartas();
-          }, 1100);
-        }
-      }
-    }
-
-    // Inicia o jogo ao carregar a página
-    window.onload = iniciarJogo;
-  </script>
+            <div class="game-controls">
+                <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+                <a href="index.html" class="btn-back">Voltar</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 FireMemory. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        const dadosDaEtapa = [
+            { emoji: "📚", frente: "Tipologia Textual", verso: "Classificação dos textos com base em suas características linguísticas predominantes (narração, descrição, etc.). É limitada." },
+            { emoji: "📰", frente: "Gênero Textual", verso: "Textos materializados em situações comunicativas, com função social específica e flexível (notícia, receita, etc.). São inúmeros." },
+            { emoji: "🚶", frente: "Narração", verso: "Tipo textual que relata fatos e acontecimentos, reais ou fictícios, com personagens, tempo e espaço." },
+            { emoji: "🖼️", frente: "Descrição", verso: "Tipo textual que detalha características de seres, objetos, lugares ou sensações." },
+            { emoji: "💭", frente: "Dissertação", verso: "Tipo textual que expõe ideias, defende um ponto de vista ou reflete sobre um tema." },
+            { emoji: "📜", frente: "Injunção", verso: "Tipo textual que instrui, orienta ou comanda o interlocutor (manuais, receitas, leis)." },
+            { emoji: "📢", frente: "Exposição", verso: "Tipo textual que apresenta informações sobre um assunto, sem necessariamente defender uma tese." },
+            { emoji: "📧", frente: "Exemplo de Gênero", verso: "E-mail, carta, bilhete, reportagem, conto, crônica, bula de remédio, etc." }
+        ];
+        window.dadosDaEtapaAtual = dadosDaEtapa;
+    </script>
+    <script src="script.js" defer></script>
 </body>
   <footer>
     FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.

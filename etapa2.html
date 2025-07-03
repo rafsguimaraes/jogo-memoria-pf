@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -180,3 +181,69 @@
   <script src="script.js"></script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 2: Pressupostos e Funções da Linguagem - FireMemory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>FireMemory</h1>
+        <nav>
+            <a href="index.html">Voltar para a Seleção de Etapas</a>
+        </nav>
+    </header>
+    <main>
+        <h2 class="game-page-title">Etapa 2: Pressupostos e Funções da Linguagem</h2>
+        <p class="game-page-subtitle">Combine os conceitos com suas definições.</p>
+
+        <div class="game-container">
+            <div class="scoreboard">
+                <div>Tentativas: <span id="tentativas">0</span></div>
+                <div>Acertos: <span id="acertos">0</span></div>
+                <div>Tempo: <span id="timer">0s</span></div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
+
+            <div id="memoryGrid" class="memory-grid">
+                <!-- As cartas serão geradas pelo script.js aqui -->
+            </div>
+
+            <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                Parabéns! Você concluiu a etapa!
+            </div>
+
+            <div class="game-controls">
+                <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+                <a href="index.html" class="btn-back">Voltar</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 FireMemory. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        const dadosDaEtapa = [
+            { emoji: "🤫", frente: "Pressuposto", verso: "Ideia não expressa diretamente, mas que pode ser entendida a partir de certas palavras ou expressões." },
+            { emoji: "🗣️", frente: "Subentendido", verso: "Informação implícita que depende do contexto e da interpretação do leitor/ouvinte." },
+            { emoji: "ℹ️", frente: "Função Referencial", verso: "Foco na informação, no contexto. Linguagem objetiva e direta. (Ex: Notícias)" },
+            { emoji: "😊", frente: "Função Emotiva", verso: "Foco no emissor, expressando sentimentos e emoções. (Ex: Diários)" },
+            { emoji: "👉", frente: "Função Conativa", verso: "Foco no receptor, tentando convencê-lo ou influenciá-lo. (Ex: Publicidade)" },
+            { emoji: "🎶", frente: "Função Poética", verso: "Foco na mensagem e sua elaboração estética, no como se diz. (Ex: Poemas)" },
+            { emoji: "💬", frente: "Função Fática", verso: "Foco no canal, testando ou mantendo a comunicação. (Ex: 'Alô?', 'Entende?')" },
+            { emoji: "📜", frente: "Função Metalinguística", verso: "Foco no código, usando a linguagem para falar dela mesma. (Ex: Dicionários)" }
+        ];
+        window.dadosDaEtapaAtual = dadosDaEtapa;
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
+>>>>>>> feature/firememory-initial-structure-and-stages-1-16_20
