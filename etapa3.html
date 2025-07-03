@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 3: Tipologias e Gêneros Textuais - FireMemory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">FireMemory</h1>
+            <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+        </header>
+        <main>
+            <h2 class="game-page-title">📖 Etapa 3: Tipologias e Gêneros Textuais</h2>
+            <p class="game-page-subtitle">Combine os conceitos com suas definições.</p>
+
+            <div class="game-container">
+                <div class="scoreboard">
+                    <div>Tentativas: <span id="tentativas">0</span></div>
+                    <div>Acertos: <span id="acertos">0</span></div>
+                    <div>Tempo: <span id="timer">0s</span></div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
+
+                <div id="memoryGrid" class="memory-grid">
+                    <!-- As cartas serão geradas pelo script.js aqui -->
+                </div>
+
+                <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                    Parabéns! Você concluiu a etapa!
+                </div>
+
+                <div class="game-controls">
+                    <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+                    <a href="index.html" class="btn-back">Voltar</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+    </footer>
+    <script>
+        const dadosDaEtapa = [
+            { emoji: "📚", frente: "Tipologia Textual", verso: "Classificação dos textos com base em suas características linguísticas predominantes (narração, descrição, etc.). É limitada." },
+            { emoji: "📰", frente: "Gênero Textual", verso: "Textos materializados em situações comunicativas, com função social específica e flexível (notícia, receita, etc.). São inúmeros." },
+            { emoji: "🚶", frente: "Narração", verso: "Tipo textual que relata fatos e acontecimentos, reais ou fictícios, com personagens, tempo e espaço." },
+            { emoji: "🖼️", frente: "Descrição", verso: "Tipo textual que detalha características de seres, objetos, lugares ou sensações." },
+            { emoji: "💭", frente: "Dissertação", verso: "Tipo textual que expõe ideias, defende um ponto de vista ou reflete sobre um tema." },
+            { emoji: "📜", frente: "Injunção", verso: "Tipo textual que instrui, orienta ou comanda o interlocutor (manuais, receitas, leis)." },
+            { emoji: "📢", frente: "Exposição", verso: "Tipo textual que apresenta informações sobre um assunto, sem necessariamente defender uma tese." },
+            { emoji: "📧", frente: "Exemplo de Gênero", verso: "E-mail, carta, bilhete, reportagem, conto, crônica, bula de remédio, etc." }
+        ];
+        window.dadosDaEtapaAtual = dadosDaEtapa;
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
