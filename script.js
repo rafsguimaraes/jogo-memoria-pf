@@ -62,12 +62,25 @@ document.addEventListener('DOMContentLoaded', function() {
   function renderizarCartas() {
     grid.innerHTML = '';
     cartas.forEach((carta, i) => {
-      const div = document.createElement('div');
-      div.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
-      if (carta.acertou) div.classList.add('matched');
-      div.textContent = (carta.virada || carta.acertou) ? carta.texto : carta.emoji;
-      div.onclick = () => virarCarta(i);
-      grid.appendChild(div);
+      const card = document.createElement('div');
+      card.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
+      if (carta.acertou) card.classList.add('matched');
+
+      // Estrutura interna para frente e verso
+      const front = document.createElement('div');
+      front.className = 'card-content card-front';
+      front.textContent = carta.emoji;
+
+      const back = document.createElement('div');
+      back.className = 'card-content card-back';
+      back.textContent = carta.texto;
+
+      card.appendChild(front);
+      card.appendChild(back);
+
+      // Clique só se não estiver virada ou acertada
+      card.onclick = () => virarCarta(i);
+      grid.appendChild(card);
     });
   }
 
