@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 20: Elementos de Coesão - FireMemory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">FireMemory</h1>
+            <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+        </header>
+        <main>
+            <h2 class="game-page-title">🔗 Etapa 20 – Elementos de Coesão</h2>
+            <p class="game-page-subtitle">Combine os conceitos de coesão com suas definições ou exemplos.</p>
+
+            <div class="game-container">
+                <div class="scoreboard">
+                    <div>Tentativas: <span id="tentativas">0</span></div>
+                    <div>Acertos: <span id="acertos">0</span></div>
+                    <div>Tempo: <span id="timer">0s</span></div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
+
+                <div id="memoryGrid" class="memory-grid">
+                    <!-- As cartas serão geradas pelo script.js aqui -->
+                </div>
+
+                <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                    Parabéns! Você concluiu a etapa!
+                </div>
+
+                <div class="game-controls">
+                    <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+                    <a href="index.html" class="btn-back">Voltar</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+    </footer>
+    <script>
+        // Dados da etapa no formato esperado pelo script.js
+        window.dadosDaEtapaAtual = [
+            { emoji: "🔗", frente: "Anáfora", verso: "Retoma um termo já expresso anteriormente. Ex: Maria é estudiosa. **Ela** tira boas notas." },
+            { emoji: "➡️", frente: "Catáfora", verso: "Antecipa um termo que será expresso posteriormente. Ex: Só desejo **isto**: sua felicidade." },
+            { emoji: "💨", frente: "Elipse", verso: "Omissão de um termo facilmente identificável. Ex: João foi à feira. Comprou frutas. (Omitiu João)" },
+            { emoji: "🔁", frente: "Substituição Lexical", verso: "Uso de sinônimos/hiperônimos para evitar repetição. Ex: O **leão** escapou. O **felino** assustou." },
+            { emoji: "➕", frente: "Conector de Adição", verso: "Expressa soma de ideias. Ex: **E**, **além disso**, **também**." },
+            { emoji: "⚔️", frente: "Conector de Contraste", verso: "Expressa ideias opostas. Ex: **Mas**, **porém**, **contudo**." },
+            { emoji: "🏁", frente: "Conector de Conclusão", verso: "Introduz uma conclusão. Ex: **Logo**, **portanto**, **assim**." },
+            { emoji: "👤", frente: "Pronominalização", verso: "Uso de pronomes para retomar termos. Ex: Vi **os meninos**. Chamei-**os**." }
+        ];
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
