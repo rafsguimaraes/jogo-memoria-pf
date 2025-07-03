@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 1: Compreensão e Interpretação - FireMemory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>FireMemory</h1>
+        <nav>
+            <a href="index.html">Voltar para a Seleção de Etapas</a>
+        </nav>
+    </header>
+    <main>
+        <h2 class="game-page-title">Etapa 1: Compreensão e Interpretação</h2>
+        <p class="game-page-subtitle">Combine os conceitos com suas definições.</p>
+
+        <div class="game-container">
+            <div class="scoreboard">
+                <div>Tentativas: <span id="tentativas">0</span></div>
+                <div>Acertos: <span id="acertos">0</span></div>
+                <div>Tempo: <span id="timer">0s</span></div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
+
+            <div id="memoryGrid" class="memory-grid">
+                <!-- As cartas serão geradas pelo script.js aqui -->
+            </div>
+
+            <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                Parabéns! Você concluiu a etapa!
+            </div>
+
+            <div class="game-controls">
+                <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+                <a href="index.html" class="btn-back">Voltar</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+    </footer>
+    <script>
+        const dadosDaEtapa = [
+            { emoji: "❓", frente: "Compreensão", verso: "Capacidade de entender o significado literal do que está escrito." },
+            { emoji: "🤔", frente: "Interpretação", verso: "Capacidade de inferir, concluir e ir além do que está explicitamente dito." },
+            { emoji: "📄", frente: "Texto Literal", verso: "Informações explícitas e diretas apresentadas no texto." },
+            { emoji: "💡", frente: "Inferência", verso: "Conclusão baseada em evidências textuais e conhecimento prévio." },
+            { emoji: "🎯", frente: "Ideia Principal", verso: "O ponto central ou mensagem mais importante do texto." },
+            { emoji: "🔍", frente: "Detalhes de Apoio", verso: "Informações que sustentam ou explicam a ideia principal." },
+            { emoji: "🌐", frente: "Contexto", verso: "Circunstâncias que rodeiam um fato ou uma situação no texto." },
+            { emoji: "✍️", frente: "Intenção do Autor", verso: "O propósito ou objetivo que o autor tinha ao escrever o texto." }
+        ];
+        window.dadosDaEtapaAtual = dadosDaEtapa;
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
