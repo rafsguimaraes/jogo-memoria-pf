@@ -5,152 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FireMemory - Etapa 1</title>
   <link rel="stylesheet" href="style.css">
-    }
-    .card.flipped, .card.matched {
-      font-size: 1.1em;
-      line-height: 1.1;
-      padding: 4px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      transition: none;
-      transform: none;
-      box-shadow: 0 4px 16px #0002;
-    }
-    .card.matched { background: #b2f2bb; color: #222; cursor: default; }
-    .card.flipped { background: #d0ebff; color: #222; }
-    .scoreboard { margin: 20px 0 10px 0; font-size: 15px; }
-    .btn-restart { background: #3498db; color: #fff; border: none; border-radius: 6px; padding: 8px 18px; font-size: 15px; cursor: pointer; margin-top: 10px; }
-    .btn-restart:hover { background: #2980b9; }
-    .parabens { color: #27ae60; font-weight: bold; font-size: 18px; margin-top: 15px; }
-    @media (max-width: 600px) {
-      .memory-grid { grid-template-columns: repeat(2, 1fr); }
-      .card { width: 95px; height: 70px; font-size: 0.95em; }
-    }
-  </style>
 </head>
 <body>
-  <h1>🧠 Etapa 1 – Compreensão e Interpretação de Textos</h1>
-  <h2>Fixe os conceitos essenciais para acertar questões de interpretação!</h2>
-  <div class="regras">
-    <h3>📌 Como jogar</h3>
-    <ul>
-      <li>Encontre os pares: <b>conceito</b> ↔ <b>definição ou exemplo</b></li>
-      <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
-      <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
-    </ul>
-  </div>
-  <div class="scoreboard">
-    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
-  </div>
-  <div class="game-area">
-    <div class="memory-grid" id="memoryGrid"></div>
-    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
+  <div class="container">
+    <header>
+      <h1>🧠 FireMemory – Etapa 1</h1>
+      <h2>Compreensão e Interpretação de Textos</h2>
+      <p class="etapa-desc">Fixe os conceitos essenciais para acertar questões de interpretação!</p>
+    </header>
+    <section class="regras">
+      <h3>📌 Como jogar</h3>
+      <ul>
+        <li>Encontre os pares: <b>conceito</b> ↔ <b>definição ou exemplo</b></li>
+        <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
+        <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
+      </ul>
+    </section>
+    <div class="scoreboard">
+      Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
+    </div>
+    <div class="memory-grid"></div>
+    <button class="btn-restart" onclick="reiniciarJogo()">🔄 Reiniciar</button>
     <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
   </div>
-  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
-  <script>
-    // Pares didáticos de Compreensão e Interpretação com emojis
-    const pares = [
-      { emoji: '🧠', frente: 'Compreensão', verso: 'Identificar informações explícitas no texto.' },
-      { emoji: '🔍', frente: 'Interpretação', verso: 'Inferir informações a partir do texto, leitura implícita.' },
-      { emoji: '✍️', frente: 'Texto verbal', verso: 'Utiliza palavras (oralidade ou escrita).' },
-      { emoji: '🖼️', frente: 'Texto não verbal', verso: 'Utiliza imagens, gestos, sons, etc.' },
-      { emoji: '🔗', frente: 'Texto misto', verso: 'Combina elementos verbais e não verbais.' },
-      { emoji: '📋', frente: 'Critérios de textualidade', verso: 'Aceitabilidade, intencionalidade, informatividade, situacionalidade, intertextualidade.' },
-      { emoji: '✅', frente: 'Exemplo de compreensão', verso: 'Pergunta: “O que o autor disse?”' },
-      { emoji: '💡', frente: 'Exemplo de interpretação', verso: 'Pergunta: “O que o autor quis dizer?”' }
-    ];
-
-    let cartas = [];
-    let primeiraCarta = null;
-    let segundaCarta = null;
-    let bloqueado = false;
-    let tentativas = 0;
-    let acertos = 0;
-
-    function embaralhar(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    }
-
-    function iniciarJogo() {
-      tentativas = 0;
-      acertos = 0;
-      document.getElementById('tentativas').textContent = tentativas;
-      document.getElementById('acertos').textContent = acertos;
-      document.getElementById('parabensMsg').style.display = 'none';
-      primeiraCarta = null;
-      segundaCarta = null;
-      bloqueado = false;
-      cartas = [];
-      pares.forEach((par, idx) => {
-        cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
-        cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false, emoji: par.emoji });
-      });
-      embaralhar(cartas);
-      renderizarCartas();
-    }
-
-    function renderizarCartas() {
-      const grid = document.getElementById('memoryGrid');
-      grid.innerHTML = '';
-      cartas.forEach((carta, i) => {
-        const div = document.createElement('div');
-        div.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
-        if (carta.acertou) div.classList.add('matched');
-        div.textContent = (carta.virada || carta.acertou) ? carta.texto : carta.emoji;
-        div.onclick = () => virarCarta(i);
-        grid.appendChild(div);
-      });
-    }
-
-    function virarCarta(idx) {
-      if (bloqueado) return;
-      const carta = cartas[idx];
-      if (carta.virada || carta.acertou) return;
-      carta.virada = true;
-      renderizarCartas();
-      if (!primeiraCarta) {
-        primeiraCarta = carta;
-      } else if (!segundaCarta) {
-        segundaCarta = carta;
-        tentativas++;
-        document.getElementById('tentativas').textContent = tentativas;
-        if (primeiraCarta.par === segundaCarta.par && primeiraCarta.id !== segundaCarta.id) {
-          primeiraCarta.acertou = true;
-          segundaCarta.acertou = true;
-          acertos++;
-          document.getElementById('acertos').textContent = acertos;
-          primeiraCarta = null;
-          segundaCarta = null;
-          renderizarCartas();
-          if (acertos === pares.length) {
-            document.getElementById('parabensMsg').style.display = 'block';
-          }
-        } else {
-          bloqueado = true;
-          setTimeout(() => {
-            primeiraCarta.virada = false;
-            segundaCarta.virada = false;
-            primeiraCarta = null;
-            segundaCarta = null;
-            bloqueado = false;
-            renderizarCartas();
-          }, 1100);
-        }
-      }
-    }
-
-    window.onload = iniciarJogo;
-  </script>
-</body>
   <footer>
     FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.
   </footer>
