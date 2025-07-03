@@ -5,33 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FireMemory - Etapa 9</title>
   <link rel="stylesheet" href="style.css">
-    }
-    .card.flipped, .card.matched {
-      font-size: 1.1em;
-      line-height: 1.1;
-      padding: 4px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      transition: none;
-      transform: none;
-      box-shadow: 0 4px 16px #0002;
-    }
-    .card.matched { background: #b2f2bb; color: #222; cursor: default; }
-    .card.flipped { background: #d0ebff; color: #222; }
-    .scoreboard { margin: 20px 0 10px 0; font-size: 15px; }
-    .btn-restart { background: #3498db; color: #fff; border: none; border-radius: 6px; padding: 8px 18px; font-size: 15px; cursor: pointer; margin-top: 10px; }
-    .btn-restart:hover { background: #2980b9; }
-    .parabens { color: #27ae60; font-weight: bold; font-size: 18px; margin-top: 15px; }
-    @media (max-width: 600px) {
-      .memory-grid { grid-template-columns: repeat(2, 1fr); }
-      .card { width: 95px; height: 70px; font-size: 0.95em; }
-    }
-  </style>
 </head>
 <body>
   <h1>🌎 Etapa 9 – Variação Linguística</h1>
@@ -52,10 +25,11 @@
     <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
     <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
   </div>
-  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+  <footer>
+    FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.
+  </footer>
   <script>
-    // Pares didáticos de Variação Linguística com emojis
-    const pares = [
+    window.dadosDaEtapaAtual = [
       { emoji: '🌍', frente: 'Variação regional', verso: 'Diferenças de fala conforme a região. Ex: mandioca/aipim.' },
       { emoji: '👥', frente: 'Variação social', verso: 'Diferenças de fala por classe social, idade, profissão.' },
       { emoji: '⏳', frente: 'Variação histórica', verso: 'Mudanças na língua ao longo do tempo.' },
@@ -65,97 +39,7 @@
       { emoji: '👶', frente: 'Gíria', verso: 'Palavra ou expressão informal, usada por grupos específicos.' },
       { emoji: '📚', frente: 'Norma culta', verso: 'Variante da língua usada em situações formais e na escrita.' }
     ];
-
-    let cartas = [];
-    let primeiraCarta = null;
-    let segundaCarta = null;
-    let bloqueado = false;
-    let tentativas = 0;
-    let acertos = 0;
-
-    function embaralhar(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    }
-
-    function iniciarJogo() {
-      tentativas = 0;
-      acertos = 0;
-      document.getElementById('tentativas').textContent = tentativas;
-      document.getElementById('acertos').textContent = acertos;
-      document.getElementById('parabensMsg').style.display = 'none';
-      primeiraCarta = null;
-      segundaCarta = null;
-      bloqueado = false;
-      // Monta as cartas (cada par vira 2 cartas: frente e verso)
-      cartas = [];
-      pares.forEach((par, idx) => {
-        cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
-        cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false, emoji: par.emoji });
-      });
-      embaralhar(cartas);
-      renderizarCartas();
-    }
-
-    function renderizarCartas() {
-      const grid = document.getElementById('memoryGrid');
-      grid.innerHTML = '';
-      cartas.forEach((carta, i) => {
-        const div = document.createElement('div');
-        div.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
-        if (carta.acertou) div.classList.add('matched');
-        div.textContent = (carta.virada || carta.acertou) ? carta.texto : carta.emoji;
-        div.onclick = () => virarCarta(i);
-        grid.appendChild(div);
-      });
-    }
-
-    function virarCarta(idx) {
-      if (bloqueado) return;
-      const carta = cartas[idx];
-      if (carta.virada || carta.acertou) return;
-      carta.virada = true;
-      renderizarCartas();
-      if (!primeiraCarta) {
-        primeiraCarta = carta;
-      } else if (!segundaCarta) {
-        segundaCarta = carta;
-        tentativas++;
-        document.getElementById('tentativas').textContent = tentativas;
-        if (primeiraCarta.par === segundaCarta.par && primeiraCarta.id !== segundaCarta.id) {
-          primeiraCarta.acertou = true;
-          segundaCarta.acertou = true;
-          acertos++;
-          document.getElementById('acertos').textContent = acertos;
-          primeiraCarta = null;
-          segundaCarta = null;
-          renderizarCartas();
-          if (acertos === pares.length) {
-            document.getElementById('parabensMsg').style.display = 'block';
-          }
-        } else {
-          bloqueado = true;
-          setTimeout(() => {
-            primeiraCarta.virada = false;
-            segundaCarta.virada = false;
-            primeiraCarta = null;
-            segundaCarta = null;
-            bloqueado = false;
-            renderizarCartas();
-          }, 1100);
-        }
-      }
-    }
-
-    // Inicia o jogo ao carregar a página
-    window.onload = iniciarJogo;
   </script>
-</body>
-  <footer>
-    FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.
-  </footer>
   <script src="script.js"></script>
 </body>
 </html>
