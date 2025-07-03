@@ -3,186 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>FireMemory - Etapa 2</title>
+  <title>FireMemory - Etapa 2: Pressupostos e Funções da Linguagem</title> <!-- Specific Title -->
   <link rel="stylesheet" href="style.css">
-  <!-- Styles from main branch's etapa2.html - MINIMIZED to essentials not covered by style.css -->
   <style>
+    /* Minimal specific styles for etapa2.html, relying mostly on style.css */
     body {
-      /* style.css now handles general body styling (font, background, color, layout) */
-      /* Adding specific padding for game page content if needed */
       padding-top: 20px;
       padding-bottom: 20px;
     }
     .etapa-title { /* Class for the main H1 of the stage page */
-        color: #ff5722; /* Consistent with logo color from style.css */
+        color: #ff5722;
         text-align: center;
         margin-bottom: 20px;
-        font-size: 2.2em; /* Adjusted size */
+        font-size: 2.2em;
     }
     #explicacao {
       max-width:700px;
       margin:0 auto 20px auto;
       text-align:left;
-      background:#fffbe7; /* Light yellow, distinct background */
+      background:#fffbe7;
       border-radius:8px;
       padding:16px 20px 10px 20px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1); /* Softer shadow */
-      font-size:15px;
-      border-left: 4px solid #ffc107; /* Accent border */
-    }
-    #placar {
-      margin-bottom:16px;
-      font-size:1.1em; /* Slightly larger */
-      color: #333; /* Darker text for better readability */
-      text-align: center;
-      font-weight: 500;
-    }
-    #mensagem-final {
-      display:none; /* JS handles display */
-      margin:24px auto 10px auto;
-      max-width:500px;
-      background:#e6ffed; /* Lighter green */
-      border-radius:8px;
-      padding:18px 20px 10px 20px;
       box-shadow:0 2px 8px rgba(0,0,0,0.1);
-      font-size:1.1em; /* Adjusted font size */
-      text-align:center;
-      color:#1d8a23; /* Darker green text */
-      font-weight:bold;
+      font-size:15px;
+      border-left: 4px solid #ffc107;
     }
-    /* .grid and .card styles are now primarily from style.css */
-    /* .btn-restart style is from style.css */
-
-    .game-controls { /* Centering container for buttons */
+    /* Scoreboard, progress bar, etc. will be styled by global style.css or added if missing by script.js */
+    .game-controls {
       text-align: center;
       margin-top: 20px;
       margin-bottom: 20px;
     }
-    /* Using .btn-restart style for the "Voltar ao Menu" button for consistency */
   </style>
 </head>
 <body>
-  <!-- Using .container class from style.css for consistent page width and centering -->
-  <div class="container">
-    <h1 class="etapa-title">Etapa 2 – Pressupostos, Subentendidos e Funções da Linguagem</h1>
-    <div id="explicacao">
-      <b>Como jogar:</b> Encontre os pares de cartas que relacionam <b>conceitos</b> e <b>explicações/exemplos</b> sobre Pressupostos, Subentendidos e Funções da Linguagem.<br>
-      <b>O que você vai aprender:</b> Identificar pressupostos, subentendidos e reconhecer as funções da linguagem em exemplos reais.<br>
-      <b>Dica:</b> Clique nas cartas para revelar o conteúdo e memorize as relações!
-    </div>
-    <div id="placar"></div>
-    <!-- .memory-grid will be styled by style.css -->
-    <div class="memory-grid" id="grid"></div>
-    <div id="mensagem-final"></div>
-    <div class="game-controls">
-      <!-- Applying .btn-restart class from style.css to the restart button -->
-      <button id="reiniciar" class="btn-restart" style="display:none;">Reiniciar Jogo</button>
-    </div>
-    <div class="game-controls">
-        <a href="index.html" class="btn-restart">Voltar ao Menu</a>
-    </div>
+  <div class="container"> <!-- Standard container -->
+    <header>
+        <h1 class="logo">FireMemory</h1>
+        <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+    <main>
+        <h2 class="game-page-title etapa-title">🧩 Etapa 2 – Pressupostos, Subentendidos e Funções da Linguagem</h2>
+        <div id="explicacao"> <!-- Specific explanation for Etapa 2 -->
+          <b>Como jogar:</b> Encontre os pares de cartas que relacionam <b>conceitos</b> e <b>explicações/exemplos</b> sobre Pressupostos, Subentendidos e Funções da Linguagem.<br>
+          <b>O que você vai aprender:</b> Identificar pressupostos, subentendidos e reconhecer as funções da linguagem em exemplos reais.<br>
+          <b>Dica:</b> Clique nas cartas para revelar o conteúdo e memorize as relações!
+        </div>
+
+        <div class="game-container">
+            <div class="scoreboard">
+                <div>Tentativas: <span id="tentativas">0</span></div>
+                <div>Acertos: <span id="acertos">0</span></div>
+                <div>Tempo: <span id="timer">0s</span></div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="paresRestantes" class="pares-restantes">Pares restantes: 0</p>
+
+            <div class="memory-grid" id="memoryGrid">
+                <!-- Cartas geradas pelo script.js -->
+            </div>
+
+            <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                <!-- Mensagem preenchida pelo script.js -->
+            </div>
+
+            <div class="game-controls">
+              <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+            </div>
+            <div class="game-controls">
+                <a href="index.html" class="btn-restart">Voltar ao Menu</a>
+            </div>
+        </div>
+    </main>
   </div>
-
+  <footer>
+    <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+  </footer>
   <script>
-    // This is the game script from 'main' branch's etapa2.html
-    const pairs = [
-      ["💬 Pressuposto", "Informação implícita, pressuposta pelo falante, necessária para o sentido. Ex: 'João parou de fumar.' (pressupõe que João fumava antes)"],
-      ["🤔 Subentendido", "Sentido sugerido, depende do contexto e da interpretação. Ex: 'Está calor aqui, não?' (pode sugerir: abra a janela)"],
-      ["🌍 Função Referencial", "Foco na informação, linguagem objetiva, transmite dados. Ex: notícia, relatório."],
-      ["🙋 Função Emotiva (Expressiva)", "Expressa emoções, sentimentos ou opiniões do emissor. Ex: 'Estou muito feliz hoje!'"] ,
-      ["👂 Função Conativa (Apelativa)", "Busca influenciar o receptor, dar ordens, pedidos, conselhos. Ex: 'Feche a porta, por favor.'"],
-      ["📞 Função Fática", "Testa, inicia, mantém ou encerra o canal de comunicação. Ex: 'Alô?', 'Oi!', 'Tudo bem?'"],
-      ["🔤 Função Metalinguística", "A linguagem fala de si mesma, explica códigos. Ex: 'O que significa a palavra 'verbo'?'."],
-      ["🖋️ Função Poética", "Foco na forma, estética da mensagem, uso de figuras de linguagem. Ex: poesia, slogan."],
+    // Data for Etapa 2
+    window.dadosDaEtapaAtual = [
+      { emoji: "💬", frente: "Pressuposto", verso: "Informação implícita, pressuposta pelo falante, necessária para o sentido. Ex: 'João parou de fumar.' (pressupõe que João fumava antes)" },
+      { emoji: "🤔", frente: "Subentendido", verso: "Sentido sugerido, depende do contexto e da interpretação. Ex: 'Está calor aqui, não?' (pode sugerir: abra a janela)" },
+      { emoji: "🌍", frente: "Função Referencial", verso: "Foco na informação, linguagem objetiva, transmite dados. Ex: notícia, relatório." },
+      { emoji: "🙋", frente: "Função Emotiva (Expressiva)", verso: "Expressa emoções, sentimentos ou opiniões do emissor. Ex: 'Estou muito feliz hoje!'" },
+      { emoji: "👂", frente: "Função Conativa (Apelativa)", verso: "Busca influenciar o receptor, dar ordens, pedidos, conselhos. Ex: 'Feche a porta, por favor.'" },
+      { emoji: "📞", frente: "Função Fática", verso: "Testa, inicia, mantém ou encerra o canal de comunicação. Ex: 'Alô?', 'Oi!', 'Tudo bem?'" },
+      { emoji: "🔤", frente: "Função Metalinguística", verso: "A linguagem fala de si mesma, explica códigos. Ex: 'O que significa a palavra 'verbo'?'." },
+      { emoji: "🖋️", frente: "Função Poética", verso: "Foco na forma, estética da mensagem, uso de figuras de linguagem. Ex: poesia, slogan." }
     ];
-    const grid = document.getElementById("grid");
-    const placar = document.getElementById("placar");
-    const mensagemFinal = document.getElementById("mensagem-final");
-    const btnReiniciar = document.getElementById("reiniciar");
-
-    function embaralhar(array) {
-      return array.map(a => [Math.random(), a]).sort((a, b) => a[0] - b[0]).map(a => a[1]);
-    }
-
-    function iniciarJogo() {
-      grid.innerHTML = "";
-      mensagemFinal.style.display = "none";
-      btnReiniciar.style.display = "none";
-      let tentativas = 0;
-      let acertos = 0;
-      let totalPares = pairs.length;
-      let first = null;
-      let lock = false;
-
-      const allCards = [];
-      pairs.forEach(pair => {
-        allCards.push({ emoji: pair[0].split(' ')[0], text: pair[0] }); // Card for concept
-        allCards.push({ emoji: pair[0].split(' ')[0], text: pair[1] }); // Card for explanation
-      });
-      const cardsData = embaralhar(allCards); // Changed variable name to avoid conflict
-
-      cardsData.forEach(data => { // Use cardsData here
-        const card = document.createElement("div");
-        card.className = "card"; // This class will be styled by style.css
-        card.textContent = data.emoji; // Show emoji initially
-        card.dataset.text = data.text; // Full text for flipped state
-        card.dataset.emoji = data.emoji; // Store emoji for flipping back
-        grid.appendChild(card);
-
-        card.addEventListener("click", () => {
-          if (lock || card.classList.contains("matched") || card === first) return;
-          card.textContent = card.dataset.text; // Show full text
-          card.classList.add("flipped"); // Style from style.css
-
-          if (!first) {
-            first = card;
-          } else {
-            tentativas++;
-            atualizarPlacar();
-            // Matching logic from main's etapa2.html
-            const isMatch = pairs.some(p =>
-              (p[0] === first.dataset.text && p[1] === card.dataset.text) ||
-              (p[1] === first.dataset.text && p[0] === card.dataset.text)
-            );
-
-            if (isMatch) {
-              first.classList.add("matched"); // Style from style.css
-              card.classList.add("matched");  // Style from style.css
-              // No need to remove "flipped" if "matched" style implies visibility of text
-              acertos++;
-              atualizarPlacar();
-              if (acertos === totalPares) {
-                setTimeout(() => {
-                  mensagemFinal.innerHTML = `🎉 Parabéns! Você encontrou todos os pares!<br> Total de tentativas: <b>${tentativas}</b> <br><br> <span style='font-size:15px;'>Clique em Reiniciar para jogar novamente.</span>`;
-                  mensagemFinal.style.display = "block";
-                  btnReiniciar.style.display = "inline-block"; // Show restart button
-                }, 400);
-              }
-              first = null;
-            } else {
-              lock = true;
-              setTimeout(() => {
-                first.textContent = first.dataset.emoji; // Flip back to emoji
-                card.textContent = card.dataset.emoji;   // Flip back to emoji
-                first.classList.remove("flipped");
-                card.classList.remove("flipped");
-                first = null;
-                lock = false;
-              }, 900);
-            }
-          }
-        });
-      });
-
-      function atualizarPlacar() {
-        placar.innerHTML = `Tentativas: <b>${tentativas}</b> &nbsp; | &nbsp; Pares encontrados: <b>${acertos}/${totalPares}</b>`;
-      }
-      atualizarPlacar();
-    }
-    iniciarJogo(); // Start the game
-    btnReiniciar.onclick = iniciarJogo; // Restart button functionality
   </script>
-  <!-- The global footer from style.css will apply if body is not deeply nested or footer is positioned fixed/absolute -->
-  <script src="script.js"></script> <!-- Global script.js -->
+  <script src="script.js" defer></script>
 </body>
 </html>

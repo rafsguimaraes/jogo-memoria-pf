@@ -198,3 +198,109 @@ footer {
     padding: 12px 10px;
   }
 }
+
+/* Styles for new game elements */
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0; /* Light grey background for the container */
+  border-radius: 10px;
+  margin: 15px auto;
+  height: 25px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.progress-bar {
+  width: 0%; /* Initial width */
+  height: 100%;
+  background-color: #4caf50; /* Green for progress */
+  border-radius: 10px;
+  transition: width 0.4s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.pares-restantes {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.parabens-msg .estrelas { /* Style for stars within the congratulations message */
+  display: block;
+  font-size: 2em;
+  margin-top: 10px;
+  color: #ffc107; /* Gold color for stars */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Card face styling for two-sided cards */
+.card .card-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px; /* Ensure padding doesn't break layout */
+  box-sizing: border-box; /* Important for padding and border */
+  border-radius: inherit; /* Inherit border-radius from .card */
+}
+
+.card .card-front {
+  /* Current .card styles primarily define the front (emoji view) */
+  /* background: #fff3e0; from .card */
+  /* color: #ff5722; from .card */
+}
+
+.card .card-back {
+  background: #ffe0b2; /* Slightly different background for the back */
+  color: #333; /* Darker text for readability on the back */
+  transform: rotateY(180deg);
+  font-size: 0.8em; /* Adjust text size for potentially longer content */
+  line-height: 1.2;
+  overflow-wrap: break-word; /* Ensure long words break */
+  word-break: break-word;   /* Ensure long words break */
+}
+
+/* Adjust .card.flipped to show the back face */
+.card.flipped {
+  transform: rotateY(180deg) scale(1.04); /* Keep existing scale effect, add rotate */
+  /* background: #ffe0b2; -- This is now handled by .card-back, .card itself can be transparent or a base */
+}
+
+/* .card.matched can remain as is, or ensure its background applies to .card-back if needed */
+.card.matched .card-back {
+    background-color: #b2f2bb; /* Ensure matched background is on the back */
+    color: #222;
+}
+.card.matched .card-front { /* Hide front when matched and showing back */
+    opacity: 0;
+}
+
+
+/* Card error feedback */
+.card.error {
+  animation: shakeError 0.5s ease-in-out;
+  border-color: #FF6B6B !important;
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0) rotateY(180deg); }
+  20%, 60% { transform: translateX(-5px) rotateY(180deg); }
+  40%, 80% { transform: translateX(5px) rotateY(180deg); }
+}
+
+/* Ensure .parabens-msg (from HTML) uses .parabens style from CSS */
+.parabens-msg {
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 18px;
+  text-align: center;
+}
