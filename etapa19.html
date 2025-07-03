@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireMemory - Etapa 19: Ambiguidade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="logo">FireMemory</h1>
+      <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+
+    <h2 class="game-page-title">🌀 Etapa 19 – Ambiguidade</h2>
+    <p class="game-page-subtitle">Aprenda a identificar e evitar a duplicidade de sentidos!</p>
+
+    <div class="game-container">
+      <div class="scoreboard">
+        <div>Tentativas: <span id="tentativas">0</span></div>
+        <div>Acertos: <span id="acertos">0</span></div>
+        <div>Tempo: <span id="timer">0s</span></div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="pares-restantes" id="paresRestantes">Pares restantes: 0</div>
+
+      <div class="memory-grid" id="memoryGrid">
+        <!-- As cartas serão geradas pelo JavaScript -->
+      </div>
+
+      <div class="game-controls">
+        <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar Etapa</button>
+        <a href="index.html" class="btn-back">🏠 Voltar ao Início</a>
+      </div>
+
+      <div class="parabens-msg" id="parabensMsg" style="display:none;">
+        Parabéns! Você concluiu a etapa 👏
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+  </footer>
+
+  <script>
+    // Define os dados específicos desta etapa que o script.js usará
+    window.dadosDaEtapaAtual = [
+      { emoji: '❓', frente: 'Ambiguidade: O que é?', verso: 'É a propriedade de uma palavra, frase ou texto de ter mais de um significado ou interpretação possível, gerando incerteza.' },
+      { emoji: '📖', frente: 'Ambiguidade Lexical (Polissemia)', verso: 'Ocorre quando uma PALAVRA possui múltiplos significados. Ex: "Ele sentou no banco." (Banco de praça ou instituição financeira?)' },
+      { emoji: '🔗', frente: 'Ambiguidade Estrutural (Sintática)', verso: 'Ocorre devido à FORMA como as palavras estão organizadas na frase. Ex: "O policial viu o assalto da viatura." (Ele viu da viatura ou a viatura foi assaltada?)' },
+      { emoji: '🗣️', frente: 'Ambiguidade por Pronome Possessivo', verso: 'Uso de "seu/sua" pode gerar dúvida. Ex: "Maria disse a João que seu carro quebrou." (Carro de Maria ou de João?)' },
+      { emoji: '📍', frente: 'Ambiguidade por Colocação de Termo', verso: 'Um termo pode se referir a diferentes partes da oração. Ex: "Crianças que comem doce frequentemente são felizes." (Comem doce frequentemente ou são felizes frequentemente?)' },
+      { emoji: '💡', frente: 'Como Evitar: Clareza', verso: 'Reescrever a frase de forma mais direta, usar sinônimos, reordenar termos, ou adicionar palavras para especificar o sentido.' },
+      { emoji: '➡️', frente: 'Exemplo de Desambiguação (Estrutural)', verso: 'Original: "Vi o homem com o binóculo." / Desambiguado 1: "Com o binóculo, vi o homem." / Desambiguado 2: "Vi o homem que estava com o binóculo."' },
+      { emoji: '🎯', frente: 'Importância de Evitar', verso: 'A ambiguidade prejudica a clareza e a precisão da comunicação, podendo levar a mal-entendidos, especialmente em textos formais e técnicos.' }
+    ];
+  </script>
+  <script src="script.js" defer></script>
+</body>
+</html>
