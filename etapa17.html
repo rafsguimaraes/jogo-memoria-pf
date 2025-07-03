@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireMemory - Etapa 17: Colocação Pronominal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="logo">FireMemory</h1>
+      <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+
+    <h2 class="game-page-title">📍 Etapa 17 – Colocação Pronominal</h2>
+    <p class="game-page-subtitle">Domine as regras de próclise, mesóclise e ênclise!</p>
+
+    <div class="game-container">
+      <div class="scoreboard">
+        <div>Tentativas: <span id="tentativas">0</span></div>
+        <div>Acertos: <span id="acertos">0</span></div>
+        <div>Tempo: <span id="timer">0s</span></div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="pares-restantes" id="paresRestantes">Pares restantes: 0</div>
+
+      <div class="memory-grid" id="memoryGrid">
+        <!-- As cartas serão geradas pelo JavaScript -->
+      </div>
+
+      <div class="game-controls">
+        <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar Etapa</button>
+        <a href="index.html" class="btn-back">🏠 Voltar ao Início</a>
+      </div>
+
+      <div class="parabens-msg" id="parabensMsg" style="display:none;">
+        Parabéns! Você concluiu a etapa 👏
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+  </footer>
+
+  <script>
+    // Define os dados específicos desta etapa que o script.js usará
+    // Adaptado para 8 pares
+    window.dadosDaEtapaAtual = [
+      { emoji: '❓', frente: 'Colocação Pronominal', verso: 'Estuda a posição correta dos pronomes oblíquos átonos (me, te, se, o, a, lhe, nos, vos, os, as, lhes) junto ao verbo.' },
+      { emoji: '⬅️', frente: 'Próclise', verso: 'Pronome ANTES do verbo. Ex: "Não ME importo." Usada com palavras atrativas (negação, advérbios, conj. subordinativas, pron. relativos/indefinidos/demonstrativos).'},
+      { emoji: '➡️', frente: 'Ênclise', verso: 'Pronome DEPOIS do verbo. Ex: "Importo-ME." Usada em início de frase (norma culta), imperativo afirmativo, gerúndio (sem atrativo).' },
+      { emoji: ' बीच में', frente: 'Mesóclise (Port.  बीच में)', verso: 'Pronome NO MEIO do verbo. Ex: "Importar-ME-ei." Usada com futuro do presente ou futuro do pretérito, se não houver palavra atrativa.' },
+      { emoji: '🚫', frente: 'Proibição de Ênclise', verso: 'Não se usa ênclise com futuro do presente/pretérito ou particípio. Ex: ERRADO: "Falarei-lhe", CORRETO: "Falar-lhe-ei" ou "Lhe falarei".' },
+      { emoji: '✨', frente: 'Palavras Atrativas (Próclise)', verso: 'Palavras negativas (não, nunca), advérbios (já, sempre), pron. relativos (que), pron. indefinidos (alguém), conj. subordinativas (quando, se).' },
+      { emoji: '🗣️', frente: 'Imperativo Afirmativo', verso: 'Sempre usa ÊNCLISE. Ex: "Diga-ME a verdade." (Se fosse negativo: "Não ME diga...")' },
+      { emoji: '💡', frente: 'Dica Geral', verso: 'Na dúvida, se não houver palavra atrativa forte e não for início de frase, a ênclise costuma ser uma opção segura na escrita formal (exceto com futuros/particípio).' }
+    ];
+  </script>
+  <script src="script.js" defer></script>
+</body>
+</html>
