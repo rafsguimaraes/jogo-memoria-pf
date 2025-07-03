@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etapa 2: Pressupostos e Funções da Linguagem - FireMemory</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Styles specific to this game page, if any, or to override style.css */
+    /* The main game grid and card styles from the original file are kept,
+       but could be moved to style.css if they are generic enough.
+       For now, keeping them here to ensure this page works standalone
+       with the new style.css linkage. */
+    body {
+        font-family: 'Poppins', sans-serif; /* Ensure consistent font with main page */
+        /* background and color are handled by style.css */
+        padding: 20px;
+        text-align: center;
+        display: flex; /* Added to center content like in style.css */
+        flex-direction: column; /* Added for consistency */
+        align-items: center; /* Added for consistency */
+        min-height: 100vh; /* Added for consistency */
+    }
+    .game-container { /* Using a class from style.css for the game area */
+        background-color: rgba(0,0,0,0.2); /* From style.css .game-container */
+        padding: 25px; /* From style.css .game-container */
+        border-radius: 12px; /* From style.css .game-container */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* From style.css .game-container */
+        width: 100%;
+        max-width: 800px; /* Adjusted from original 800px to match game content better */
+        margin: 20px auto; /* Added for spacing */
+    }
+    .grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+        gap:10px;
+        /* max-width:800px; /* Controlled by .game-container now */
+        margin:auto;
+    }
+    .card{
+        background:#3498db; /* Original card background */
+        color:#fff; /* Original card text color */
+        border-radius:10px;
+        padding:20px;
+        font-size:14px; /* Consider adjusting if text is too small/large with Poppins */
+        cursor:pointer;
+        height:100px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        transition:background .3s, transform 0.3s; /* Added transform for potential future effects */
+        /* The .card class in style.css is more detailed, this might need merging/overriding */
+    }
+    .card.flipped{
+        background:#2ecc71!important; /* Original flipped background */
+    }
+    .card.matched{
+        background:#95a5a6!important; /* Original matched background */
+        cursor:default;
+    }
+    .btn-back-container {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="game-page-title">Etapa 2</h1>
+    <p class="game-page-subtitle">Pressupostos, Subentendidos e Funções da Linguagem</p>
+  </header>
+
+  <div class="game-container">
+    <div class="grid" id="grid"></div>
+    <div class="btn-back-container">
+        <a href="index.html" class="btn-back">Voltar ao Menu</a>
+    </div>
+  </div>
+
+  <script>
+    const pairs = [
+      ["Compreensão","Identifica informações explícitas no texto"],
+      ["Interpretação","Depende de inferências e análise contextual"],
+      ["Texto verbal","Forma oral ou escrita"],
+      ["Texto não verbal","Imagens, sons, símbolos visuais"],
+      ["Texto misto","Combina texto verbal e não verbal"],
+      ["Pressuposto","Marca linguística que supõe algo"],
+      ["Subentendido","Mensagem não explícita, deduzida pelo contexto"],
+      ["Pontuação","Pode funcionar como marcador de subentendido"],
+      ["Emissor","Função Expressiva"],
+      ["Receptor","Função Apelativa"],
+      ["Mensagem","Função Poética"],
+      ["Código","Função Metalinguística"],
+      ["Canal","Função Fática"],
+      ["Contexto","Função Referencial"]
+    ];
+    const grid = document.getElementById("grid");
+    const cards = [...pairs,...pairs].sort(()=>0.5-Math.random()).map(text=>{
+      const c=document.createElement("div");c.className="card";c.textContent="?";c.dataset.text=text;grid.appendChild(c);return c;
+    });
+    let first=null,lock=false;
+    cards.forEach(card=>card.addEventListener("click",()=>{
+      if(lock||card===first||card.classList.contains("matched"))return;
+      card.textContent = card.dataset.text;
+      card.classList.add("flipped");
+      if(!first){first=card}
+      else{
+        const isMatch = pairs.some(p=>(
+          (p[0]===first.dataset.text && p[1]===card.dataset.text) ||
+          (p[1]===first.dataset.text && p[0]===card.dataset.text)
+        ));
+        if(isMatch){
+          first.classList.add("matched");
+          card.classList.add("matched");
+          first=null;
+        } else {
+          lock=true;
+          setTimeout(()=>{
+            first.textContent="?";
+            card.textContent="?";
+            first.classList.remove("flipped");
+            card.classList.remove("flipped");
+            first=null;
+            lock=false;
+          },1000);
+        }
+      }
+    }));
+  </script>
+  <!-- Footer can be inherited from style.css or a global include if using templating -->
+  <!-- For now, let's assume the main footer from index.html (via style.css) is sufficient -->
+</body>
+</html>

@@ -1,0 +1,426 @@
+/* Estilos Globais FireMemory */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #FF7043 0%, #FF5722 100%);
+  color: #FFF;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.container {
+  max-width: 900px; /* Aumentado para acomodar melhor o jogo */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+header {
+  margin-bottom: 20px; /* Reduzido para páginas de etapa */
+}
+
+.logo {
+  font-size: 2.8em; /* Ajustado para páginas de etapa */
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  margin-bottom: 0;
+}
+
+.slogan {
+  font-size: 1.2em; /* Ajustado para páginas de etapa */
+  font-weight: 400;
+  margin-top: 2px;
+  opacity: 0.9;
+}
+
+/* Estilos para a página inicial (index.html) */
+.index-header .logo {
+  font-size: 3.5em;
+}
+.index-header .slogan {
+  font-size: 1.5em;
+  margin-top: 5px;
+}
+.intro-text {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 20px 0;
+  background-color: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.rules-section {
+  background-color: rgba(0,0,0,0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  text-align: left;
+  font-size: 0.95em;
+}
+.rules-section h3 {
+  font-size: 1.6em;
+  margin-top: 0;
+  text-align: center;
+  color: #FFF;
+}
+.rules-section ul {
+  list-style: none;
+  padding: 0;
+}
+.rules-section ul li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.rules-section ul li::before {
+  content: '🔥';
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.stages-menu {
+  margin-top: 20px;
+}
+.stages-menu h3 {
+  font-size: 2em;
+  color: #FFF;
+  margin-bottom: 20px;
+}
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+.stage-button {
+  background-color: #FFF;
+  color: #FF5722;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.stage-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.stage-button .emoji {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+/* Estilos para as Páginas de Etapa do Jogo */
+.game-page-title {
+  font-size: 1.8em;
+  color: #FFF;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.game-page-subtitle {
+  font-size: 1em;
+  color: rgba(255,255,255,0.85);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.game-container {
+  background-color: rgba(0,0,0,0.2);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 680px; /* Ajustado para grid 4x4 */
+  margin: 0 auto;
+}
+
+.scoreboard {
+  font-size: 1.1em;
+  color: #FFF;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+.scoreboard span {
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%; /* Inicia vazia */
+  height: 100%;
+  background-color: #FFD700; /* Dourado para progresso */
+  border-radius: 8px;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  color: #424242; /* Cor escura para texto na barra */
+}
+
+.pares-restantes {
+  font-size: 0.95em;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 15px;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Padrão 4x4 */
+  gap: 12px; /* Espaçamento entre cartas */
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #fff;
+  color: #FF5722; /* Cor do texto/emoji quando não virada */
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  width: 100%; /* Para ocupar o espaço da célula do grid */
+  aspect-ratio: 3 / 2; /* Proporção da carta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5em; /* Tamanho do emoji/texto inicial */
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: transform 0.5s, background-color 0.3s;
+  transform-style: preserve-3d; /* Para efeito de virar */
+  text-align: center;
+  padding: 5px; /* Pequeno padding interno */
+  box-sizing: border-box;
+}
+
+.card .card-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Esconde o lado de trás */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.card .card-front {
+  /* Estilo para a frente da carta (emoji) */
+  font-size: 2.5em;
+}
+
+.card .card-back {
+  /* Estilo para o verso da carta (texto) */
+  background-color: #FFF8E1; /* Um creme suave para o verso */
+  color: #424242; /* Cor do texto no verso */
+  transform: rotateY(180deg);
+  font-size: 0.85em; /* Tamanho do texto do verso */
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+  background-color: #FFF8E1; /* Cor de fundo quando virada */
+}
+
+.card.matched {
+  transform: rotateY(180deg);
+  background-color: #A5D6A7;
+  color: #1B5E20;
+  cursor: default;
+  box-shadow: 0 0 12px #90EE90; /* Sombra mais vibrante para acerto */
+  animation: pulseCorrect 0.6s ease-in-out;
+}
+.card.matched .card-back {
+    background-color: #A5D6A7; /* Garante consistência */
+    color: #1B5E20;
+}
+
+/* Animação para carta correta */
+@keyframes pulseCorrect {
+  0% { transform: rotateY(180deg) scale(1); box-shadow: 0 0 10px #A5D6A7; }
+  50% { transform: rotateY(180deg) scale(1.05); box-shadow: 0 0 18px #98FB98; }
+  100% { transform: rotateY(180deg) scale(1); box-shadow: 0 0 12px #90EE90; }
+}
+
+/* Classe para feedback de erro */
+.card.error {
+  animation: shakeError 0.5s ease-in-out;
+  border: 2px solid #FF6B6B !important; /* Borda vermelha para erro, !important para sobrepor outras bordas */
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0) rotateY(180deg); } /* Mantém virada durante o shake */
+  20%, 60% { transform: translateX(-5px) rotateY(180deg); }
+  40%, 80% { transform: translateX(5px) rotateY(180deg); }
+}
+
+.parabens-msg .estrelas {
+  display: block;
+  font-size: 1.8em; /* Tamanho maior para as estrelas */
+  margin-top: 10px;
+  color: #FFD700; /* Cor dourada para estrelas */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+
+.game-controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-restart, .btn-back {
+  background-color: #FFF;
+  color: #FF5722;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin: 0 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.btn-restart:hover, .btn-back:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.parabens-msg {
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  display: none; /* Escondido por padrão */
+}
+
+footer {
+  margin-top: auto;
+  padding: 20px;
+  font-size: 0.9em;
+  color: rgba(255,255,255,0.8);
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  .logo {
+    font-size: 2.5em;
+  }
+  .index-header .logo {
+    font-size: 3em;
+  }
+  .slogan {
+    font-size: 1.1em;
+  }
+  .index-header .slogan {
+    font-size: 1.3em;
+  }
+  .rules-section h3 {
+    font-size: 1.4em;
+  }
+  .stages-menu h3 {
+    font-size: 1.8em;
+  }
+  .game-page-title {
+    font-size: 1.6em;
+  }
+  .game-page-subtitle {
+    font-size: 0.9em;
+  }
+  .memory-grid {
+    gap: 10px;
+  }
+  .card .card-front {
+    font-size: 2em;
+  }
+  .card .card-back {
+    font-size: 0.75em;
+  }
+  .scoreboard {
+    font-size: 1em;
+    padding: 8px;
+  }
+  .btn-restart, .btn-back {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+  .parabens-msg {
+    font-size: 1.3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .stages-grid {
+    grid-template-columns: 1fr; /* Uma coluna para telas pequenas */
+  }
+  .memory-grid {
+    grid-template-columns: repeat(4, 1fr); /* Mantém 4 colunas mas cartas menores */
+    gap: 8px;
+  }
+  .card .card-front {
+    font-size: 1.5em; /* Reduz emoji para caber */
+  }
+  .card .card-back {
+    font-size: 0.65em; /* Reduz texto para caber */
+    line-height: 1.2;
+  }
+  .logo {
+    font-size: 2em;
+  }
+  .index-header .logo {
+    font-size: 2.5em;
+  }
+  .slogan {
+    font-size: 1em;
+  }
+  .index-header .slogan {
+    font-size: 1.1em;
+  }
+  .game-page-title {
+    font-size: 1.4em;
+  }
+  .scoreboard {
+    flex-direction: column; /* Empilha placar em telas pequenas */
+    gap: 5px;
+  }
+}

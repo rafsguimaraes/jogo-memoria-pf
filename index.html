@@ -2,69 +2,83 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Jogo da Memória – Etapa 2</title>
-  <style>
-    body{font-family:Arial,sans-serif;background:#f4f6f8;padding:20px;text-align:center}
-    h1{color:#2c3e50} .subtitle{color:#34495e;margin-bottom:20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;max-width:800px;margin:auto}
-    .card{background:#3498db;color:#fff;border-radius:10px;padding:20px;font-size:14px;cursor:pointer;height:100px;display:flex;justify-content:center;align-items:center;transition:background .3s}
-    .card.flipped{background:#2ecc71!important} .card.matched{background:#95a5a6!important;cursor:default}
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireMemory - Aqueça sua Mente!</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Jogo da Memória – PF 2025</h1>
-  <div class="subtitle">Etapa 2: Pressupostos, Subentendidos e Funções da Linguagem</div>
-  <div class="grid" id="grid"></div>
-  <script>
-    const pairs = [
-      ["Compreensão","Identifica informações explícitas no texto"],
-      ["Interpretação","Depende de inferências e análise contextual"],
-      ["Texto verbal","Forma oral ou escrita"],
-      ["Texto não verbal","Imagens, sons, símbolos visuais"],
-      ["Texto misto","Combina texto verbal e não verbal"],
-      ["Pressuposto","Marca linguística que supõe algo"],
-      ["Subentendido","Mensagem não explícita, deduzida pelo contexto"],
-      ["Pontuação","Pode funcionar como marcador de subentendido"],
-      ["Emissor","Função Expressiva"],
-      ["Receptor","Função Apelativa"],
-      ["Mensagem","Função Poética"],
-      ["Código","Função Metalinguística"],
-      ["Canal","Função Fática"],
-      ["Contexto","Função Referencial"]
-    ];
-    const grid = document.getElementById("grid");
-    const cards = [...pairs,...pairs].sort(()=>0.5-Math.random()).map(text=>{
-      const c=document.createElement("div");c.className="card";c.textContent="?";c.dataset.text=text;grid.appendChild(c);return c;
-    });
-    let first=null,lock=false;
-    cards.forEach(card=>card.addEventListener("click",()=>{
-      if(lock||card===first||card.classList.contains("matched"))return;
-      card.textContent = card.dataset.text;
-      card.classList.add("flipped");
-      if(!first){first=card}
-      else{
-        const isMatch = pairs.some(p=>(
-          (p[0]===first.dataset.text && p[1]===card.dataset.text) ||
-          (p[1]===first.dataset.text && p[0]===card.dataset.text)
-        ));
-        if(isMatch){
-          first.classList.add("matched");
-          card.classList.add("matched");
-          first=null;
-        } else {
-          lock=true;
-          setTimeout(()=>{
-            first.textContent="?";
-            card.textContent="?";
-            first.classList.remove("flipped");
-            card.classList.remove("flipped");
-            first=null;
-            lock=false;
-          },1000);
-        }
-      }
-    }));
-  </script>
+  <div class="container">
+    <header class="index-header">
+      <h1 class="logo">FireMemory</h1>
+      <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+
+    <p class="intro-text">
+      Bem-vindo ao FireMemory! Prepare-se para uma jornada de aprendizado dinâmico e divertido.
+      Este jogo foi desenhado para turbinar sua memorização e foco, especialmente se você busca
+      uma forma mais interativa de estudar. Encare os desafios, forme os pares e veja seu conhecimento em chamas!
+    </p>
+
+    <section class="rules-section">
+      <h3>📌 Como Jogar?</h3>
+      <ul>
+        <li>Escolha uma etapa de estudo abaixo.</li>
+        <li>Clique nas cartas para revelar conceitos, explicações ou emojis.</li>
+        <li>Encontre os pares corretos para fixar o conteúdo.</li>
+        <li>Cada carta virada conta como uma tentativa. Tente completar em menos tentativas!</li>
+        <li>Repita as etapas quantas vezes quiser para fortalecer sua memória.</li>
+        <li>Divirta-se aprendendo e desafiando sua mente!</li>
+      </ul>
+    </section>
+
+    <nav class="stages-menu">
+      <h3>🎮 Escolha sua Etapa</h3>
+      <div class="stages-grid">
+        <a href="etapa1.html" class="stage-button"><span class="emoji">📝</span> Etapa 1 – Compreensão e Interpretação</a>
+        <a href="etapa2.html" class="stage-button"><span class="emoji">🧩</span> Etapa 2 – Pressupostos e Funções da Linguagem</a>
+        <a href="etapa3.html" class="stage-button"><span class="emoji">📖</span> Etapa 3 – Tipologias e Gêneros Textuais</a>
+        <a href="etapa4.html" class="stage-button"><span class="emoji">🔗</span> Etapa 4 – Coesão e Coerência</a>
+        <a href="etapa5.html" class="stage-button"><span class="emoji">🔤</span> Etapa 5 – Semântica</a>
+        <a href="etapa6.html" class="stage-button"><span class="emoji">🎭</span> Etapa 6 – Figuras e Vícios de Linguagem</a>
+        <a href="etapa7.html" class="stage-button"><span class="emoji">🔄</span> Etapa 7 – Reescrita e Intertextualidade</a>
+        <a href="etapa8.html" class="stage-button"><span class="emoji">🌐</span> Etapa 8 – Gêneros Digitais e Multimodais</a>
+        <a href="etapa9.html" class="stage-button"><span class="emoji">🌎</span> Etapa 9 – Variação Linguística</a>
+        <a href="etapa10.html" class="stage-button"><span class="emoji">✏️</span> Etapa 10 – Ortografia e Acentuação</a>
+        <a href="etapa11.html" class="stage-button"><span class="emoji">🔬</span> Etapa 11 – Morfologia</a>
+        <a href="etapa12.html" class="stage-button"><span class="emoji">🧩</span> Etapa 12 – Sintaxe</a>
+        <a href="etapa13.html" class="stage-button"><span class="emoji">✒️</span> Etapa 13 – Pontuação</a>
+        <a href="etapa14.html" class="stage-button"><span class="emoji">🤝</span> Etapa 14 – Concordância</a>
+        <a href="etapa15.html" class="stage-button"><span class="emoji">🧭</span> Etapa 15 – Regência</a>
+        <a href="etapa16.html" class="stage-button"><span class="emoji">➰</span> Etapa 16 – Crase</a>
+        <a href="etapa17.html" class="stage-button"><span class="emoji">📍</span> Etapa 17 – Colocação Pronominal</a>
+        <a href="etapa18.html" class="stage-button"><span class="emoji">📄</span> Etapa 18 – Redação Oficial</a>
+        <a href="etapa19.html" class="stage-button"><span class="emoji">🌀</span> Etapa 19 – Ambiguidade</a>
+        <a href="etapa20.html" class="stage-button"><span class="emoji">🔗</span> Etapa 20 – Elementos de Coesão</a>
+        <a href="etapa21.html" class="stage-button"><span class="emoji">🔊</span> Etapa 21 – Vozes Verbais</a>
+        <a href="etapa22.html" class="stage-button"><span class="emoji">🔗</span> Etapa 22 – Coordenação e Subordinação</a>
+        <a href="etapa23.html" class="stage-button"><span class="emoji">🧩</span> Etapa 23 – Orações Subordinadas</a>
+        <a href="etapa24.html" class="stage-button"><span class="emoji">🔁</span> Etapa 24 – Elementos de Referenciação</a>
+        <a href="etapa25.html" class="stage-button"><span class="emoji">💬</span> Etapa 25 – Discurso Direto/Indireto</a>
+        <a href="etapa26.html" class="stage-button"><span class="emoji">🔤</span> Etapa 26 – Parônimos e Homônimos</a>
+        <a href="etapa27.html" class="stage-button"><span class="emoji">🌈</span> Etapa 27 – Polissemia</a>
+        <a href="etapa28.html" class="stage-button"><span class="emoji">📈</span> Etapa 28 – Progressão Textual</a>
+        <a href="etapa29.html" class="stage-button"><span class="emoji">📑</span> Etapa 29 – Gêneros Oficiais</a>
+        <a href="etapa30.html" class="stage-button"><span class="emoji">🗣️</span> Etapa 30 – Elementos de Argumentação</a>
+        <a href="etapa31.html" class="stage-button"><span class="emoji">🎨</span> Etapa 31 – Figuras de Pensamento</a>
+        <a href="etapa32.html" class="stage-button"><span class="emoji">🧱</span> Etapa 32 – Sintaxe de Colocação</a>
+        <a href="etapa33.html" class="stage-button"><span class="emoji">🔗</span> Etapa 33 – Intertextualidade</a>
+        <a href="etapa34.html" class="stage-button"><span class="emoji">👤</span> Etapa 34 – Pronomes e Funções</a>
+        <a href="etapa35.html" class="stage-button"><span class="emoji">🤝</span> Etapa 35 – Concordância/Regência Especiais</a>
+        <a href="etapa36.html" class="stage-button"><span class="emoji">✍️</span> Etapa 36 – Ortografia Oficial</a>
+        <a href="etapa37.html" class="stage-button"><span class="emoji">🔣</span> Etapa 37 – Pontuação Avançada</a>
+        <a href="etapa38.html" class="stage-button"><span class="emoji">🧠</span> Etapa 38 – Estratégias de Leitura</a>
+        <a href="etapa39.html" class="stage-button"><span class="emoji">📝</span> Etapa 39 – Resumo e Síntese</a>
+        <a href="etapa40.html" class="stage-button"><span class="emoji">🔍</span> Etapa 40 – Interpretação de Questões</a>
+      </div>
+    </nav>
+  </div>
+  <footer>
+    FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.
+  </footer>
 </body>
 </html>
