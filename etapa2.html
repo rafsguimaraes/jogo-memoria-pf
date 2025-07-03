@@ -1,200 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Jogo da Memória – Etapa 2</title>
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #f2f2f2; text-align: center; padding: 20px; }
-    h1 { color: #2c3e50; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      max-width: 700px;
-      margin: 20px auto;
-      justify-items: center;
-    }
-    .card {
-      background: #fff;
-      color: #222;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px #0001;
-      width: 140px;
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2em;
-      cursor: pointer;
-      transition: background 0.2s;
-      user-select: none;
-      position: relative;
-      padding: 4px;
-      text-align: center;
-      word-break: break-word;
-    }
-    .card.flipped, .card.matched {
-      font-size: 1.1em;
-      line-height: 1.1;
-      padding: 4px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      transition: none;
-      transform: none;
-      box-shadow: 0 4px 16px #0002;
-      background: #d0ebff;
-      color: #222;
-    }
-    .card.matched {
-      background: #b2f2bb;
-      color: #222;
-      cursor: default;
-    }
-    .card.flipped, .card.matched {
-      font-size: 13px;
-      line-height: 1.1;
-      padding: 4px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      /* Remove transição e efeito ao virar */
-      transition: none;
-      transform: none;
-      box-shadow: 0 4px 16px #0002;
-    }
-    .card.flipped, .card.matched {
-      font-size: 13px;
-      line-height: 1.1;
-      padding: 4px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-    }
-    .flipped { background-color: #2ecc71 !important; }
-    .matched { background-color: #95a5a6 !important; cursor: default; }
-    footer { margin-top: 40px; font-size: 12px; color: #888; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 2: Pressupostos e Funções da Linguagem - FireMemory</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Etapa 2 – Pressupostos, Subentendidos e Funções da Linguagem</h1>
-  <div id="explicacao" style="max-width:700px;margin:0 auto 20px auto;text-align:left;background:#fffbe7;border-radius:8px;padding:16px 20px 10px 20px;box-shadow:0 2px 8px #0001;font-size:15px;">
-    <b>Como jogar:</b> Encontre os pares de cartas que relacionam <b>conceitos</b> e <b>explicações/exemplos</b> sobre Pressupostos, Subentendidos e Funções da Linguagem.<br>
-    <b>O que você vai aprender:</b> Identificar pressupostos, subentendidos e reconhecer as funções da linguagem em exemplos reais.<br>
-    <b>Dica:</b> Clique nas cartas para revelar o conteúdo e memorize as relações!
-  </div>
-  <div id="placar" style="margin-bottom:16px;font-size:16px;color:#2c3e50;"></div>
-  <div class="grid" id="grid"></div>
-  <div id="mensagem-final" style="display:none;margin:24px auto 0 auto;max-width:500px;background:#eaffea;border-radius:8px;padding:18px 20px 10px 20px;box-shadow:0 2px 8px #0001;font-size:18px;text-align:center;color:#207520;font-weight:bold;"></div>
-  <div style="margin-top:18px;"><button id="reiniciar" style="display:none;padding:8px 18px;font-size:15px;border-radius:6px;border:none;background:#3498db;color:#fff;cursor:pointer;">Reiniciar Jogo</button></div>
-  <script>
-    const pairs = [
-      ["💬 Pressuposto", "Informação implícita, pressuposta pelo falante, necessária para o sentido. Ex: 'João parou de fumar.' (pressupõe que João fumava antes)"],
-      ["🤔 Subentendido", "Sentido sugerido, depende do contexto e da interpretação. Ex: 'Está calor aqui, não?' (pode sugerir: abra a janela)"],
-      ["🌍 Função Referencial", "Foco na informação, linguagem objetiva, transmite dados. Ex: notícia, relatório."],
-      ["🙋 Função Emotiva (Expressiva)", "Expressa emoções, sentimentos ou opiniões do emissor. Ex: 'Estou muito feliz hoje!'"] ,
-      ["👂 Função Conativa (Apelativa)", "Busca influenciar o receptor, dar ordens, pedidos, conselhos. Ex: 'Feche a porta, por favor.'"],
-      ["📞 Função Fática", "Testa, inicia, mantém ou encerra o canal de comunicação. Ex: 'Alô?', 'Oi!', 'Tudo bem?'"],
-      ["🔤 Função Metalinguística", "A linguagem fala de si mesma, explica códigos. Ex: 'O que significa a palavra 'verbo'?'."],
-      ["🖋️ Função Poética", "Foco na forma, estética da mensagem, uso de figuras de linguagem. Ex: poesia, slogan."],
-    ];
-    const grid = document.getElementById("grid");
-    const placar = document.getElementById("placar");
-    const mensagemFinal = document.getElementById("mensagem-final");
-    const btnReiniciar = document.getElementById("reiniciar");
+    <header>
+        <h1>FireMemory</h1>
+        <nav>
+            <a href="index.html">Voltar para a Seleção de Etapas</a>
+        </nav>
+    </header>
+    <main>
+        <h2 class="game-page-title">Etapa 2: Pressupostos e Funções da Linguagem</h2>
+        <p class="game-page-subtitle">Combine os conceitos com suas definições.</p>
 
-    function embaralhar(array) {
-      return array.map(a => [Math.random(), a]).sort((a, b) => a[0] - b[0]).map(a => a[1]);
-    }
+        <div class="game-container">
+            <div class="scoreboard">
+                <div>Tentativas: <span id="tentativas">0</span></div>
+                <div>Acertos: <span id="acertos">0</span></div>
+                <div>Tempo: <span id="timer">0s</span></div>
+            </div>
 
-    function iniciarJogo() {
-      grid.innerHTML = "";
-      mensagemFinal.style.display = "none";
-      btnReiniciar.style.display = "none";
-      let tentativas = 0;
-      let acertos = 0;
-      let totalPares = pairs.length;
-      let first = null;
-      let lock = false;
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
 
-      // Gera cartas (emoji e texto)
-      const allCards = [];
-      pairs.forEach(pair => {
-        allCards.push({ emoji: pair[0].split(' ')[0], text: pair[0] });
-        allCards.push({ emoji: pair[0].split(' ')[0], text: pair[1] });
-      });
-      const cards = embaralhar(allCards).map(data => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.textContent = data.emoji;
-        card.dataset.text = data.text;
-        card.dataset.emoji = data.emoji;
-        grid.appendChild(card);
-        return card;
-      });
+            <div id="memoryGrid" class="memory-grid">
+                <!-- As cartas serão geradas pelo script.js aqui -->
+            </div>
 
-      function atualizarPlacar() {
-        placar.innerHTML = `Tentativas: <b>${tentativas}</b> &nbsp; | &nbsp; Pares encontrados: <b>${acertos}/${totalPares}</b>`;
-      }
-      atualizarPlacar();
+            <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                Parabéns! Você concluiu a etapa!
+            </div>
 
-      cards.forEach(card => {
-        card.addEventListener("click", () => {
-          if (lock || card.classList.contains("matched") || card === first) return;
-          card.textContent = card.dataset.text;
-          card.classList.add("flipped");
-          if (!first) {
-            first = card;
-          } else {
-            tentativas++;
-            atualizarPlacar();
-            const isMatch = pairs.some(pair =>
-              (pair[0] === first.dataset.text && pair[1] === card.dataset.text) ||
-              (pair[1] === first.dataset.text && pair[0] === card.dataset.text)
-            );
-            if (isMatch) {
-              first.classList.add("matched");
-              card.classList.add("matched");
-              acertos++;
-              atualizarPlacar();
-              if (acertos === totalPares) {
-                setTimeout(() => {
-                  mensagemFinal.innerHTML = `🎉 Parabéns! Você encontrou todos os pares!<br> Total de tentativas: <b>${tentativas}</b> <br><br> <span style='font-size:15px;'>Clique em Reiniciar para jogar novamente.</span>`;
-                  mensagemFinal.style.display = "block";
-                  btnReiniciar.style.display = "inline-block";
-                }, 400);
-              }
-              first = null;
-            } else {
-              lock = true;
-              setTimeout(() => {
-                first.textContent = first.dataset.emoji;
-                card.textContent = card.dataset.emoji;
-                first.classList.remove("flipped");
-                card.classList.remove("flipped");
-                first = null;
-                lock = false;
-              }, 900);
-            }
-          }
-        });
-      });
-    }
-    iniciarJogo();
-    btnReiniciar.onclick = iniciarJogo;
-  </script>
+            <div class="game-controls">
+                <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+                <a href="index.html" class="btn-back">Voltar</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 FireMemory. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        const dadosDaEtapa = [
+            { emoji: "🤫", frente: "Pressuposto", verso: "Ideia não expressa diretamente, mas que pode ser entendida a partir de certas palavras ou expressões." },
+            { emoji: "🗣️", frente: "Subentendido", verso: "Informação implícita que depende do contexto e da interpretação do leitor/ouvinte." },
+            { emoji: "ℹ️", frente: "Função Referencial", verso: "Foco na informação, no contexto. Linguagem objetiva e direta. (Ex: Notícias)" },
+            { emoji: "😊", frente: "Função Emotiva", verso: "Foco no emissor, expressando sentimentos e emoções. (Ex: Diários)" },
+            { emoji: "👉", frente: "Função Conativa", verso: "Foco no receptor, tentando convencê-lo ou influenciá-lo. (Ex: Publicidade)" },
+            { emoji: "🎶", frente: "Função Poética", verso: "Foco na mensagem e sua elaboração estética, no como se diz. (Ex: Poemas)" },
+            { emoji: "💬", frente: "Função Fática", verso: "Foco no canal, testando ou mantendo a comunicação. (Ex: 'Alô?', 'Entende?')" },
+            { emoji: "📜", frente: "Função Metalinguística", verso: "Foco no código, usando a linguagem para falar dela mesma. (Ex: Dicionários)" }
+        ];
+        window.dadosDaEtapaAtual = dadosDaEtapa;
+    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>

@@ -1,30 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etapa 20 – Elementos de Coesão</title>
-  <link rel="stylesheet" href="estilo-etapa.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 20: Elementos de Coesão - FireMemory</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🔗 Etapa 20 – Elementos de Coesão</h1>
-  <div class="menu-voltar">
-    <button onclick="location.href='index.html'">⬅️ Voltar ao Menu</button>
-  </div>
-  <div class="grid-memoria">
-    <!-- Pares conceito ↔ explicação/exemplo -->
-    <div class="carta">🔗<div class="texto-carta">Elementos de Coesão</div></div>
-    <div class="carta">Palavras ou expressões que ligam ideias no texto.<br><em>Ex: "portanto", "além disso", "porém"</em></div>
-    <div class="carta">🔄<div class="texto-carta">Coesão Referencial</div></div>
-    <div class="carta">Uso de pronomes, elipses, sinônimos para evitar repetições.<br><em>Ex: "Maria saiu. Ela foi ao mercado."</em></div>
-    <div class="carta">🔗<div class="texto-carta">Coesão Sequencial</div></div>
-    <div class="carta">Conectores que organizam a sequência de ideias.<br><em>Ex: "primeiramente", "depois", "finalmente"</em></div>
-    <div class="carta">❗<div class="texto-carta">Erros de Coesão</div></div>
-    <div class="carta">Ambiguidade, falta de conectores, uso inadequado de pronomes.</div>
-    <div class="carta">📝<div class="texto-carta">Dica</div></div>
-    <div class="carta">Revise o texto e verifique se as ideias estão bem conectadas!</div>
-  </div>
-  <footer>Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
-  <script src="memoria.js"></script>
+    <header>
+        <h1>FireMemory</h1>
+        <nav>
+            <a href="index.html">Voltar para a Seleção de Etapas</a>
+        </nav>
+    </header>
+    <main>
+        <h2 class="game-page-title">Etapa 20: Elementos de Coesão</h2>
+        <p class="game-page-subtitle">Combine os conceitos de coesão com suas definições ou exemplos.</p>
+
+        <div class="game-container">
+            <div class="scoreboard">
+                <div>Tentativas: <span id="tentativas">0</span></div>
+                <div>Acertos: <span id="acertos">0</span></div>
+                <div>Tempo: <span id="timer">0s</span></div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
+
+            <div id="memoryGrid" class="memory-grid">
+                <!-- As cartas serão geradas pelo script.js aqui -->
+            </div>
+
+            <div id="parabensMsg" class="parabens-msg" style="display: none;">
+                Parabéns! Você concluiu a etapa!
+            </div>
+
+            <div class="game-controls">
+                <button id="btn-restart-game" class="btn-restart">Reiniciar Etapa</button>
+                <a href="index.html" class="btn-back">Voltar</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 FireMemory. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        // Dados da etapa no formato esperado pelo script.js
+        // Cada objeto representa um PAR de cartas.
+        // 'emoji' será a frente de ambas as cartas do par (uma visual e uma textual)
+        // 'frente' é o conteúdo da primeira carta do par (ex: o termo)
+        // 'verso' é o conteúdo da segunda carta do par (ex: a definição/exemplo)
+        const dadosDaEtapa = [
+            { emoji: "🔗", frente: "Anáfora", verso: "Retoma um termo já expresso anteriormente. Ex: Maria é estudiosa. **Ela** tira boas notas." },
+            { emoji: "➡️", frente: "Catáfora", verso: "Antecipa um termo que será expresso posteriormente. Ex: Só desejo **isto**: sua felicidade." },
+            { emoji: "💨", frente: "Elipse", verso: "Omissão de um termo facilmente identificável. Ex: João foi à feira. Comprou frutas. (Omitiu João)" },
+            { emoji: "🔁", frente: "Substituição Lexical", verso: "Uso de sinônimos/hiperônimos para evitar repetição. Ex: O **leão** escapou. O **felino** assustou." },
+            { emoji: "➕", frente: "Conector de Adição", verso: "Expressa soma de ideias. Ex: **E**, **além disso**, **também**." },
+            { emoji: "⚔️", frente: "Conector de Contraste", verso: "Expressa ideias opostas. Ex: **Mas**, **porém**, **contudo**." },
+            { emoji: "🏁", frente: "Conector de Conclusão", verso: "Introduz uma conclusão. Ex: **Logo**, **portanto**, **assim**." },
+            { emoji: "👤", frente: "Pronominalização", verso: "Uso de pronomes para retomar termos. Ex: Vi **os meninos**. Chamei-**os**." }
+        ];
+        window.dadosDaEtapaAtual = dadosDaEtapa;
+    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>

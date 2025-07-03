@@ -3,93 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etapa 15 – Regência</title>
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center; }
-    h1 { color: #2c3e50; margin-bottom: 5px; }
-    h2 { color: #34495e; margin-top: 0; font-size: 18px; }
-    .regras {
-      background: #ecf0f1; border-radius: 10px; padding: 15px; max-width: 600px;
-      margin: 20px auto; text-align: left; font-size: 14px;
-    }
-    .game-area { margin: 30px auto; max-width: 700px; }
-    .memory-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      justify-items: center;
-    }
-    .card {
-      background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001;
-      width: 140px; height: 90px; display: flex; align-items: center; justify-content: center;
-      font-size: 2.2em;
-      cursor: pointer; transition: background 0.2s;
-      user-select: none; position: relative;
-      padding: 4px;
-      text-align: center;
-      word-break: break-word;
-    }
-    .card.flipped, .card.matched {
-      font-size: 1.1em;
-      line-height: 1.1;
-      padding: 4px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      transition: none;
-      transform: none;
-      box-shadow: 0 4px 16px #0002;
-    }
-    .card.matched { background: #b2f2bb; color: #222; cursor: default; }
-    .card.flipped { background: #d0ebff; color: #222; }
-    .scoreboard { margin: 20px 0 10px 0; font-size: 15px; }
-    .btn-restart { background: #3498db; color: #fff; border: none; border-radius: 6px; padding: 8px 18px; font-size: 15px; cursor: pointer; margin-top: 10px; }
-    .btn-restart:hover { background: #2980b9; }
-    .parabens { color: #27ae60; font-weight: bold; font-size: 18px; margin-top: 15px; }
-    @media (max-width: 600px) {
-      .memory-grid { grid-template-columns: repeat(2, 1fr); }
-      .card { width: 95px; height: 70px; font-size: 0.95em; }
-    }
-  </style>
+  <title>FireMemory - Etapa 15: Regência</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🧭 Etapa 15 – Regência</h1>
-  <h2>Memorize as principais regras de regência verbal e nominal!</h2>
-  <div class="regras">
-    <h3>📌 Como jogar</h3>
-    <ul>
-      <li>Encontre os pares: <b>regra</b> ↔ <b>exemplo ou explicação</b></li>
-      <li>Toque ou clique para virar as cartas e formar os pares corretos</li>
-      <li>Jogue quantas vezes quiser para fixar o conteúdo</li>
-    </ul>
+  <div class="container">
+    <header>
+      <h1 class="logo">FireMemory</h1>
+      <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+
+    <h2 class="game-page-title">🧭 Etapa 15 – Regência</h2>
+    <p class="game-page-subtitle">Memorize as principais regras de regência verbal e nominal!</p>
+
+    <div class="game-container">
+      <div class="scoreboard">
+        <div>Tentativas: <span id="tentativas">0</span></div>
+        <div>Acertos: <span id="acertos">0</span></div>
+        <div>Tempo: <span id="timer">0s</span></div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="pares-restantes" id="paresRestantes">Pares restantes: 0</div>
+
+      <div class="memory-grid" id="memoryGrid">
+        <!-- As cartas serão geradas pelo JavaScript -->
+      </div>
+
+      <div class="game-controls">
+        <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar Etapa</button>
+        <a href="index.html" class="btn-back">🏠 Voltar ao Início</a>
+      </div>
+
+      <div class="parabens-msg" id="parabensMsg" style="display:none;">
+        Parabéns! Você concluiu a etapa 👏
+      </div>
+    </div>
   </div>
-  <div class="menu-voltar">
-    <button onclick="location.href='index.html'">⬅️ Voltar ao Menu</button>
-  </div>
-  <div class="scoreboard">
-    Tentativas: <span id="tentativas">0</span> | Acertos: <span id="acertos">0</span>
-  </div>
-  <div class="game-area">
-    <div class="memory-grid" id="memoryGrid"></div>
-    <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar</button>
-    <div class="parabens" id="parabensMsg" style="display:none;">Parabéns! Você concluiu a etapa 👏</div>
-  </div>
-  <footer style="margin-top:40px; font-size:12px; color:#888;">Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo © 2025</footer>
+
+  <footer>
+    FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.
+  </footer>
+
   <script>
-    // Pares didáticos de Regência com emojis
-    const pares = [
-      { emoji: '🧭', frente: 'Regência verbal', verso: 'O verbo concorda com o seu complemento, podendo exigir ou não preposição.<br><em>Ex: Assisti <b>ao</b> filme.</em>' },
-      { emoji: '📚', frente: 'Regência nominal', verso: 'O nome (substantivo, adjetivo, advérbio) se liga ao complemento, geralmente com preposição.<br><em>Ex: Cheio <b>de</b> esperança.</em>' },
-      { emoji: '❗', frente: 'Verbos que exigem preposição', verso: 'Exigem preposição obrigatória.<br><em>Ex: Gostar <b>de</b>, precisar <b>de</b>, assistir <b>a</b>.</em>' },
-      { emoji: '⚠️', frente: 'Verbos que não exigem preposição', verso: 'Não exigem preposição antes do complemento.<br><em>Ex: Agradecer algo a alguém, pagar algo a alguém.</em>' },
-      { emoji: '🔄', frente: 'Ambiguidade de regência', verso: 'A preposição pode mudar o sentido do verbo.<br><em>Ex: Assisti <b>ao</b> jogo (ver) x Assisti o doente (cuidar).</em>' },
-      { emoji: '📝', frente: 'Dica', verso: 'Consulte sempre o dicionário para saber a regência correta de cada verbo ou nome!' }
+    // Define os dados específicos desta etapa que o script.js usará
+    // Ajustado para 8 pares para manter o padrão da grade 4x4.
+    window.dadosDaEtapaAtual = [
+      { emoji: '🧭', frente: 'Regência Verbal', verso: 'Verbo exige complemento (com ou sem preposição). Ex: Assisti AO filme.' },
+      { emoji: '📚', frente: 'Regência Nominal', verso: 'Nome (subst., adj., adv.) exige complemento (com preposição). Ex: Tenho amor À pátria.' },
+      { emoji: '➡️', frente: 'Obedecer / Desobedecer', verso: 'Exigem a preposição "a". Ex: Obedeceu AOS pais.' },
+      { emoji: '🤝', frente: 'Simpatizar / Antipatizar', verso: 'Exigem a preposição "com". Ex: Simpatizo COM ele.' },
+      { emoji: '👀', frente: 'Assistir (ver)', verso: 'Exige prep. "a". Ex: Assistimos AO jogo.' },
+      { emoji: '🆘', frente: 'Assistir (ajudar)', verso: 'Não exige preposição (VTD). Ex: O médico assiste O paciente.' },
+      { emoji: '💳', frente: 'Pagar / Perdoar (coisa)', verso: 'Não exige preposição (VTD). Ex: Paguei A CONTA.' },
+      { emoji: '👤', frente: 'Pagar / Perdoar (pessoa)', verso: 'Exige prep. "a" (VTI). Ex: Perdoei AOS devedores.' }
     ];
   </script>
-  <script src="memoria.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
