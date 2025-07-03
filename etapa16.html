@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireMemory - Etapa 16: Crase</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="logo">FireMemory</h1>
+      <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+
+    <h2 class="game-page-title">➰ Etapa 16 – Crase</h2>
+    <p class="game-page-subtitle">Entenda quando e como usar o acento grave indicador da crase!</p>
+
+    <div class="game-container">
+      <div class="scoreboard">
+        <div>Tentativas: <span id="tentativas">0</span></div>
+        <div>Acertos: <span id="acertos">0</span></div>
+        <div>Tempo: <span id="timer">0s</span></div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="pares-restantes" id="paresRestantes">Pares restantes: 0</div>
+
+      <div class="memory-grid" id="memoryGrid">
+        <!-- As cartas serão geradas pelo JavaScript -->
+      </div>
+
+      <div class="game-controls">
+        <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar Etapa</button>
+        <a href="index.html" class="btn-back">🏠 Voltar ao Início</a>
+      </div>
+
+      <div class="parabens-msg" id="parabensMsg" style="display:none;">
+        Parabéns! Você concluiu a etapa 👏
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+  </footer>
+
+  <script>
+    // Define os dados específicos desta etapa que o script.js usará
+    window.dadosDaEtapaAtual = [
+      { emoji: '🅰️', frente: 'Crase: Definição', verso: 'É a fusão da preposição "a" com o artigo feminino "a(s)" ou com o "a" inicial de pronomes (aquele, aquela, aquilo). Marcada pelo acento grave (`). Ex: Vou à praia.' },
+      { emoji: '✅', frente: 'Uso Obrigatório: Palavra Feminina', verso: 'Antes de substantivo feminino que admite artigo "a". Dica: troque por masc. + "ao". Ex: Refiro-me à aluna (ao aluno).' },
+      { emoji: '✅', frente: 'Uso Obrigatório: Locuções Adverbiais Femininas', verso: 'Em locuções que indicam tempo, modo ou lugar. Ex: à tarde, às pressas, à direita, à noite.' },
+      { emoji: '✅', frente: 'Uso Obrigatório: Locuções Prepositivas e Conjuntivas', verso: 'Formadas por palavra feminina. Ex: à procura de, à medida que, à força de.' },
+      { emoji: '⛔', frente: 'Não Usar: Antes de Palavra Masculina', verso: 'Ex: Andar a cavalo. Pagamento a prazo. Exceto se subentender "moda de": Salto à Luís XV.' },
+      { emoji: '⛔', frente: 'Não Usar: Antes de Verbo', verso: 'Verbos não admitem artigo antes de si. Ex: Começou a chover. Disposto a ajudar.' },
+      { emoji: '⛔', frente: 'Não Usar: Antes da Maioria dos Pronomes', verso: 'Ex: Disse a ela. Peça a mim. (Exceções: Sra., Srta., dona, mesma, própria, aquela).' },
+      { emoji: '🤔', frente: 'Casos Facultativos', verso: 'Antes de nomes próprios femininos (Ex: Dei um presente a/à Maria) e antes de pronomes possessivos femininos adjetivos (Ex: Levei a/à sua tia).' }
+    ];
+  </script>
+  <script src="script.js" defer></script>
+</body>
+</html>
