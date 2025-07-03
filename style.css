@@ -1,203 +1,3 @@
-<<<<<<< HEAD
-/* FireMemory - Grid e Cards do Jogo da Memória */
-.memory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 22px;
-  justify-items: center;
-  align-items: center;
-  max-width: 700px;
-  margin: 32px auto 24px auto;
-  padding: 10px 0 20px 0;
-}
-.card {
-  width: 110px;
-  height: 110px;
-  background: #fff3e0;
-  border: 2.5px solid #ff9800;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(255,152,0,0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.18rem;
-  font-weight: 600;
-  color: #ff5722;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  user-select: none;
-  position: relative;
-  text-align: center;
-  padding: 8px;
-  word-break: break-word;
-  white-space: normal;
-  overflow-wrap: break-word;
-  overflow: hidden;
-}
-.card.flipped, .card.matched {
-  background: #ffe0b2;
-  color: #222;
-  transform: scale(1.04);
-  box-shadow: 0 4px 16px #ff980033;
-  cursor: default;
-}
-.card.matched {
-  background: #b2f2bb;
-  color: #222;
-  border-color: #27ae60;
-}
-.btn-restart {
-  background: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 26px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 10px;
-  box-shadow: 0 2px 8px #3498db22;
-  transition: background 0.2s;
-}
-.btn-restart:hover {
-  background: #217dbb;
-}
-.scoreboard {
-  margin: 18px 0 0 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #ff9800;
-  text-align: left;
-}
-.parabens {
-  color: #27ae60;
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-top: 18px;
-  text-align: center;
-}
-@media (max-width: 800px) {
-  .memory-grid {
-    max-width: 98vw;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 14px;
-  }
-  .card {
-    width: 80px;
-    height: 80px;
-    font-size: 1.05rem;
-  }
-}
-/* FireMemory - Estilo Moderno e Responsivo */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  color: #222;
-  min-height: 100vh;
-}
-.container {
-  max-width: 900px;
-  margin: 32px auto 0 auto;
-  background: #fff8f0;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  padding: 32px 24px 24px 24px;
-}
-.index-header {
-  text-align: center;
-  margin-bottom: 16px;
-}
-.logo {
-  font-size: 2.8rem;
-  color: #ff5722;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 0;
-}
-.slogan {
-  font-size: 1.2rem;
-  color: #ff9800;
-  margin-top: 0;
-}
-.intro-text {
-  font-size: 1.1rem;
-  margin: 18px 0 24px 0;
-  text-align: center;
-}
-.rules-section {
-  background: #fff3e0;
-  border-left: 5px solid #ff9800;
-  border-radius: 8px;
-  padding: 16px 20px;
-  margin-bottom: 28px;
-}
-.rules-section h3 {
-  margin-top: 0;
-  color: #ff9800;
-}
-.rules-section ul {
-  padding-left: 20px;
-}
-.stages-menu {
-  margin-bottom: 24px;
-}
-.stages-menu h3 {
-  color: #ff5722;
-  margin-bottom: 12px;
-}
-.stages-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-.stage-button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #fff;
-  border: 2px solid #ff9800;
-  border-radius: 10px;
-  padding: 14px 18px;
-  font-size: 1.08rem;
-  color: #ff5722;
-  text-decoration: none;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(255,152,0,0.07);
-  transition: background 0.2s, color 0.2s, transform 0.15s;
-}
-.stage-button:hover, .stage-button:focus {
-  background: #ff9800;
-  color: #fff;
-  transform: translateY(-2px) scale(1.03);
-  outline: none;
-}
-.emoji {
-  font-size: 1.5rem;
-  margin-right: 6px;
-}
-footer {
-  text-align: center;
-  margin: 32px 0 12px 0;
-  color: #ff9800;
-  font-size: 1rem;
-  letter-spacing: 1px;
-}
-@media (max-width: 600px) {
-  .container {
-    padding: 10px 2vw;
-  }
-  .logo {
-    font-size: 2rem;
-  }
-  .stages-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .stage-button {
-    font-size: 1rem;
-    padding: 12px 10px;
-=======
 /* Estilos Globais FireMemory */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -215,25 +15,25 @@ body {
 }
 
 .container {
-  max-width: 900px; /* Aumentado para acomodar melhor o jogo */
+  max-width: 900px; 
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
 }
 
 header {
-  margin-bottom: 20px; /* Reduzido para páginas de etapa */
+  margin-bottom: 20px; 
 }
 
 .logo {
-  font-size: 2.8em; /* Ajustado para páginas de etapa */
+  font-size: 2.8em; 
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   margin-bottom: 0;
 }
 
 .slogan {
-  font-size: 1.2em; /* Ajustado para páginas de etapa */
+  font-size: 1.2em; 
   font-weight: 400;
   margin-top: 2px;
   opacity: 0.9;
@@ -455,8 +255,8 @@ header {
 
 .card.matched {
   transform: rotateY(180deg);
-  background-color: #A5D6A7;
-  color: #1B5E20;
+  background-color: #A5D6A7; 
+  color: #1B5E20; 
   cursor: default;
   box-shadow: 0 0 12px #90EE90; /* Sombra mais vibrante para acerto */
   animation: pulseCorrect 0.6s ease-in-out;
@@ -622,6 +422,5 @@ footer {
   .scoreboard {
     flex-direction: column; /* Empilha placar em telas pequenas */
     gap: 5px;
->>>>>>> feature/firememory-initial-structure-and-stages-1-16_20
   }
 }

@@ -1,41 +1,3 @@
-<<<<<<< HEAD
-// FireMemory - script.js
-// Lógica universal para todas as etapas e menu
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Mensagem gamificada no menu principal
-  const intro = document.querySelector('.intro-text');
-  if (intro) {
-    intro.innerHTML += '<br><span style="color:#ff9800;font-weight:bold;">🔥 Dica: Complete todas as etapas para liberar conquistas especiais!</span>';
-  }
-
-  // Menu: clique nos botões de etapa
-  document.querySelectorAll('.stage-button').forEach(btn => {
-    btn.addEventListener('click', function() {
-      // Futuro: enviar evento para backend, analytics, etc.
-    });
-  });
-
-  // Jogo da Memória: só executa se houver .memory-grid na página
-  const grid = document.querySelector('.memory-grid');
-  if (!grid) return;
-
-  // Busca os pares definidos na etapa (window.paresEtapa)
-  const pares = window.paresEtapa || [];
-  if (!pares.length) {
-    grid.innerHTML = '<p style="color:#c00;font-weight:bold;">Nenhum conteúdo disponível para esta etapa.</p>';
-    return;
-  }
-
-  let cartas = [];
-  let primeiraCarta = null;
-  let segundaCarta = null;
-  let bloqueado = false;
-  let tentativas = 0;
-  let acertos = 0;
-
-  function embaralhar(array) {
-=======
 // Variáveis globais do jogo
 let cartas = [];
 let primeiraCarta = null;
@@ -56,22 +18,10 @@ let timerInterval = null;
  */
 function embaralhar(array) {
   try {
->>>>>>> feature/firememory-initial-structure-and-stages-1-16_20
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
-<<<<<<< HEAD
-  }
-
-  function iniciarJogo() {
-    tentativas = 0;
-    acertos = 0;
-    document.getElementById('tentativas').textContent = tentativas;
-    document.getElementById('acertos').textContent = acertos;
-    const parabens = document.getElementById('parabensMsg');
-    if (parabens) parabens.style.display = 'none';
-=======
   } catch (error) {
     console.error("Erro ao embaralhar as cartas:", error);
   }
@@ -88,41 +38,43 @@ function iniciarJogo() {
     acertosEl = document.getElementById('acertos');
     parabensMsgEl = document.getElementById('parabensMsg');
     memoryGridEl = document.getElementById('memoryGrid');
-    timerEl = document.getElementById('timer');
+    timerEl = document.getElementById('timer'); 
     progressBarEl = document.getElementById('progressBar');
     paresRestantesEl = document.getElementById('paresRestantes');
 
     // Garante que o elemento do timer exista no scoreboard
-    if (timerEl === null) {
-        const scoreboardDiv = document.querySelector('.scoreboard div:last-child'); // Tenta adicionar ao lado do último item
-        if (scoreboardDiv && scoreboardDiv.parentElement) {
-            const timerDiv = document.createElement('div');
-            timerDiv.innerHTML = 'Tempo: <span id="timer">0s</span>';
-            // Insere o timer como o último elemento no scoreboard
-            scoreboardDiv.parentElement.appendChild(timerDiv);
+    if (timerEl === null && document.querySelector('.scoreboard')) { 
+        const scoreboardDiv = document.querySelector('.scoreboard');
+        // Verifica se já não existe um span com id timer para evitar duplicar
+        if (scoreboardDiv && !scoreboardDiv.querySelector('#timer')) {
+            const timerDivContainer = document.createElement('div'); // Cria um div para o timer
+            timerDivContainer.innerHTML = 'Tempo: <span id="timer">0s</span>';
+            scoreboardDiv.appendChild(timerDivContainer);
             timerEl = document.getElementById('timer');
-        } else {
-            // Fallback se a estrutura do scoreboard for inesperada
-            const gameContainer = document.querySelector('.game-container');
-            if(gameContainer) {
-                const timerDiv = document.createElement('div');
-                timerDiv.id = "timerFallbackContainer" // Para evitar duplicidade de ID 'timer'
-                timerDiv.innerHTML = 'Tempo: <span id="timer">0s</span>';
-                gameContainer.insertBefore(timerDiv, memoryGridEl); // Adiciona antes da grade
-                timerEl = document.getElementById('timer');
-            }
+        }
+    } else if (timerEl === null) {
+        // Fallback se a estrutura do scoreboard for inesperada ou não existir
+        const gameContainer = document.querySelector('.game-container');
+        if(gameContainer && !document.getElementById('timer')) {
+            const timerDiv = document.createElement('div');
+            timerDiv.id = "timerFallbackContainer";
+            timerDiv.style.textAlign = 'center';
+            timerDiv.style.marginBottom = '10px';
+            timerDiv.innerHTML = 'Tempo: <span id="timer">0s</span>'; 
+            gameContainer.insertBefore(timerDiv, memoryGridEl || gameContainer.firstChild); 
+            timerEl = document.getElementById('timer');
         }
     }
+
+    pararTimer(); // Limpa timer anterior antes de iniciar um novo
     iniciarTimer();
-    atualizarProgresso(); // Atualiza a barra de progresso e pares restantes no início
-
-
+    
     if (!window.dadosDaEtapaAtual || window.dadosDaEtapaAtual.length === 0) {
-      console.error("Dados da etapa não foram definidos ou estão vazios. Verifique a variável 'window.dadosDaEtapaAtual' no HTML.");
-      if (memoryGridEl) memoryGridEl.innerHTML = "<p style='color:red;'>Erro: Dados da etapa não carregados.</p>";
+      console.error("Dados da etapa não foram definidos ou estão vazios. Verifique a variável 'window.dadosDaEtapaAtual' no HTML da etapa.");
+      if (memoryGridEl) memoryGridEl.innerHTML = "<p style='color:red; text-align:center;'>Erro: Dados da etapa não carregados. Verifique o console (F12).</p>";
       return;
     }
-
+    
     const dadosEtapa = window.dadosDaEtapaAtual;
     totalPares = dadosEtapa.length;
 
@@ -131,116 +83,44 @@ function iniciarJogo() {
 
     if (tentativasEl) tentativasEl.textContent = tentativas;
     if (acertosEl) acertosEl.textContent = acertos;
-    if (parabensMsgEl) parabensMsgEl.style.display = 'none';
-
->>>>>>> feature/firememory-initial-structure-and-stages-1-16_20
+    if (parabensMsgEl) {
+        parabensMsgEl.style.display = 'none';
+        parabensMsgEl.innerHTML = "Parabéns! Você concluiu a etapa!"; // Reset msg
+    }
+    
     primeiraCarta = null;
     segundaCarta = null;
     bloqueado = false;
     cartas = [];
-<<<<<<< HEAD
-    pares.forEach((par, idx) => {
-      cartas.push({ id: idx + '-A', texto: par.frente, par: idx, virada: false, acertou: false, emoji: par.emoji });
-      cartas.push({ id: idx + '-B', texto: par.verso, par: idx, virada: false, acertou: false, emoji: par.emoji });
-    });
-    embaralhar(cartas);
-    renderizarCartas();
-  }
-
-  function renderizarCartas() {
-    grid.innerHTML = '';
-    cartas.forEach((carta, i) => {
-      const card = document.createElement('div');
-      card.className = 'card' + (carta.virada || carta.acertou ? ' flipped' : '');
-      if (carta.acertou) card.classList.add('matched');
-
-      // Estrutura interna para frente e verso
-      const front = document.createElement('div');
-      front.className = 'card-content card-front';
-      front.textContent = carta.emoji;
-
-      const back = document.createElement('div');
-      back.className = 'card-content card-back';
-      back.textContent = carta.texto;
-
-      card.appendChild(front);
-      card.appendChild(back);
-
-      // Clique só se não estiver virada ou acertada
-      card.onclick = () => virarCarta(i);
-      grid.appendChild(card);
-    });
-  }
-
-  function virarCarta(idx) {
-    if (bloqueado) return;
-    const carta = cartas[idx];
-    if (carta.virada || carta.acertou) return;
-    carta.virada = true;
-    renderizarCartas();
-    if (!primeiraCarta) {
-      primeiraCarta = carta;
-    } else if (!segundaCarta) {
-      segundaCarta = carta;
-      tentativas++;
-      document.getElementById('tentativas').textContent = tentativas;
-      if (primeiraCarta.par === segundaCarta.par && primeiraCarta.id !== segundaCarta.id) {
-        primeiraCarta.acertou = true;
-        segundaCarta.acertou = true;
-        acertos++;
-        document.getElementById('acertos').textContent = acertos;
-        primeiraCarta = null;
-        segundaCarta = null;
-        renderizarCartas();
-        if (acertos === pares.length) {
-          const parabens = document.getElementById('parabensMsg');
-          if (parabens) parabens.style.display = 'block';
-        }
-      } else {
-        bloqueado = true;
-        setTimeout(() => {
-          primeiraCarta.virada = false;
-          segundaCarta.virada = false;
-          primeiraCarta = null;
-          segundaCarta = null;
-          bloqueado = false;
-          renderizarCartas();
-        }, 1100);
-      }
-    }
-  }
-
-  window.reiniciarJogo = iniciarJogo;
-  iniciarJogo();
-});
-=======
-
+    
     dadosEtapa.forEach((par, idx) => {
-      cartas.push({
-        id: idx + '-A',
-        tipo: 'frente',
-        parId: idx,
-        conteudoFrente: par.emoji,
-        conteudoVerso: par.frente,
-        virada: false,
-        acertou: false
+      cartas.push({ 
+        id: idx + '-A', 
+        tipo: 'frente', // Identificador do tipo de carta (pode ser usado para lógicas futuras)
+        parId: idx, // ID do par ao qual esta carta pertence
+        conteudoFrente: par.emoji, // O que aparece na frente da carta (emoji)
+        conteudoVerso: par.frente, // O que aparece no verso (o conceito/pergunta)
+        virada: false, 
+        acertou: false 
       });
-      cartas.push({
-        id: idx + '-B',
-        tipo: 'verso',
-        parId: idx,
-        conteudoFrente: par.emoji, // Usar o mesmo emoji para a "frente" visual da carta de texto
-        conteudoVerso: par.verso,
-        virada: false,
-        acertou: false
+      cartas.push({ 
+        id: idx + '-B', 
+        tipo: 'verso', // Identificador do tipo de carta
+        parId: idx, // ID do par ao qual esta carta pertence
+        conteudoFrente: par.emoji, // Verso também mostra emoji na parte da frente visual
+        conteudoVerso: par.verso, // O que aparece no verso (a definição/resposta)
+        virada: false, 
+        acertou: false 
       });
     });
 
     embaralhar(cartas);
     renderizarCartas();
+    atualizarProgresso(); // Atualiza a barra de progresso e pares restantes no início
+
   } catch (error) {
     console.error("Erro ao iniciar o jogo:", error);
-    if (memoryGridEl) memoryGridEl.innerHTML = "<p style='color:red;'>Ocorreu um erro ao iniciar o jogo. Tente recarregar.</p>";
+    if (memoryGridEl) memoryGridEl.innerHTML = "<p style='color:red; text-align:center;'>Ocorreu um erro ao iniciar o jogo. Tente recarregar.</p>";
   }
 }
 
@@ -258,27 +138,26 @@ function renderizarCartas() {
     cartas.forEach((carta) => {
       const cardDiv = document.createElement('div');
       cardDiv.className = 'card';
-      // Adiciona um data attribute para facilitar encontrar o objeto da carta depois, se necessário
-      cardDiv.dataset.cardId = carta.id;
+      cardDiv.dataset.cardId = carta.id; 
 
-      if (carta.virada) cardDiv.classList.add('flipped');
-      if (carta.acertou) cardDiv.classList.add('matched');
-
+      // Não adiciona 'flipped' ou 'matched' aqui, pois o estado inicial é sempre não virado
+      // Essas classes serão adicionadas dinamicamente ao virar/acertar
+      
       const cardFront = document.createElement('div');
       cardFront.className = 'card-content card-front';
-      // Se for uma carta de 'verso' (texto), a frente visual ainda mostra o emoji.
-      // Se for uma carta de 'frente' (conceito), a frente visual também é o emoji.
-      cardFront.textContent = carta.conteudoFrente;
-
+      cardFront.textContent = carta.conteudoFrente; 
+      
       const cardBack = document.createElement('div');
       cardBack.className = 'card-content card-back';
-      // O verso real da carta, seja o conceito (para carta emoji) ou a explicação (para carta conceito)
-      cardBack.textContent = carta.conteudoVerso;
+      cardBack.innerHTML = carta.conteudoVerso; // Usar innerHTML para permitir tags como <br> ou <strong> se necessário
 
       cardDiv.appendChild(cardFront);
       cardDiv.appendChild(cardBack);
-
-      cardDiv.onclick = () => virarCarta(carta);
+      
+      // Só adiciona o evento de clique se a carta ainda não foi acertada
+      if (!carta.acertou) {
+        cardDiv.onclick = () => virarCarta(carta);
+      }
       memoryGridEl.appendChild(cardDiv);
     });
   } catch (error) {
@@ -293,9 +172,7 @@ function renderizarCartas() {
 function virarCarta(cartaClicada) {
   try {
     if (bloqueado || cartaClicada.virada || cartaClicada.acertou) return;
-
-    // Encontra o elemento DOM correspondente à carta clicada e adiciona/remove 'flipped'
-    // Isso é mais eficiente do que re-renderizar tudo.
+    
     const cardElement = Array.from(memoryGridEl.children).find(el => el.dataset.cardId === cartaClicada.id);
     if (cardElement) {
         cardElement.classList.add('flipped');
@@ -305,30 +182,35 @@ function virarCarta(cartaClicada) {
     if (!primeiraCarta) {
       primeiraCarta = cartaClicada;
     } else if (!segundaCarta) {
-      // Garante que não está clicando na mesma carta duas vezes (embora a lógica de parId resolva isso)
       if (cartaClicada.id === primeiraCarta.id) {
-          // Clicou na mesma carta, desvira a primeira e reseta.
-          // Isso pode acontecer se o usuário for muito rápido.
+          // Clicou na mesma carta, desvira e reseta.
           if (cardElement) cardElement.classList.remove('flipped');
           cartaClicada.virada = false;
+          // Não conta como tentativa, pois foi um clique inválido na mesma carta
           return;
       }
       segundaCarta = cartaClicada;
       tentativas++;
       if (tentativasEl) tentativasEl.textContent = tentativas;
 
-      if (primeiraCarta.parId === segundaCarta.parId) { // Verifica se são um par pelo parId
+      if (primeiraCarta.parId === segundaCarta.parId) { 
         primeiraCarta.acertou = true;
         segundaCarta.acertou = true;
         acertos++;
         if (acertosEl) acertosEl.textContent = acertos;
-        atualizarProgresso(); // Atualiza a barra de progresso e pares restantes
-
-        // Adiciona a classe 'matched' aos elementos DOM correspondentes
+        atualizarProgresso();
+        
         const primeiraCartaEl = Array.from(memoryGridEl.children).find(el => el.dataset.cardId === primeiraCarta.id);
         const segundaCartaEl = Array.from(memoryGridEl.children).find(el => el.dataset.cardId === segundaCarta.id);
-        if(primeiraCartaEl) primeiraCartaEl.classList.add('matched');
-        if(segundaCartaEl) segundaCartaEl.classList.add('matched');
+        
+        if(primeiraCartaEl) {
+            primeiraCartaEl.classList.add('matched');
+            primeiraCartaEl.onclick = null; // Remove evento de clique após acertar
+        }
+        if(segundaCartaEl) {
+            segundaCartaEl.classList.add('matched');
+            segundaCartaEl.onclick = null; // Remove evento de clique após acertar
+        }
 
         primeiraCarta = null;
         segundaCarta = null;
@@ -343,7 +225,6 @@ function virarCarta(cartaClicada) {
         }
       } else {
         bloqueado = true;
-        // Feedback de erro visual
         const primeiraCartaEl = Array.from(memoryGridEl.children).find(el => el.dataset.cardId === primeiraCarta.id);
         const segundaCartaEl = Array.from(memoryGridEl.children).find(el => el.dataset.cardId === segundaCarta.id);
 
@@ -351,14 +232,14 @@ function virarCarta(cartaClicada) {
         if(segundaCartaEl) segundaCartaEl.classList.add('error');
 
         setTimeout(() => {
-          if (primeiraCarta) {
+          if (primeiraCarta && !primeiraCarta.acertou) {
             primeiraCarta.virada = false;
             if (primeiraCartaEl) {
               primeiraCartaEl.classList.remove('flipped');
               primeiraCartaEl.classList.remove('error');
             }
           }
-          if (segundaCarta) {
+          if (segundaCarta && !segundaCarta.acertou) {
             segundaCarta.virada = false;
             if (segundaCartaEl) {
               segundaCartaEl.classList.remove('flipped');
@@ -391,7 +272,7 @@ function virarCarta(cartaClicada) {
 }
 
 function iniciarTimer() {
-  pararTimer(); // Garante que qualquer timer anterior seja limpo
+  // pararTimer() é chamado antes em iniciarJogo()
   tempoDecorrido = 0;
   if(timerEl) timerEl.textContent = tempoDecorrido + 's';
   timerInterval = setInterval(() => {
@@ -402,32 +283,21 @@ function iniciarTimer() {
 
 function pararTimer() {
   clearInterval(timerInterval);
+  timerInterval = null; // Garante que o ID do intervalo seja limpo
 }
 
 function calcularEstrelas() {
-  // Critérios para estrelas (ajustar conforme necessário)
-  // totalPares é o número de pares únicos na etapa
-  const maxTentativasPara3Estrelas = totalPares + Math.floor(totalPares * 0.5); // Ex: 8 pares -> 12 tentativas
-  const maxTentativasPara2Estrelas = totalPares + totalPares; // Ex: 8 pares -> 16 tentativas
-  // Tempo também pode ser um fator, mas vamos focar nas tentativas por enquanto
-  // const tempoMaxPara3Estrelas = totalPares * 5; // Ex: 8 pares -> 40 segundos
+  const maxTentativasPara3Estrelas = totalPares + Math.floor(totalPares * 0.5); 
+  const maxTentativasPara2Estrelas = totalPares + totalPares; 
 
-  let estrelas = '⭐'; // Pelo menos 1 estrela por completar
+  let estrelas = '⭐';
 
   if (tentativas <= maxTentativasPara3Estrelas) {
     estrelas = '⭐⭐⭐';
   } else if (tentativas <= maxTentativasPara2Estrelas) {
     estrelas = '⭐⭐';
   }
-
-  // Exemplo com tempo (descomentar e ajustar se quiser usar)
-  /*
-  if (tentativas <= maxTentativasPara3Estrelas && tempoDecorrido <= tempoMaxPara3Estrelas) {
-    estrelas = '⭐⭐⭐';
-  } else if (tentativas <= maxTentativasPara2Estrelas && tempoDecorrido <= totalPares * 7) {
-    estrelas = '⭐⭐';
-  }
-  */
+  
   return `<span class='estrelas'>${estrelas}</span>`;
 }
 
@@ -435,7 +305,6 @@ function atualizarProgresso() {
   if (progressBarEl) {
     const progressoPercentual = totalPares > 0 ? (acertos / totalPares) * 100 : 0;
     progressBarEl.style.width = progressoPercentual + '%';
-    // progressBarEl.textContent = Math.round(progressoPercentual) + '%'; // Opcional: mostrar porcentagem na barra
   }
   if (paresRestantesEl) {
     const restantes = totalPares - acertos;
@@ -443,23 +312,23 @@ function atualizarProgresso() {
   }
 }
 
-// Adiciona o listener para iniciar o jogo quando a página carregar.
-// A função iniciarJogo agora depende de `window.dadosDaEtapaAtual` que deve ser definido no HTML.
+// Adiciona o listener para iniciar o jogo quando a página carregar e para o botão de reiniciar.
 function configurarListeners() {
-    if (window.addEventListener) {
-        window.addEventListener('load', iniciarJogo, false);
-    } else if (window.attachEvent) {
-        window.attachEvent('onload', iniciarJogo);
-    } else {
-        document.addEventListener('DOMContentLoaded', iniciarJogo, false);
+    // Garante que iniciarJogo seja chamado após o DOM estar completamente carregado
+    if (document.readyState === 'loading') { // Ainda carregando
+        document.addEventListener('DOMContentLoaded', iniciarJogo);
+    } else { // `DOMContentLoaded` já disparou
+        iniciarJogo();
     }
 
-    // Adiciona listener para o botão de reiniciar, se existir
     const btnRestart = document.getElementById('btn-restart-game');
     if (btnRestart) {
+        // Remove listener antigo para evitar múltiplos, se configurarListeners for chamado mais de uma vez
+        btnRestart.removeEventListener('click', iniciarJogo);
         btnRestart.addEventListener('click', iniciarJogo);
     }
 }
 
+// Chama a configuração dos listeners assim que o script é lido.
+// iniciarJogo() será chamado por 'DOMContentLoaded' ou imediatamente se já carregado.
 configurarListeners();
->>>>>>> feature/firememory-initial-structure-and-stages-1-16_20
