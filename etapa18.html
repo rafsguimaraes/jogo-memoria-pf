@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireMemory - Etapa 18: Redação Oficial</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="logo">FireMemory</h1>
+      <p class="slogan">Aqueça sua mente, memorize com FireMemory!</p>
+    </header>
+
+    <h2 class="game-page-title">📄 Etapa 18 – Redação Oficial</h2>
+    <p class="game-page-subtitle">Conheça os princípios e características da comunicação oficial.</p>
+
+    <div class="game-container">
+      <div class="scoreboard">
+        <div>Tentativas: <span id="tentativas">0</span></div>
+        <div>Acertos: <span id="acertos">0</span></div>
+        <div>Tempo: <span id="timer">0s</span></div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="pares-restantes" id="paresRestantes">Pares restantes: 0</div>
+
+      <div class="memory-grid" id="memoryGrid">
+        <!-- As cartas serão geradas pelo JavaScript -->
+      </div>
+
+      <div class="game-controls">
+        <button class="btn-restart" onclick="iniciarJogo()">🔄 Reiniciar Etapa</button>
+        <a href="index.html" class="btn-back">🏠 Voltar ao Início</a>
+      </div>
+
+      <div class="parabens-msg" id="parabensMsg" style="display:none;">
+        Parabéns! Você concluiu a etapa 👏
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
+  </footer>
+
+  <script>
+    // Define os dados específicos desta etapa que o script.js usará
+    // Adaptado para 8 pares
+    window.dadosDaEtapaAtual = [
+      { emoji: '📜', frente: 'Redação Oficial: O que é?', verso: 'É a maneira pela qual o Poder Público redige atos normativos e comunicações. Segue princípios específicos.' },
+      { emoji: '⚖️', frente: 'Princípio: Impessoalidade', verso: 'O emissor é o Serviço Público; o receptor é o público. Evita-se marcas pessoais e subjetividade. Ex: "Encaminha-se..." e não "Encaminho...".' },
+      { emoji: '🎯', frente: 'Princípio: Clareza e Precisão', verso: 'O texto deve ser de fácil compreensão, sem ambiguidades, usando palavras no sentido comum. Evitar termos técnicos desnecessários.' },
+      { emoji: '✂️', frente: 'Princípio: Concisão', verso: 'Transmitir o máximo de informações com o mínimo de palavras. Evitar redundâncias e excesso de adjetivos.' },
+      { emoji: '👔', frente: 'Princípio: Formalidade e Padronização', verso: 'Uso da norma culta da língua, polidez, respeito. Seguir padrões de diagramação e estrutura definidos (ex: Manual de Redação da Presidência).' },
+      { emoji: '🏛️', frente: 'Pronomes de Tratamento', verso: 'Uso adequado conforme o destinatário. Ex: Vossa Excelência (para altas autoridades), Vossa Senhoria (para demais autoridades e particulares).' },
+      { emoji: '📨', frente: 'Documentos Comuns', verso: 'Ofício, Memorando, Aviso, Exposição de Motivos, Mensagem, Telegrama, Correio Eletrônico (e-mail).' },
+      { emoji: '💡', frente: 'Dica: Vocativo e Fecho', verso: 'Vocativo: Ex: "Senhor Ministro,". Fechos comuns: "Respeitosamente," (para autoridades superiores) e "Atenciosamente," (para mesma hierarquia ou inferiores).' }
+    ];
+  </script>
+  <script src="script.js" defer></script>
+</body>
+</html>
