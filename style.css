@@ -1,243 +1,247 @@
-/* FireMemory - Grid e Cards do Jogo da Memória */
-.memory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 22px;
-  justify-items: center;
-  align-items: center;
-  max-width: 700px;
-  margin: 32px auto 24px auto;
-  padding: 10px 0 20px 0;
-}
-.card {
-  width: 110px;
-  height: 110px;
-  background: #fff3e0;
-  border: 2.5px solid #ff9800;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(255,152,0,0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.18rem;
-  font-weight: 600;
-  color: #ff5722;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  user-select: none;
-  position: relative;
-  text-align: center;
-  padding: 8px;
-  word-break: break-word;
-  white-space: normal;
-  overflow-wrap: break-word;
-  overflow: hidden;
-}
-.card.flipped, .card.matched {
-  background: #ffe0b2;
-  color: #222;
-  transform: scale(1.04);
-  box-shadow: 0 4px 16px #ff980033;
-  cursor: default;
-}
-.card.matched {
-  background: #b2f2bb;
-  color: #222;
-  border-color: #27ae60;
-}
-.btn-restart {
-  background: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 26px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 10px;
-  box-shadow: 0 2px 8px #3498db22;
-  transition: background 0.2s;
-}
-.btn-restart:hover {
-  background: #217dbb;
-}
-.scoreboard {
-  margin: 18px 0 0 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #ff9800;
-  text-align: left;
-}
-.parabens {
-  color: #27ae60;
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-top: 18px;
-  text-align: center;
-}
-@media (max-width: 800px) {
-  .memory-grid {
-    max-width: 98vw;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 14px;
-  }
-  .card {
-    width: 80px;
-    height: 80px;
-    font-size: 1.05rem;
-  }
-}
-/* FireMemory - Estilo Moderno e Responsivo */
+/* Estilos Globais FireMemory */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #FF7043 0%, #FF5722 100%);
+  color: #FFF;
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  color: #222;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
-}
-.container {
-  max-width: 900px;
-  margin: 32px auto 0 auto;
-  background: #fff8f0;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  padding: 32px 24px 24px 24px;
-}
-.index-header {
   text-align: center;
-  margin-bottom: 16px;
 }
-.logo {
-  font-size: 2.8rem;
-  color: #ff5722;
-  font-weight: bold;
-  letter-spacing: 2px;
+
+.container {
+  max-width: 900px; /* Aumentado para acomodar melhor o jogo */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+header { /* This header is for individual stage pages, not index.html's main header */
+  margin-bottom: 20px;
+  /* Ensure it doesn't conflict with .index-header if .container is reused on index.html */
+}
+
+.logo { /* General logo style, can be overridden by .index-header .logo */
+  font-size: 2.8em;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   margin-bottom: 0;
+  color: #FFF; /* Ensure logo color is white for contrast on dark bg */
 }
-.slogan {
-  font-size: 1.2rem;
-  color: #ff9800;
-  margin-top: 0;
+
+.slogan { /* General slogan style */
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-top: 2px;
+  opacity: 0.9;
+  color: #FFF; /* Ensure slogan color is white */
+}
+
+/* Estilos para a página inicial (index.html) */
+.index-header { /* Specific header for index.html */
+    text-align: center;
+    margin-bottom: 30px;
+}
+.index-header .logo {
+  font-size: 3.5em; /* Larger logo for main page */
+}
+.index-header .slogan {
+  font-size: 1.5em; /* Larger slogan for main page */
+  margin-top: 5px;
 }
 .intro-text {
-  font-size: 1.1rem;
-  margin: 18px 0 24px 0;
-  text-align: center;
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 20px auto; /* Centered */
+  background-color: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 700px; /* Max width for intro text */
 }
+
 .rules-section {
-  background: #fff3e0;
-  border-left: 5px solid #ff9800;
-  border-radius: 8px;
-  padding: 16px 20px;
-  margin-bottom: 28px;
+  background-color: rgba(0,0,0,0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px auto 30px auto; /* Centered */
+  text-align: left;
+  font-size: 0.95em;
+  max-width: 700px; /* Max width for rules */
 }
 .rules-section h3 {
+  font-size: 1.6em;
   margin-top: 0;
-  color: #ff9800;
+  text-align: center;
+  color: #FFF;
 }
 .rules-section ul {
-  padding-left: 20px;
+  list-style: none;
+  padding: 0;
 }
+.rules-section ul li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.rules-section ul li::before {
+  content: '🔥';
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
 .stages-menu {
-  margin-bottom: 24px;
+  margin-top: 20px;
+  width: 100%; /* Ensure it uses available width in container */
 }
 .stages-menu h3 {
-  color: #ff5722;
-  margin-bottom: 12px;
+  font-size: 2em;
+  color: #FFF;
+  margin-bottom: 20px;
 }
 .stages-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
 }
 .stage-button {
+  background-color: #FFF;
+  color: #FF5722;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: #fff;
-  border: 2px solid #ff9800;
-  border-radius: 10px;
-  padding: 14px 18px;
-  font-size: 1.08rem;
-  color: #ff5722;
-  text-decoration: none;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(255,152,0,0.07);
-  transition: background 0.2s, color 0.2s, transform 0.15s;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.stage-button:hover, .stage-button:focus {
-  background: #ff9800;
-  color: #fff;
-  transform: translateY(-2px) scale(1.03);
-  outline: none;
+.stage-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
 }
-.emoji {
-  font-size: 1.5rem;
-  margin-right: 6px;
-}
-footer {
-  text-align: center;
-  margin: 32px 0 12px 0;
-  color: #ff9800;
-  font-size: 1rem;
-  letter-spacing: 1px;
-}
-@media (max-width: 600px) {
-  .container {
-    padding: 10px 2vw;
-  }
-  .logo {
-    font-size: 2rem;
-  }
-  .stages-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .stage-button {
-    font-size: 1rem;
-    padding: 12px 10px;
-  }
+.stage-button .emoji {
+  margin-right: 10px;
+  font-size: 1.2em;
 }
 
-/* Styles for new game elements */
+/* Estilos para as Páginas de Etapa do Jogo */
+.game-page-title { /* For H2 on stage pages */
+  font-size: 2em; /* Made consistent with stages-menu h3 */
+  color: #FFF;
+  margin-bottom: 10px;
+  font-weight: 700; /* Bolder */
+}
+.game-page-subtitle {
+  font-size: 1.1em; /* Slightly larger */
+  color: rgba(255,255,255,0.9); /* Brighter */
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.game-container {
+  background-color: rgba(0,0,0,0.2);
+  padding: 20px; /* Adjusted padding */
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 720px; /* Slightly increased for better content fit */
+  margin: 20px auto; /* Added top/bottom margin */
+}
+
+.scoreboard {
+  font-size: 1.1em;
+  color: #FFF;
+  margin-bottom: 15px; /* Adjusted margin */
+  display: flex;
+  justify-content: space-around; /* Ensures items are spaced out */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 10px; /* Add gap between scoreboard items */
+  background-color: rgba(255,255,255,0.1);
+  padding: 12px; /* Adjusted padding */
+  border-radius: 8px;
+}
+.scoreboard div { /* Target individual items in scoreboard for better spacing */
+    min-width: 120px; /* Ensure items don't get too squished */
+    text-align: center;
+}
+.scoreboard span {
+  font-weight: 600;
+}
+
 .progress-bar-container {
   width: 100%;
-  background-color: #e0e0e0; /* Light grey background for the container */
+  background-color: rgba(255,255,255,0.2);
   border-radius: 10px;
-  margin: 15px auto;
-  height: 25px;
+  margin: 15px auto; /* Centered, with vertical margin */
+  height: 25px; /* Slightly taller */
+  overflow: hidden;
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .progress-bar {
-  width: 0%; /* Initial width */
+  width: 0%;
   height: 100%;
-  background-color: #4caf50; /* Green for progress */
-  border-radius: 10px;
+  background-color: #FFD700;
+  border-radius: 8px; /* Match container if it's not full width */
   transition: width 0.4s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  font-size: 0.9em; /* Adjusted */
+  color: #424242;
   font-weight: bold;
 }
 
 .pares-restantes {
-  text-align: center;
-  font-size: 1rem;
-  color: #555;
+  font-size: 1em; /* Adjusted */
+  color: rgba(255,255,255,0.95); /* Brighter */
+  margin-bottom: 20px;
+  text-align: center; /* Centered */
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px; /* Slightly reduced gap */
+  justify-items: center;
   margin-bottom: 20px;
 }
 
-.parabens-msg .estrelas { /* Style for stars within the congratulations message */
-  display: block;
-  font-size: 2em;
-  margin-top: 10px;
-  color: #ffc107; /* Gold color for stars */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+.card {
+  background-color: #fff;
+  color: #FF5722;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Enhanced shadow */
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Making cards square for better content fit */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em; /* Adjusted for square cards, primarily for emoji */
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: transform 0.6s, box-shadow 0.3s; /* Adjusted transition */
+  transform-style: preserve-3d;
+  text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
 }
 
-/* Card face styling for two-sided cards */
 .card .card-content {
   position: absolute;
   width: 100%;
@@ -247,60 +251,181 @@ footer {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 5px; /* Ensure padding doesn't break layout */
-  box-sizing: border-box; /* Important for padding and border */
-  border-radius: inherit; /* Inherit border-radius from .card */
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: inherit;
 }
 
 .card .card-front {
-  /* Current .card styles primarily define the front (emoji view) */
-  /* background: #fff3e0; from .card */
-  /* color: #ff5722; from .card */
+  font-size: 2.5em; /* Emoji size on front */
 }
 
 .card .card-back {
-  background: #ffe0b2; /* Slightly different background for the back */
-  color: #333; /* Darker text for readability on the back */
+  background-color: #FFF8E1;
+  color: #424242;
   transform: rotateY(180deg);
-  font-size: 0.8em; /* Adjust text size for potentially longer content */
-  line-height: 1.2;
-  overflow-wrap: break-word; /* Ensure long words break */
-  word-break: break-word;   /* Ensure long words break */
+  font-size: 0.9em; /* Text size on back, adjusted for potentially more text */
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  padding: 10px; /* More padding for text content */
 }
 
-/* Adjust .card.flipped to show the back face */
 .card.flipped {
-  transform: rotateY(180deg) scale(1.04); /* Keep existing scale effect, add rotate */
-  /* background: #ffe0b2; -- This is now handled by .card-back, .card itself can be transparent or a base */
+  transform: rotateY(180deg);
+  /* background-color is now on .card-back */
 }
 
-/* .card.matched can remain as is, or ensure its background applies to .card-back if needed */
-.card.matched .card-back {
-    background-color: #b2f2bb; /* Ensure matched background is on the back */
-    color: #222;
+.card.matched {
+  transform: rotateY(180deg); /* Keep it flipped to show back */
+  box-shadow: 0 0 15px #90EE90;
+  animation: pulseCorrect 0.7s ease-in-out;
+  cursor: default;
 }
-.card.matched .card-front { /* Hide front when matched and showing back */
+.card.matched .card-back { /* Ensure matched card back has the correct style */
+    background-color: #A5D6A7;
+    color: #1B5E20;
+}
+.card.matched .card-front { /* Hide front when matched */
     opacity: 0;
 }
 
 
-/* Card error feedback */
+@keyframes pulseCorrect {
+  0% { transform: rotateY(180deg) scale(1); box-shadow: 0 0 12px #A5D6A7; }
+  50% { transform: rotateY(180deg) scale(1.08); box-shadow: 0 0 20px #98FB98; }
+  100% { transform: rotateY(180deg) scale(1); box-shadow: 0 0 15px #90EE90; }
+}
+
 .card.error {
-  animation: shakeError 0.5s ease-in-out;
-  border-color: #FF6B6B !important;
+  animation: shakeError 0.6s ease-in-out;
+  border: 3px solid #D32F2F !important; /* More prominent error border */
 }
 
 @keyframes shakeError {
   0%, 100% { transform: translateX(0) rotateY(180deg); }
-  20%, 60% { transform: translateX(-5px) rotateY(180deg); }
-  40%, 80% { transform: translateX(5px) rotateY(180deg); }
+  20%, 60% { transform: translateX(-6px) rotateY(180deg); }
+  40%, 80% { transform: translateX(6px) rotateY(180deg); }
 }
 
-/* Ensure .parabens-msg (from HTML) uses .parabens style from CSS */
-.parabens-msg {
-  color: #27ae60;
+.parabens-msg { /* This is the ID used in HTML, ensure it's styled */
+  color: #FFF;
   font-weight: bold;
-  font-size: 1.2rem;
-  margin-top: 18px;
-  text-align: center;
+  font-size: 1.6em; /* Slightly larger */
+  margin-top: 25px;
+  padding: 20px; /* More padding */
+  background-color: rgba(0,0,0,0.3); /* Darker background for contrast */
+  border-radius: 10px;
+  display: none;
+}
+.parabens-msg .estrelas {
+  display: block;
+  font-size: 2.2em;
+  margin-top: 12px;
+  color: #FFD700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+.game-controls {
+  margin-top: 20px; /* Increased margin */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Add gap between buttons if multiple in same container */
+}
+
+.btn-restart, .btn-back { /* General button styling */
+  background-color: #FFF;
+  color: #FF5722;
+  border: 2px solid #FF5722; /* Added border for definition */
+  border-radius: 8px;
+  padding: 10px 20px; /* Adjusted padding */
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  margin: 0 5px; /* Adjusted margin */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn-restart:hover, .btn-back:hover {
+  background-color: #FF5722; /* Invert colors on hover */
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+
+footer {
+  margin-top: auto; /* Pushes footer to bottom if content is short */
+  padding: 25px 20px; /* Increased padding */
+  font-size: 0.9em;
+  color: rgba(255,255,255,0.85); /* Slightly brighter */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  .logo { font-size: 2.5em; }
+  .index-header .logo { font-size: 3em; }
+  .slogan { font-size: 1.1em; }
+  .index-header .slogan { font-size: 1.3em; }
+
+  .rules-section h3 { font-size: 1.4em; }
+  .stages-menu h3 { font-size: 1.8em; }
+
+  .game-page-title { font-size: 1.8em; } /* Adjusted */
+  .game-page-subtitle { font-size: 1em; } /* Adjusted */
+
+  .memory-grid {
+    gap: 8px; /* Reduced gap for smaller cards */
+    /* grid-template-columns still auto-fit, cards will resize based on their own minmax if set, or this count */
+  }
+  .card { /* Cards might need to be smaller */
+    font-size: 1.8em; /* Adjust emoji size on smaller cards */
+  }
+  .card .card-front { font-size: 2em; } /* Adjusted */
+  .card .card-back { font-size: 0.8em; } /* Adjusted */
+
+  .scoreboard {
+    font-size: 1em;
+    padding: 10px; /* Adjusted */
+    flex-direction: column; /* Stack scoreboard items */
+    align-items: center; /* Center stacked items */
+    gap: 8px;
+  }
+  .btn-restart, .btn-back {
+    padding: 10px 18px; /* Adjusted */
+    font-size: 0.95em; /* Adjusted */
+  }
+  .parabens-msg { font-size: 1.4em; } /* Adjusted */
+}
+
+@media (max-width: 480px) {
+  .stages-grid {
+    grid-template-columns: 1fr;
+  }
+  .memory-grid {
+    /* For very small screens, maybe 3 columns or ensure minmax in card works well */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .card {
+    /* font-size might need further reduction if content overflows */
+    font-size: 1.5em; /* Emoji on front */
+    min-height: 70px; /* Ensure cards don't get too small */
+  }
+  .card .card-front { font-size: 1.8em; }
+  .card .card-back { font-size: 0.7em; line-height: 1.25; }
+
+  .logo { font-size: 2.2em; }
+  .index-header .logo { font-size: 2.6em; }
+  .slogan { font-size: 1em; }
+  .index-header .slogan { font-size: 1.1em; }
+  .game-page-title { font-size: 1.5em; }
+  .parabens-msg { font-size: 1.2em; }
 }
