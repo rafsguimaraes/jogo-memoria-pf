@@ -1,0 +1,111 @@
+/* FireMemory - Estilo Moderno e Responsivo */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #222;
+  min-height: 100vh;
+}
+.container {
+  max-width: 900px;
+  margin: 32px auto 0 auto;
+  background: #fff8f0;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px 24px 24px;
+}
+.index-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.logo {
+  font-size: 2.8rem;
+  color: #ff5722;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 0;
+}
+.slogan {
+  font-size: 1.2rem;
+  color: #ff9800;
+  margin-top: 0;
+}
+.intro-text {
+  font-size: 1.1rem;
+  margin: 18px 0 24px 0;
+  text-align: center;
+}
+.rules-section {
+  background: #fff3e0;
+  border-left: 5px solid #ff9800;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+.rules-section h3 {
+  margin-top: 0;
+  color: #ff9800;
+}
+.rules-section ul {
+  padding-left: 20px;
+}
+.stages-menu {
+  margin-bottom: 24px;
+}
+.stages-menu h3 {
+  color: #ff5722;
+  margin-bottom: 12px;
+}
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.stage-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 2px solid #ff9800;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 1.08rem;
+  color: #ff5722;
+  text-decoration: none;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(255,152,0,0.07);
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.stage-button:hover, .stage-button:focus {
+  background: #ff9800;
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  outline: none;
+}
+.emoji {
+  font-size: 1.5rem;
+  margin-right: 6px;
+}
+footer {
+  text-align: center;
+  margin: 32px 0 12px 0;
+  color: #ff9800;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 10px 2vw;
+  }
+  .logo {
+    font-size: 2rem;
+  }
+  .stages-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .stage-button {
+    font-size: 1rem;
+    padding: 12px 10px;
+  }
+}
