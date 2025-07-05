@@ -30,8 +30,7 @@
             <p id="paresRestantes" class="pares-restantes">Pares restantes: 8</p>
 
             <div id="memoryGrid" class="memory-grid">
-                <!-- As cartas serão geradas pelo script.js aqui -->
-            </div>
+                </div>
 
             <div id="parabensMsg" class="parabens-msg" style="display: none;">
                 Parabéns! Você concluiu a etapa!
@@ -44,9 +43,7 @@
         </div>
     </main>
     <footer>
-<footer>
-  <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
-</footer>
+        <p>FireMemory &copy; 2025 - Desenvolvido para Rafael Almeida – Projeto TDAH Estudo Interativo.</p>
     </footer>
     <script>
         const dadosDaEtapa = [
@@ -59,6 +56,7 @@
             { emoji: "🌐", frente: "Contexto", verso: "Circunstâncias que rodeiam um fato ou uma situação no texto." },
             { emoji: "✍️", frente: "Intenção do Autor", verso: "O propósito ou objetivo que o autor tinha ao escrever o texto." }
         ];
+        // Garante que a variável global seja definida para o script.js.
         window.dadosDaEtapaAtual = dadosDaEtapa;
     </script>
     <script src="script.js" defer></script>
